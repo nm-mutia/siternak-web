@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <!-- Favicon-->
-    <link rel="icon" href="{{ asset('/adminbsb/favicon.ico') }}" type="image/x-icon">
+    <!-- <link rel="icon" href="{{ asset('/adminbsb/favicon.ico') }}" type="image/x-icon"> -->
     <!-- Bootstrap Core Css -->
     <link href="{{ asset('/adminbsb/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
     <!-- Waves Effect Css -->
@@ -50,9 +50,11 @@
         </div>
     </div>
     <!-- #END# Page Loader -->
+
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
+
     <!-- Search Bar -->
     <div class="search-bar">
         <div class="search-icon">
@@ -134,7 +136,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
+                    <img src="{{ asset('adminbsb/images/user.png') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
@@ -216,10 +218,19 @@
         <!-- #END# Left Sidebar -->
     </section>
 
+
     <!-- content -->
     <section class="content">
         <div class="container-fluid">
+            <div class="body">
+                <ol class="breadcrumb breadcrumb-bg-teal align-right">
+                    <li><a href="javascript:void(0);"><i class="material-icons">home</i> Home</a></li>
+                    <li class="active"><i class="material-icons">attachment</i> File</li>
+                </ol>
+            </div>
+
             @yield('content')
+        
         </div>
     </section>
     <!-- /content -->
