@@ -17,3 +17,6 @@ Route::get('/', function () {
 Route::get('/home', function () {
     return view('admin.dashboard');
 });
+Route::get('/ternak', function () {
+    return view('data.ternak');
+});
