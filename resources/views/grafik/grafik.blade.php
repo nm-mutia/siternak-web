@@ -1,0 +1,122 @@
+@extends('layouts.app')
+
+@section('link')
+    <link href="{{ asset('/adminbsb/plugins/morrisjs/morris.css') }}" rel="stylesheet" />
+@endsection
+
+@section('title')
+    <h2>GRAFIK</h2>
+@endsection
+
+@section('breadcrumb')
+    <li><a href="javascript:void(0);"><i class="material-icons">home</i> Home</a></li>
+    <li class="active"><i class="material-icons">attachment</i> Grafik </li>
+@endsection
+
+@section('content')
+    <div class="row clearfix">
+                <!-- Line Chart -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>LINE CHART</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div id="line_chart" class="graph"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Line Chart -->
+                <!-- Bar Chart -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>BAR CHART</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div id="bar_chart" class="graph"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Bar Chart -->
+            </div>
+            <div class="row clearfix">
+                <!-- Area Chart -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>AREA CHART</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div id="area_chart" class="graph"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Area Chart -->
+                <!-- Donut Chart -->
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>DONUT CHART</h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <div id="donut_chart" class="graph"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# Donut Chart -->
+            </div>
+@endsection
+
+@section('script')
+	<script src="{{ asset('/adminbsb/plugins/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('/adminbsb/plugins/morrisjs/morris.js') }}"></script>
+@endsection

@@ -21,8 +21,6 @@
     <link href="{{ asset('/adminbsb/plugins/node-waves/waves.css') }}" rel="stylesheet" />
     <!-- Animation Css -->
     <link href="{{ asset('/adminbsb/plugins/animate-css/animate.css') }}" rel="stylesheet" />
-    <!-- Morris Chart Css-->
-    <link href="{{ asset('/adminbsb/plugins/morrisjs/morris.css') }}" rel="stylesheet" >
     <!-- bootstrap-progressbar -->/
     <link href="{{ asset('/adminbsb/plugins/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
@@ -191,19 +189,19 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ url('home') }}">
+                        <a href="{{ url('perkawinan') }}">
                             <i class="material-icons">compare</i>
                             <span>Perkawinan</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('home') }}">
+                        <a href="{{ url('grafik') }}">
                             <i class="material-icons">pie_chart</i>
                             <span>Grafik</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('home') }}">
+                        <a href="{{ url('laporan') }}">
                             <i class="material-icons">archive</i>
                             <span>Laporan</span>
                         </a>

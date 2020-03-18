@@ -18,5 +18,14 @@ Route::get('/home', function () {
     return view('admin.dashboard');
 });
 Route::get('/ternak', function () {
-    return view('data.ternak');
+    return view('data.data');
+});
+Route::get('/perkawinan', function () {
+    return view('perkawinan.kawin');
+});
+Route::get('/grafik', function () {
+    return view('grafik.grafik');
+});
+Route::get('/laporan', function () {
+    return view('admin.laporan');
 });
