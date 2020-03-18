@@ -14,9 +14,9 @@
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/home', function () {
-    return view('admin.dashboard');
-});
+// Route::get('/home', function () {
+//     return view('admin.dashboard');
+// });
 Route::get('/ternak', function () {
     return view('data.data');
 });
@@ -24,8 +24,12 @@ Route::get('/perkawinan', function () {
     return view('perkawinan.kawin');
 });
 Route::get('/grafik', function () {
-    return view('grafik.grafik');
+    return view('admin.grafik.grafik');
 });
 Route::get('/laporan', function () {
     return view('admin.laporan');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');

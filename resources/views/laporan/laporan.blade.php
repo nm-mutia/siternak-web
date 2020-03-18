@@ -5,13 +5,12 @@
 @endsection
 
 @section('title')
-    <h2>DATA - TERNAK</h2>
+    <h2>LAPORAN</h2>
 @endsection
 
 @section('breadcrumb')
     <li><a href="javascript:void(0);"><i class="material-icons">home</i> Home</a></li>
-    <li><i class="material-icons">widgets</i> Data </li>
-    <li class="active"><i class="material-icons">attachment</i> Ternak</li>
+    <li class="active"><i class="material-icons">attachment</i> Laporan </li>
 @endsection
 
 @section('content')
@@ -86,7 +85,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('/adminbsb/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
+	<script src="{{ asset('/adminbsb/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
     <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}"></script>

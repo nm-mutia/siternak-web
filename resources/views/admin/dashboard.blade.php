@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.part')
 
 @section('link')
     <link href="{{ asset('/css/search.css') }}" rel="stylesheet" />

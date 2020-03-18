@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.part')
 
 @section('link')
     <link href="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
