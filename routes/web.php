@@ -11,25 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-// Route::get('/home', function () {
-//     return view('admin.dashboard');
-// });
-Route::get('/ternak', function () {
-    return view('data.data');
-});
-Route::get('/perkawinan', function () {
-    return view('perkawinan.kawin');
-});
-Route::get('/grafik', function () {
-    return view('admin.grafik.grafik');
-});
-Route::get('/laporan', function () {
-    return view('admin.laporan');
+Route::group(['midlleware' => 'web'], function() {
+	//auth
+	Auth::routes();
+
+	//index
+	Route::get('/', 'HomeController@index')->middleware('auth');
+	Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+
+	//admin
+	Route::group(['prefix' => 'admin', 'middleware' => ['role', 'auth']], function(){
+		Route::get('/', 'Admin\HomeController@index');
+	});
+
+	//peternak
+	Route::group(['prefix' => 'peternak', 'middleware' => ['role', 'auth']], function(){
+		Route::get('/', 'Peternak\HomeController@index')->name('peternak');
+	});
+
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
