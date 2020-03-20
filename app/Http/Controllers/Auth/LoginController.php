@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 // use App\Providers\RouteServiceProvider;
-// use Illuminate\Http\Request;
-// use User;
 
 class LoginController extends Controller
 {
@@ -59,13 +57,6 @@ class LoginController extends Controller
         $this->redirectTo = route('peternak');
         return $this->redirectTo;
     }
-
-    // protected function authenticated(Request $request, $user){
-    //     if($user->role == 'Admin'){
-    //         return redirect()->route('admin.dashboard');
-    //     }
-    //     return redirect()->route('peternak.dashboard');
-    // }
     /**
      * Create a new controller instance.
      *

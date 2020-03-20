@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ternak extends Model
 {
-    //
+    protected $keyType = 'string';
 }

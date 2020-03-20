@@ -15,12 +15,12 @@ class CreateTernaksTable extends Migration
     {
         Schema::create('ternaks', function (Blueprint $table) {
             $table->char('necktag', 6)->primary();
-            $table->integer('id_pemilik')->unsigned()->nullable();
-            $table->foreign('id_pemilik')->references('id')->on('pemiliks')->onDelete('cascade');
-            $table->integer('id_ras')->unsigned();
-            $table->foreign('id_ras')->references('id')->on('ras')->onDelete('cascade');
-            $table->integer('id_kematian')->unsigned()->nullable();
-            $table->foreign('id_kematian')->references('id')->on('kematians')->onDelete('cascade');
+            $table->integer('pemilik_id')->unsigned()->nullable();
+            $table->foreign('pemilik_id')->references('id')->on('pemiliks')->onDelete('cascade');
+            $table->integer('ras_id')->unsigned();
+            $table->foreign('ras_id')->references('id')->on('ras')->onDelete('cascade');
+            $table->integer('kematian_id')->unsigned()->nullable();
+            $table->foreign('kematian_id')->references('id')->on('kematians')->onDelete('cascade');
             $table->char('jenis_kelamin', 1);
             $table->date('tgl_lahir')->nullable();
             $table->float('bobot_lahir')->nullable();
@@ -50,9 +50,9 @@ class CreateTernaksTable extends Migration
     {
         Schema::table('ternaks', function(Blueprint $table)
         {
-            $table->dropForeign('ternaks_id_pemilik_foreign');
-            $table->dropForeign('ternaks_id_ras_foreign');
-            $table->dropForeign('ternaks_id_kematian_foreign');
+            $table->dropForeign('ternaks_pemilik_id_foreign');
+            $table->dropForeign('ternaks_ras_id_foreign');
+            $table->dropForeign('ternaks_kematian_id_foreign');
         });
         Schema::dropIfExists('ternaks');
     }

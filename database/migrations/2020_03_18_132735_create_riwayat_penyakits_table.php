@@ -14,8 +14,8 @@ class CreateRiwayatPenyakitsTable extends Migration
     public function up()
     {
         Schema::create('riwayat_penyakits', function (Blueprint $table) {
-            $table->integer('id_penyakit')->unsigned();
-            $table->foreign('id_penyakit')->references('id')->on('penyakits')->onDelete('cascade');
+            $table->integer('penyakit_id')->unsigned();
+            $table->foreign('penyakit_id')->references('id')->on('penyakits')->onDelete('cascade');
             $table->char('necktag', 6);
             $table->foreign('necktag')->references('necktag')->on('ternaks')->onDelete('cascade');
             $table->date('tgl_sakit')->nullable();
@@ -35,7 +35,7 @@ class CreateRiwayatPenyakitsTable extends Migration
     {
         Schema::table('riwayat_penyakits', function(Blueprint $table)
         {
-            $table->dropForeign('riwayat_penyakits_id_penyakit_foreign');
+            $table->dropForeign('riwayat_penyakits_penyakit_id_foreign');
             $table->dropForeign('riwayat_penyakits_necktag_foreign');
         });
         Schema::dropIfExists('riwayat_penyakits');
