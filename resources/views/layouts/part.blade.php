@@ -117,7 +117,7 @@
                             <i class="material-icons">account_circle</i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">John Doe</li>
+                            <li class="header">{{ Auth::user()->name }}</li>
                             <li class="body">
                                 <ul class="menu" style="list-style-type:none;">
                                     <li>
@@ -131,12 +131,16 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:void(0);">
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <div class="icon-circle bg-cyan">
                                                 <i class="material-icons">input</i>
                                             </div>
                                             <div class="menu-info" style="top: -3px;">
-                                                <h4>Sign Out</h4>
+                                                <h4>{{ __('Logout') }}</h4>
+                                                
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
                                             </div>
                                         </a>
                                     </li>
@@ -160,8 +164,8 @@
                     <img src="{{ asset('adminbsb/images/user.png') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Selamat Datang, John Doe</div>
-                    <div class="email">Admin</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Selamat Datang, {{ Auth::user()->name }}</div>
+                    <div class="email">{{ Auth::user()->role }}</div>
                 </div>
             </div>
             <!-- #User Info -->

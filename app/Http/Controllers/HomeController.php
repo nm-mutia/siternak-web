@@ -24,12 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role == 1) { //admin
-            return view('admin.dashboard');
-        }
-
-        if (Auth::user()->role == 2) { //peternak
-            return view('home');
-        }
+        return view('welcome');
     }
 }

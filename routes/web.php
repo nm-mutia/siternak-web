@@ -16,17 +16,27 @@ Route::group(['midlleware' => 'web'], function() {
 	Auth::routes();
 
 	//index
-	Route::get('/', 'HomeController@index')->middleware('auth');
-	Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+	// Route::get('/', 'HomeController@index')->middleware('auth');
+	Route::get('/', function(){
+		return view('welcome');
+	});
 
 	//admin
-	Route::group(['prefix' => 'admin', 'middleware' => ['role', 'auth']], function(){
-		Route::get('/', 'Admin\HomeController@index');
+	Route::prefix('admin')->middleware('can:isAdmin', 'auth')->group(function(){
+		Route::get('/', 'Admin\HomeController@index')->name('admin');
+		
+		Route::name('admin.')->group(function(){
+			Route::get('dashboard', 'Admin\HomeController@index')->name('dashboard');
+		});
 	});
 
 	//peternak
-	Route::group(['prefix' => 'peternak', 'middleware' => ['role', 'auth']], function(){
+	Route::prefix('peternak')->middleware('can:isPeternak', 'auth')->group(function(){
 		Route::get('/', 'Peternak\HomeController@index')->name('peternak');
+
+		Route::name('peternak.')->group(function(){
+			Route::get('dashboard', 'Peternak\HomeController@index')->name('dashboard');
+		});
 	});
 
 });

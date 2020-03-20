@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-// use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+// use App\Providers\RouteServiceProvider;
+// use Illuminate\Http\Request;
+// use User;
 
 class LoginController extends Controller
 {
@@ -29,26 +31,41 @@ class LoginController extends Controller
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
 
-    protected $redirectTo;
-    protected function redirectTo()
-    {
-        switch(Auth::user()->role){
-            case 1:
-                // $this->redirectTo = '/admin';
-                // return $this->redirectTo;
-                return '/admin';
-                break;
-            case 2:
-                // $this->redirectTo = '/peternak';
-                // return $this->redirectTo;
-                return '/peternak';
-                break;
-            default:
-                // $this->redirectTo = '/login';
-                // return $this->redirectTo;
-                return '/login';
+    // protected $redirectTo;
+    // public function redirectTo()
+    // {
+    //     switch(Auth::user()->role){
+    //         case 'Admin':
+    //             $this->redirectTo = '/admin';
+    //             return $this->redirectTo;
+    //             break;
+    //         case 'Peternak':
+    //             $this->redirectTo = '/peternak';
+    //             return $this->redirectTo;
+    //             break;
+    //         default:
+    //             $this->redirectTo = '/login';
+    //             return $this->redirectTo;
+    //             break;
+    //     }
+    // } 
+    
+    public function redirectTo(){
+        if(Auth::user()->role == 'admin'){
+            $this->redirectTo = route('admin');
+            return $this->redirectTo;
         }
-    } 
+
+        $this->redirectTo = route('peternak');
+        return $this->redirectTo;
+    }
+
+    // protected function authenticated(Request $request, $user){
+    //     if($user->role == 'Admin'){
+    //         return redirect()->route('admin.dashboard');
+    //     }
+    //     return redirect()->route('peternak.dashboard');
+    // }
     /**
      * Create a new controller instance.
      *
