@@ -1,8 +1,8 @@
 @extends('layouts.part')
 
-@section('link')
+@push('link')
     <link href="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
-@endsection
+@endpush
 
 @section('title')
     <h2>LAPORAN</h2>
@@ -84,7 +84,7 @@
     <!-- #END# Exportable Table -->
 @endsection
 
-@section('script')
+@push('script')
 	<script src="{{ asset('/adminbsb/plugins/jquery-datatable/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script>
     <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}"></script>
@@ -95,4 +95,4 @@
     <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script>
     <script src="{{ asset('/adminbsb/js/pages/tables/jquery-datatable.js') }}"></script>
-@endsection
+@endpush

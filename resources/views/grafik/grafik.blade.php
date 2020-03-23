@@ -1,9 +1,9 @@
 @extends('layouts.part')
 
-@section('link')
+@push('link')
     <link href="{{ asset('/adminbsb/plugins/morrisjs/morris.css') }}" rel="stylesheet" />
     <link href="{{ asset('/bootstrap/css/bootstrap.css.map') }}" rel="stylesheet" />
-@endsection
+@endpush
 
 @section('title')
     <h2>GRAFIK</h2>
@@ -113,8 +113,8 @@
     <!-- #END# Donut Chart -->
 @endsection
 
-@section('script')
+@push('script')
 	<script src="{{ asset('/adminbsb/plugins/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('/adminbsb/plugins/morrisjs/morris.js') }}"></script>
     <script src="{{ asset('/adminbsb/js/pages/charts/morris.js') }}"></script>
-@endsection
+@endpush

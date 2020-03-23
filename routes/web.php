@@ -23,10 +23,26 @@ Route::group(['midlleware' => 'web'], function() {
 
 	//admin
 	Route::prefix('admin')->middleware('can:isAdmin', 'auth')->group(function(){
+		//dashboard
 		Route::get('/', 'Admin\HomeController@index')->name('admin');
 		
-		Route::name('admin.')->group(function(){
-			Route::get('dashboard', 'Admin\HomeController@index')->name('dashboard');
+		Route::namespace('admin')->name('admin.')->group(function(){
+			//data
+			Route::resource('ternak', 'TernakController');
+			Route::resource('ras', 'RasController');
+			Route::resource('penyakit', 'PenyakitController');
+			Route::resource('kematian', 'KematianController');
+			Route::resource('pemilik', 'PemilikController');
+			Route::resource('perkawinan', 'PerkawinanController');
+
+			//perkawinan
+			Route::get('match', 'HomeController@index')->name('match');
+
+			//grafik
+			Route::get('grafik', 'HomeController@index')->name('grafik');
+
+			//laporan
+			Route::get('laporan', 'HomeController@index')->name('laporan');
 		});
 	});
 

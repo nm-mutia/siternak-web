@@ -31,7 +31,7 @@
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ asset('/adminbsb/css/themes/all-themes.css') }}" rel="stylesheet" />
 
-    @yield('link')
+    @stack('link')
 
 </head>
 <body class="theme-teal">
@@ -164,8 +164,8 @@
                     <img src="{{ asset('adminbsb/images/user.png') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Selamat Datang, {{ Auth::user()->name }}</div>
-                    <div class="email">{{ Auth::user()->role }}</div>
+                    <div class="email">Selamat datang, {{ Auth::user()->role }}</div>
+                    <div class="name">{{ Auth::user()->name }}</div>
                 </div>
             </div>
             <!-- #User Info -->
@@ -174,7 +174,7 @@
                 <ul class="list">
                     <li class="header">MENU</li>
                     <li>
-                        <a href="{{ url('home') }}">
+                        <a href="{{ route('admin') }}">
                             <i class="material-icons">home</i>
                             <span>Dashboard</span>
                         </a>
@@ -185,28 +185,28 @@
                             <span>Data</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><a href="{{ url('ternak') }}">Ternak</a></li>
-                            <li><a href="{{ url('home') }}">Ras</a></li>
-                            <li><a href="{{ url('home') }}">Penyakit</a></li>
-                            <li><a href="{{ url('home') }}">Perkawinan</a></li>
-                            <li><a href="{{ url('home') }}">Ternak Mati</a></li>
-                            <li><a href="{{ url('home') }}">Pemilik</a></li>
+                            <li><a href="{{ route('admin.ternak.index') }}">Ternak</a></li>
+                            <li><a href="{{ route('admin.ras.index') }}">Ras</a></li>
+                            <li><a href="{{ route('admin.penyakit.index') }}">Penyakit</a></li>
+                            <li><a href="{{ route('admin.perkawinan.index') }}">Perkawinan</a></li>
+                            <li><a href="{{ route('admin.kematian.index') }}">Ternak Mati</a></li>
+                            <li><a href="{{ route('admin.pemilik.index') }}">Pemilik</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="{{ url('perkawinan') }}">
+                        <a href="{{ route('admin.match') }}">
                             <i class="material-icons">compare</i>
                             <span>Perkawinan</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('grafik') }}">
+                        <a href="{{ route('admin.grafik') }}">
                             <i class="material-icons">pie_chart</i>
                             <span>Grafik</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('laporan') }}">
+                        <a href="{{ route('admin.laporan') }}">
                             <i class="material-icons">archive</i>
                             <span>Laporan</span>
                         </a>
@@ -268,7 +268,7 @@
     <!-- Demo Js -->
     <script src="{{ asset('/adminbsb/js/demo.js') }}"></script>
 
-    @yield('script')
+    @stack('script')
 
 </body>
 </html>

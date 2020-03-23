@@ -1,6 +1,6 @@
 @extends('layouts.part')
 
-@section('link')
+@push('link')
     <link href="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
     <!-- Dropzone Css -->
     <link href="{{ asset('/adminbsb/plugins/dropzone/dropzone.css') }}" rel="stylesheet">
@@ -12,7 +12,7 @@
     <link href="{{ asset('/adminbsb/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet">
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('/adminbsb/plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet" />
-@endsection
+@endpush
 
 @section('title')
     <h2>PERKAWINAN - KECOCOKAN TERNAK</h2>
@@ -73,7 +73,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('script')
 	<script src="{{ asset('/adminbsb/js/pages/forms/advanced-form-elements.js') }}"></script>
 	<!-- Dropzone Plugin Js -->
     <script src="{{ asset('/adminbsb/plugins/dropzone/dropzone.js') }}"></script>
@@ -85,4 +85,4 @@
     <script src="{{ asset('/adminbsb/plugins/jquery-spinner/js/jquery.spinner.js') }}"></script>
     <!-- Bootstrap Tags Input Plugin Js -->
     <script src="{{ asset('/adminbsb/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
-@endsection
+@endpush

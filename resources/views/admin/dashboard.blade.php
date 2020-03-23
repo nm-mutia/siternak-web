@@ -1,10 +1,10 @@
 @extends('layouts.part')
 
-@section('link')
+@push('link')
     <link href="{{ asset('/css/search.css') }}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link href="{{ asset('/adminbsb/plugins/waitme/waitMe.css') }}" rel="stylesheet" />
-@endsection
+@endpush
 
 @section('title')
     <h2>DASHBOARD</h2>
@@ -126,7 +126,7 @@
     <!-- /result -->
 @endsection
 
-@section('script')
+@push('script')
     <script src="{{ asset('/adminbsb/plugins/waitme/waitMe.js') }}"></script>
     <script src="{{ asset('/adminbsb/js/pages/cards/colored.js') }}"></script>
-@endsection
+@endpush
