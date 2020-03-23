@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Pemilik;
 use Yajra\Datatables\Datatables;
+use Validator;
 
 
 class PemilikController extends Controller
@@ -21,14 +22,13 @@ class PemilikController extends Controller
         $page = 'Pemilik';
 
         if ($request->ajax()) {
-            $data = Pemilik::all();
+            $data = Pemilik::latest()->get();
 
             return Datatables::of($data)
-                    // ->addIndexColumn()
+                    ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
-                                <a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Edit</a>
-                                <a href="javascript:void(0)" class="edit btn btn-primary btn-sm">Delete</a>';
+                        $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                        $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
                         return $btn;
                     })
                     ->rawColumns(['action'])
@@ -36,7 +36,7 @@ class PemilikController extends Controller
         }
 
         return view('data.pemilik')->with('title', $title)
-                                 ->with('page', $page);
+                                   ->with('page', $page);
     }
 
     /**
@@ -57,7 +57,25 @@ class PemilikController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'nama_pemilik' => 'required',
+            'ktp' => 'required|digits:16'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'nama_pemilik' => $request->nama_pemilik,
+            'ktp' => $request->ktp
+        );
+
+        Pemilik::create($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
 
     /**
@@ -79,7 +97,10 @@ class PemilikController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Pemilik::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     /**
@@ -91,7 +112,25 @@ class PemilikController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'nama_pemilik' => 'required',
+            'ktp' => 'required|digits:16'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'nama_pemilik' => $request->nama_pemilik,
+            'ktp' => $request->ktp
+        );
+
+        Pemilik::whereId($id)->update($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
 
     /**
@@ -102,6 +141,7 @@ class PemilikController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Pemilik::findOrFail($id);
+        $data->delete();
     }
 }

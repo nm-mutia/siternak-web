@@ -188,6 +188,7 @@
                             <li><a href="{{ route('admin.ternak.index') }}">Ternak</a></li>
                             <li><a href="{{ route('admin.ras.index') }}">Ras</a></li>
                             <li><a href="{{ route('admin.penyakit.index') }}">Penyakit</a></li>
+                            <li><a href="{{ route('admin.penyakit.index') }}">Riwayat Penyakit</a></li>
                             <li><a href="{{ route('admin.perkawinan.index') }}">Perkawinan</a></li>
                             <li><a href="{{ route('admin.kematian.index') }}">Ternak Mati</a></li>
                             <li><a href="{{ route('admin.pemilik.index') }}">Pemilik</a></li>

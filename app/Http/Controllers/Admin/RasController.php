@@ -27,6 +27,7 @@ class RasController extends Controller
             $data = Ras::latest()->get();
 
             return Datatables::of($data)
+                    ->addIndexColumn()
                     ->addColumn('action', function($row){
                         $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
                         $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
@@ -59,7 +60,8 @@ class RasController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'jenis_ras' => 'required'
+            'jenis_ras' => 'required',
+            'ket_ras' => 'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -75,7 +77,7 @@ class RasController extends Controller
 
         Ras::create($form_data);
 
-        return response()->json(['success' => 'Data telah ditambahkan ke dalam database.']);
+        return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
 
     /**
@@ -97,7 +99,10 @@ class RasController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Ras::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     /**
@@ -109,7 +114,25 @@ class RasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'jenis_ras' => 'required',
+            'ket_ras' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'jenis_ras' => $request->jenis_ras,
+            'ket_ras' => $request->ket_ras
+        );
+
+        Ras::whereId($id)->update($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
 
     /**
@@ -120,6 +143,7 @@ class RasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Ras::findOrFail($id);
+        $data->delete();
     }
 }

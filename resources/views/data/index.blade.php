@@ -1,9 +1,9 @@
 @extends('layouts.part')
 
 @push('link')
-<!-- <link href="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet"> -->
 <link href="{{ asset('/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
+@stack('link2')
 @endpush
 
 @section('title')
@@ -50,9 +50,5 @@
 @push('script')
 <script src="{{ asset('/datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/datatable/dataTables.bootstrap4.min.js') }}"></script>
-
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/jquery.dataTables.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/js/pages/tables/jquery-datatable.js') }}"></script> -->
 @stack('script2')
 @endpush

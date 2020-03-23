@@ -1,5 +1,10 @@
 @extends('data.index')
 
+@push('link2')
+<!-- Bootstrap Material Datetime Picker Css -->
+<link href="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
+@endpush
+
 @section('table-content')
 <div align="right">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
@@ -9,13 +14,15 @@
 <br>
 <!-- tabel -->
 <div class="table-responsive">
-    <table id="pemilik-table" class="table table-bordered table-condensed table-striped">
+    <table id="kematian-table" class="table table-bordered table-condensed table-striped">
         <thead>
             <tr>
                 <th>No.</th>
                 <!-- <th>ID</th> -->
-                <th>Nama</th>
-                <th>KTP</th>
+                <th>Tanggal Kematian</th>
+                <th>Waktu Kematian</th>
+                <th>Penyebab</th>
+                <th>Kondisi</th>
                 <th>Created At</th>
                 <th>Updated At</th>
                 <th>Action</th>
@@ -25,8 +32,10 @@
             <tr>
                 <th>No.</th>
                 <!-- <th>ID</th> -->
-                <th>Nama</th>
-                <th>KTP</th>
+                <th>Tanggal Kematian</th>
+                <th>Waktu Kematian</th>
+                <th>Penyebab</th>
+                <th>Kondisi</th>
                 <th>Created At</th>
                 <th>Updated At</th>
                 <th>Action</th>
@@ -49,15 +58,37 @@
                     @csrf
 
                     <div class="form-group">
-                        <label class="control-label">Nama</label>
-                        <div class="form-line col-md-8">
-                            <input type="text" name="nama_pemilik" id="nama_pemilik" class="form-control">
+                        <label class="control-label">Tanggal Kematian</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">date_range</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" name="tgl_kematian" id="tgl_kematian" class="datepicker form-control" placeholder="Pilih tanggal...">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">KTP</label>
+                        <label class="control-label">Waktu Kematian</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">access_time</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" name="waktu_kematian" id="waktu_kematian" class="timepicker form-control" placeholder="Pilih waktu...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Penyebab</label>
                         <div class="form-line col-md-8">
-                            <input type="text" name="ktp" id="ktp" class="form-control">
+                            <input type="text" name="penyebab" id="penyebab" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Kondisi</label>
+                        <div class="form-line col-md-8">
+                            <input type="text" name="kondisi" id="kondisi" class="form-control">
                         </div>
                     </div>
                     <br>
@@ -93,6 +124,28 @@
 @endsection
 
 @push('script2')
+<!-- <script src="{{ asset('/adminbsb/js/pages/forms/basic-form-elements.js') }}"></script> -->
+<script>
+    $(function () {
+    //Textarea auto growth
+    autosize($('textarea.auto-growth'));
+
+    $('.datepicker').bootstrapMaterialDatePicker({
+        format: 'dddd DD MMMM YYYY',
+        clearButton: true,
+        weekStart: 1,
+        time: false
+    }, moment());
+
+    $('.timepicker').bootstrapMaterialDatePicker({
+        format: 'HH:mm',
+        clearButton: true,
+        date: false
+    }, moment());
+});
+</script>
+<script src="{{ asset('/adminbsb/plugins/momentjs/moment.js') }}"></script>
+<script src="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -100,15 +153,17 @@
         }
     });
 
-	$('#pemilik-table').DataTable({
+	$('#kematian-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{{ route('admin.pemilik.index') }}',
+        ajax: "{{ route('admin.kematian.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             // {data: 'id', name: 'id'},
-            {data: 'nama_pemilik', name: 'nama_pemilik'},
-            {data: 'ktp', name: 'ktp'},
+            {data: 'tgl_kematian', name: 'tgl_kematian'},
+            {data: 'waktu_kematian', name: 'waktu_kematian'},
+            {data: 'penyebab', name: 'penyebab'},
+            {data: 'kondisi', name: 'kondisi'},
             {data: 'created_at', name: 'created_at'},
             {data: 'updated_at', name: 'updated_at'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -126,7 +181,7 @@
     });
 
     $('#tambah_data').click(function(){
-        $('.modal-title').text('Tambah Data - Pemilik');
+        $('.modal-title').text('Tambah Data - Ternak Mati');
         $('#action_button').val('Add');
         $('#action').val('Add');
         $('#form_result').html('');
@@ -140,14 +195,14 @@
 
         //tambah
         if($('#action').val() == 'Add'){
-            action_url = "{{ route('admin.pemilik.store') }}";
+            action_url = "{{ route('admin.kematian.store') }}";
             method_form = "POST";
         }
 
         //edit
         if($('#action').val() == 'Edit'){
             var updateId = $('#hidden_id').val();
-            action_url = "/admin/pemilik/"+updateId;
+            action_url = "/admin/kematian/"+updateId;
             method_form = "PUT";
         }
 
@@ -168,7 +223,7 @@
                 if (data.success) {
                     html = '<div class="alert alert-success">' + data.success + '</div>';
                     $('#tambah_data_form')[0].reset();
-                    $('#pemilik-table').DataTable().ajax.reload();
+                    $('#kematian-table').DataTable().ajax.reload();
                 }
                 $('#form_result').html(html);
             }
@@ -180,30 +235,32 @@
         var id = $(this).attr('id');
         $('#form_result').html('');
         $.ajax({
-            url: "/admin/pemilik/"+id+"/edit",
+            url: "/admin/kematian/"+id+"/edit",
             datatype: "json",
             success: function(data){
-                $('#nama_pemilik').val(data.result.nama_pemilik);
-                $('#ktp').val(data.result.ktp);
+                $('#tgl_kematian').val(data.result.tgl_kematian);
+                $('#waktu_kematian').val(data.result.waktu_kematian);
+                $('#penyebab').val(data.result.penyebab);
+                $('#kondisi').val(data.result.kondisi);
                 $('#hidden_id').val(id);
                 $('#action').val('Edit');
                 $('#action_button').val('Edit');
-                $('.modal-title').text('Edit Data - Pemilik');
+                $('.modal-title').text('Edit Data - Ternak Mati');
                 $('#formModal').modal('show');
             }
         });
     });
 
     //delete
-    var pemilik_id;
+    var kematian_id;
     $(document).on('click', '.delete', function(){
-        pemilik_id = $(this).attr('id');
+        kematian_id = $(this).attr('id');
         $('#confirmModal').modal('show');
     });
 
     $('#ok_button').click(function(){
         $.ajax({
-            url:"/admin/pemilik/"+pemilik_id,
+            url:"/admin/kematian/"+kematian_id,
             method: "DELETE",
             beforeSend: function(){
                 $('#ok_button').text('Deleting...');
@@ -211,7 +268,7 @@
             success: function(data){
                 setTimeout(function(){
                     $('#confirmModal').modal('hide');
-                    $('#pemilik-table').DataTable().ajax.reload();
+                    $('#kematian-table').DataTable().ajax.reload();
                     alert('Data Deleted');
                 }, 1000);
             }

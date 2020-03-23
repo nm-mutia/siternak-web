@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Ternak;
+use Yajra\Datatables\Datatables;
+use Validator;
 
 class TernakController extends Controller
 {
@@ -18,7 +20,20 @@ class TernakController extends Controller
         $title = 'TERNAK';
         $page = 'Ternak';
 
-        $data = Ternak::all();
+        if ($request->ajax()) {
+            $data = Penyakit::latest()->get();
+
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                        $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
         return view('data.index')->with('data', $data)
                                  ->with('title', $title)
                                  ->with('page', $page);
@@ -42,7 +57,25 @@ class TernakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'nama_penyakit' => 'required',
+            'ket_penyakit' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'nama_penyakit' => $request->nama_penyakit,
+            'ket_penyakit' => $request->ket_penyakit
+        );
+
+        Penyakit::create($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
 
     /**
@@ -64,7 +97,10 @@ class TernakController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Penyakit::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     /**
@@ -76,7 +112,25 @@ class TernakController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'nama_penyakit' => 'required',
+            'ket_penyakit' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'nama_penyakit' => $request->nama_penyakit,
+            'ket_penyakit' => $request->ket_penyakit
+        );
+
+        Penyakit::whereId($id)->update($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
 
     /**
@@ -87,6 +141,7 @@ class TernakController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Penyakit::findOrFail($id);
+        $data->delete();
     }
 }

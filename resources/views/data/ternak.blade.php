@@ -9,13 +9,30 @@
 <br>
 <!-- tabel -->
 <div class="table-responsive">
-	<table id="ras-table" class="table table-bordered table-condensed table-striped">
+	<table id="ternak-table" class="table table-bordered table-condensed table-striped">
 		<thead>
 		    <tr>
 		    	<th>No.</th>
-		        <!-- <th>ID</th> -->
-		        <th>Jenis Ras</th>
-		        <th>Keterangan</th>
+		        <th>Necktag</th>
+		        <th>ID Pemilik</th>
+		        <th>ID Ras</th>
+		        <th>ID Kematian</th>
+		        <th>Jenis Kelamin</th>
+		        <th>Tanggal Lahir</th>
+		        <th>Bobot Lahir</th>
+		        <th>Pukul Lahir</th>
+		        <th>Lama di Kandungan</th>
+		        <th>Lama Laktasi</th>
+		        <th>Tanggal Lepas Sapih</th>
+		        <th>Blood</th>
+		        <th>Ayah</th>
+		        <th>Ibu</th>
+		        <th>Bobot Tubuh</th>
+		        <th>Panjang Tubuh</th>
+		        <th>Tinggi Tubuh</th>
+		        <th>Cacat Fisik</th>
+		        <th>Ciri Lain</th>
+		        <th>Status Ada</th>
 		        <th>Created At</th>
 		        <th>Updated At</th>
 		        <th>Action</th>
@@ -24,9 +41,26 @@
 		<tfoot>
 		    <tr>
 		    	<th>No.</th>
-		        <!-- <th>ID</th> -->
-		        <th>Jenis Ras</th>
-		        <th>Keterangan</th>
+		        <th>Necktag</th>
+		        <th>ID Pemilik</th>
+		        <th>ID Ras</th>
+		        <th>ID Kematian</th>
+		        <th>Jenis Kelamin</th>
+		        <th>Tanggal Lahir</th>
+		        <th>Bobot Lahir</th>
+		        <th>Pukul Lahir</th>
+		        <th>Lama di Kandungan</th>
+		        <th>Lama Laktasi</th>
+		        <th>Tanggal Lepas Sapih</th>
+		        <th>Blood</th>
+		        <th>Ayah</th>
+		        <th>Ibu</th>
+		        <th>Bobot Tubuh</th>
+		        <th>Panjang Tubuh</th>
+		        <th>Tinggi Tubuh</th>
+		        <th>Cacat Fisik</th>
+		        <th>Ciri Lain</th>
+		        <th>Status Ada</th>
 		        <th>Created At</th>
 		        <th>Updated At</th>
 		        <th>Action</th>
@@ -49,15 +83,15 @@
 					@csrf
 
 					<div class="form-group">
-						<label class="control-label">Jenis Ras</label>
+						<label class="control-label">Nama Penyakit</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="jenis_ras" id="jenis_ras" class="form-control">
+							<input type="text" name="nama_penyakit" id="nama_penyakit" class="form-control">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Keterangan</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="ket_ras" id="ket_ras" class="form-control">
+							<input type="text" name="ket_penyakit" id="ket_penyakit" class="form-control">
 						</div>
 					</div>
 					<br>
@@ -75,7 +109,7 @@
 <!-- modal delete -->
 <div id="confirmModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content" data-type="confirm">
+        <div class="modal-content" >
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h2 class="modal-title">Confirmation</h2>
@@ -100,15 +134,15 @@
   		}
 	});
 
-	$('#ras-table').DataTable({
+	$('#penyakit-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.ras.index') }}",
+        ajax: "{{ route('admin.penyakit.index') }}",
         columns: [
 	        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             // {data: 'id', name: 'id'},
-            {data: 'jenis_ras', name: 'jenis_ras'},
-            {data: 'ket_ras', name: 'ket_ras'},
+            {data: 'nama_penyakit', name: 'nama_penyakit'},
+            {data: 'ket_penyakit', name: 'ket_penyakit'},
             {data: 'created_at', name: 'created_at'},
             {data: 'updated_at', name: 'updated_at'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -126,7 +160,7 @@
     });
 
     $('#tambah_data').click(function(){
-    	$('.modal-title').text('Tambah Data - Ras');
+    	$('.modal-title').text('Tambah Data - Penyakit');
     	$('#action_button').val('Add');
     	$('#action').val('Add');
     	$('#form_result').html('');
@@ -140,15 +174,14 @@
 
     	//tambah
     	if($('#action').val() == 'Add'){
-    		action_url = "{{ route('admin.ras.store') }}";
+    		action_url = "{{ route('admin.penyakit.store') }}";
     		method_form = "POST";
     	}
 
     	//edit
     	if($('#action').val() == 'Edit'){
     		var updateId = $('#hidden_id').val();
-    		// action_url = "{{ route('admin.ras.update',"+updateId+") }}";
-    		action_url = "/admin/ras/"+updateId;
+    		action_url = "/admin/penyakit/"+updateId;
     		method_form = "PUT";
     	}
 
@@ -169,7 +202,7 @@
     			if (data.success) {
     				html = '<div class="alert alert-success">' + data.success + '</div>';
     				$('#tambah_data_form')[0].reset();
-    				$('#ras-table').DataTable().ajax.reload();
+    				$('#penyakit-table').DataTable().ajax.reload();
     			}
     			$('#form_result').html(html);
     		}
@@ -181,16 +214,15 @@
     	var id = $(this).attr('id');
     	$('#form_result').html('');
     	$.ajax({
-    		// url: "{{ route('admin.ras.edit',"+id+") }}",
-    		url: "/admin/ras/"+id+"/edit",
+    		url: "/admin/penyakit/"+id+"/edit",
     		datatype: "json",
     		success: function(data){
-    			$('#jenis_ras').val(data.result.jenis_ras);
-    			$('#ket_ras').val(data.result.ket_ras);
+    			$('#nama_penyakit').val(data.result.nama_penyakit);
+    			$('#ket_penyakit').val(data.result.ket_penyakit);
     			$('#hidden_id').val(id);
 		    	$('#action').val('Edit');
     			$('#action_button').val('Edit');
-    			$('.modal-title').text('Edit Data - Ras');
+    			$('.modal-title').text('Edit Data - Penyakit');
 		    	$('#formModal').modal('show');
     		}
     	});
@@ -205,8 +237,7 @@
 
  	$('#ok_button').click(function(){
   		$.ajax({
-  			// url: "{{ route('admin.ras.destroy',"+id+") }}",
-   			url:"/admin/ras/"+ras_id,
+   			url:"/admin/penyakit/"+ras_id,
    			method: "DELETE",
    			beforeSend: function(){
     			$('#ok_button').text('Deleting...');
@@ -214,7 +245,7 @@
 	   		success: function(data){
 	    		setTimeout(function(){
 	     			$('#confirmModal').modal('hide');
-	     			$('#ras-table').DataTable().ajax.reload();
+	     			$('#penyakit-table').DataTable().ajax.reload();
 	     			alert('Data Deleted');
 	    		}, 1000);
 	   		}

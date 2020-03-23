@@ -16,7 +16,7 @@ class CreateKematiansTable extends Migration
         Schema::create('kematians', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('tgl_kematian');
-            $table->time('waktu_kematian');
+            $table->time('waktu_kematian')->nullable();
             $table->string('penyebab')->nullable();
             $table->string('kondisi')->nullable();
             $table->timestamps();
