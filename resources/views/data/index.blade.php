@@ -3,6 +3,7 @@
 @push('link')
 <link href="{{ asset('/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
 @stack('link2')
 @endpush
 
@@ -48,7 +49,26 @@
 @endsection
 
 @push('script')
+<script src="{{ asset('/adminbsb/plugins/momentjs/moment.js') }}"></script>
+<script src="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
 <script src="{{ asset('/datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/datatable/dataTables.bootstrap4.min.js') }}"></script>
+<script>
+    $(function () {
+        $('.datepicker').bootstrapMaterialDatePicker({
+            format: 'dddd DD MMMM YYYY',
+            formatSubmit: 'YYYY-MM-DD',
+            clearButton: true,
+            weekStart: 1,
+            time: false
+        }, moment());
+
+        $('.timepicker').bootstrapMaterialDatePicker({
+            format: 'HH:mm',
+            clearButton: true,
+            date: false
+        }, moment());
+    });
+</script>
 @stack('script2')
 @endpush

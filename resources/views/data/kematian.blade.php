@@ -1,10 +1,5 @@
 @extends('data.index')
 
-@push('link2')
-<!-- Bootstrap Material Datetime Picker Css -->
-<link href="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
-@endpush
-
 @section('table-content')
 <div align="right">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
@@ -54,7 +49,7 @@
             </div>
             <div class="modal-body">
                 <span id="form_result"></span>
-                <form method="post" id="tambah_data_form" class="form-horizontal">
+                <form method="post" id="tambah_data_form">
                     @csrf
 
                     <div class="form-group">
@@ -124,35 +119,7 @@
 @endsection
 
 @push('script2')
-<!-- <script src="{{ asset('/adminbsb/js/pages/forms/basic-form-elements.js') }}"></script> -->
 <script>
-    $(function () {
-    //Textarea auto growth
-    autosize($('textarea.auto-growth'));
-
-    $('.datepicker').bootstrapMaterialDatePicker({
-        format: 'dddd DD MMMM YYYY',
-        clearButton: true,
-        weekStart: 1,
-        time: false
-    }, moment());
-
-    $('.timepicker').bootstrapMaterialDatePicker({
-        format: 'HH:mm',
-        clearButton: true,
-        date: false
-    }, moment());
-});
-</script>
-<script src="{{ asset('/adminbsb/plugins/momentjs/moment.js') }}"></script>
-<script src="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
 	$('#kematian-table').DataTable({
         processing: true,
         serverSide: true,
@@ -179,101 +146,6 @@
             });
         }
     });
-
-    $('#tambah_data').click(function(){
-        $('.modal-title').text('Tambah Data - Ternak Mati');
-        $('#action_button').val('Add');
-        $('#action').val('Add');
-        $('#form_result').html('');
-        $('#formModal').modal('show');
-    });
-
-    $('#tambah_data_form').on('submit', function(event){
-        event.preventDefault();
-        var action_url = '';
-        var method_form = '';
-
-        //tambah
-        if($('#action').val() == 'Add'){
-            action_url = "{{ route('admin.kematian.store') }}";
-            method_form = "POST";
-        }
-
-        //edit
-        if($('#action').val() == 'Edit'){
-            var updateId = $('#hidden_id').val();
-            action_url = "/admin/kematian/"+updateId;
-            method_form = "PUT";
-        }
-
-        $.ajax({
-            url: action_url,
-            method: method_form,
-            data: $(this).serialize(),
-            datatype: "json",
-            success: function(data){
-                var html = '';
-                if (data.errors) {
-                    html = '<div class="alert alert-danger">';
-                    for (var count = 0; count < data.errors.length; count++) {
-                        html += '<p>' + data.errors[count] + '</p>';
-                    }
-                    html += '</div>';
-                }
-                if (data.success) {
-                    html = '<div class="alert alert-success">' + data.success + '</div>';
-                    $('#tambah_data_form')[0].reset();
-                    $('#kematian-table').DataTable().ajax.reload();
-                }
-                $('#form_result').html(html);
-            }
-        });
-    });
-
-    //edit
-    $(document).on('click', '.edit', function(){
-        var id = $(this).attr('id');
-        $('#form_result').html('');
-        $.ajax({
-            url: "/admin/kematian/"+id+"/edit",
-            datatype: "json",
-            success: function(data){
-                $('#tgl_kematian').val(data.result.tgl_kematian);
-                $('#waktu_kematian').val(data.result.waktu_kematian);
-                $('#penyebab').val(data.result.penyebab);
-                $('#kondisi').val(data.result.kondisi);
-                $('#hidden_id').val(id);
-                $('#action').val('Edit');
-                $('#action_button').val('Edit');
-                $('.modal-title').text('Edit Data - Ternak Mati');
-                $('#formModal').modal('show');
-            }
-        });
-    });
-
-    //delete
-    var kematian_id;
-    $(document).on('click', '.delete', function(){
-        kematian_id = $(this).attr('id');
-        $('#confirmModal').modal('show');
-    });
-
-    $('#ok_button').click(function(){
-        $.ajax({
-            url:"/admin/kematian/"+kematian_id,
-            method: "DELETE",
-            beforeSend: function(){
-                $('#ok_button').text('Deleting...');
-            },
-            success: function(data){
-                setTimeout(function(){
-                    $('#confirmModal').modal('hide');
-                    $('#kematian-table').DataTable().ajax.reload();
-                    alert('Data Deleted');
-                }, 1000);
-            }
-        });
-    });
-
 </script>
+<script src="{{ asset('/js/data/datakematian.js') }}"></script>
 @endpush

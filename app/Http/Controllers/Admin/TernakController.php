@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Ternak;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Yajra\Datatables\Datatables;
 use Validator;
 
@@ -15,28 +17,34 @@ class TernakController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'TERNAK';
         $page = 'Ternak';
+        $pemilik = DB::table('pemiliks')->orderBy('nama_pemilik', 'asc')->get();
+        $ras = DB::table('ras')->orderBy('jenis_ras', 'asc')->get();
+        $kematian = DB::table('kematians')->orderBy('id', 'asc')->get();
 
         if ($request->ajax()) {
-            $data = Penyakit::latest()->get();
+            $data = Ternak::latest()->get();
 
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-                        $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                        $btn = '<button type="button" name="view" id="'.$row->necktag.'" class="view btn btn-warning btn-sm">View</button>';
+                        $btn .= '<button type="button" name="edit" id="'.$row->necktag.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                        $btn .= '<button type="button" name="delete" id="'.$row->necktag.'" class="delete btn btn-danger btn-sm">Delete</button>';
                         return $btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
 
-        return view('data.index')->with('data', $data)
-                                 ->with('title', $title)
-                                 ->with('page', $page);
+        return view('data.ternak')->with('pemilik', $pemilik)
+                                  ->with('ras', $ras)
+                                  ->with('kematian', $kematian)
+                                  ->with('title', $title)
+                                  ->with('page', $page);
     }
 
     /**
@@ -58,8 +66,9 @@ class TernakController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'nama_penyakit' => 'required',
-            'ket_penyakit' => 'required'
+            'ras_id' => 'required',
+            'jenis_kelamin' => 'required',
+            'blood' => 'required',
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -68,12 +77,35 @@ class TernakController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
+        $necktag = Str::random(6);
+        while(Ternak::where('necktag', $necktag)->exists()) {
+            $necktag = Str::random(6);
+        }
+
         $form_data = array(
-            'nama_penyakit' => $request->nama_penyakit,
-            'ket_penyakit' => $request->ket_penyakit
+            'necktag' => $necktag,
+            'pemilik_id' => $request->pemilik_id,
+            'ras_id' => $request->ras_id,
+            'kematian_id' => $request->kematian_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tgl_lahir' => $request->tgl_lahir,
+            'bobot_lahir' => $request->bobot_lahir,
+            'pukul_lahir' => $request->pukul_lahir,
+            'lama_dikandungan' => $request->lama_dikandungan,
+            'lama_laktasi' => $request->lama_laktasi,
+            'tgl_lepas_sapih' => $request->tgl_lepas_sapih,
+            'blood' => $request->blood,
+            'necktag_ayah' => $request->necktag_ayah,
+            'necktag_ibu' => $request->necktag_ibu,
+            'bobot_tubuh' => $request->bobot_tubuh,
+            'panjang_tubuh' => $request->panjang_tubuh,
+            'tinggi_tubuh' => $request->tinggi_tubuh,
+            'cacat_fisik' => $request->cacat_fisik,
+            'ciri_lain' => $request->ciri_lain,
+            'status_ada' => $request->status_ada
         );
 
-        Penyakit::create($form_data);
+        Ternak::create($form_data);
 
         return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
@@ -86,7 +118,30 @@ class TernakController extends Controller
      */
     public function show($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Ternak::findOrFail($id);
+
+            if($data->pemilik_id != null){
+                $pid = DB::table('pemiliks')->where('id', $data->pemilik_id)->first();
+                $data->pemilik_id = $pid->nama_pemilik;
+            }
+            if($data->ras_id != null){
+                $rid = DB::table('ras')->where('id', $data->ras_id)->first();
+                $data->ras_id = $rid->jenis_ras;
+            }
+            if($data->kematian_id != null){
+                $kid = DB::table('kematians')->where('id', $data->kematian_id)->first();
+                $data->kematian_id = $kid->tgl_kematian;
+            }
+
+            if($data->status_ada == true){
+                $data->status_ada = 'Ada';
+            }else{
+                $data->status_ada = 'Tidak Ada';
+            }
+
+            return response()->json(['result' => $data]);
+        }
     }
 
     /**
@@ -98,7 +153,7 @@ class TernakController extends Controller
     public function edit($id)
     {
         if(request()->ajax()){
-            $data = Penyakit::findOrFail($id);
+            $data = Ternak::findOrFail($id);
             return response()->json(['result' => $data]);
         }
     }
@@ -113,8 +168,9 @@ class TernakController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
-            'nama_penyakit' => 'required',
-            'ket_penyakit' => 'required'
+            'ras_id' => 'required',
+            'jenis_kelamin' => 'required',
+            'blood' => 'required',
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -124,11 +180,29 @@ class TernakController extends Controller
         }
 
         $form_data = array(
-            'nama_penyakit' => $request->nama_penyakit,
-            'ket_penyakit' => $request->ket_penyakit
+            'necktag' => $request->necktag,
+            'pemilik_id' => $request->pemilik_id,
+            'ras_id' => $request->ras_id,
+            'kematian_id' => $request->kematian_id,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tgl_lahir' => $request->tgl_lahir,
+            'bobot_lahir' => $request->bobot_lahir,
+            'pukul_lahir' => $request->pukul_lahir,
+            'lama_dikandungan' => $request->lama_dikandungan,
+            'lama_laktasi' => $request->lama_laktasi,
+            'tgl_lepas_sapih' => $request->tgl_lepas_sapih,
+            'blood' => $request->blood,
+            'necktag_ayah' => $request->necktag_ayah,
+            'necktag_ibu' => $request->necktag_ibu,
+            'bobot_tubuh' => $request->bobot_tubuh,
+            'panjang_tubuh' => $request->panjang_tubuh,
+            'tinggi_tubuh' => $request->tinggi_tubuh,
+            'cacat_fisik' => $request->cacat_fisik,
+            'ciri_lain' => $request->ciri_lain,
+            'status_ada' => $request->status_ada
         );
 
-        Penyakit::whereId($id)->update($form_data);
+        Ternak::where('necktag',$id)->update($form_data);
 
         return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
@@ -141,7 +215,7 @@ class TernakController extends Controller
      */
     public function destroy($id)
     {
-        $data = Penyakit::findOrFail($id);
+        $data = Ternak::findOrFail($id);
         $data->delete();
     }
 }

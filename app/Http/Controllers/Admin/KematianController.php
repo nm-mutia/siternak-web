@@ -57,8 +57,8 @@ class KematianController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'tgl_kematian' => 'required|date_format:Y-m-d',
-            'waktu_kematian' => 'required|date_format:H:i:s',
+            'tgl_kematian' => 'required',
+            'waktu_kematian' => 'required',
             'penyebab' => 'required',
             'kondisi' => 'required'
         );
@@ -116,8 +116,8 @@ class KematianController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
-            'tgl_kematian' => 'required|date_format:Y-m-d',
-            'waktu_kematian' => 'required|date_format:H:i:s',
+            'tgl_kematian' => 'required',
+            'waktu_kematian' => 'required',
             'penyebab' => 'required',
             'kondisi' => 'required'
         );

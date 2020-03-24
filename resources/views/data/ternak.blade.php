@@ -12,58 +12,58 @@
 	<table id="ternak-table" class="table table-bordered table-condensed table-striped">
 		<thead>
 		    <tr>
-		    	<th>No.</th>
-		        <th>Necktag</th>
-		        <th>ID Pemilik</th>
-		        <th>ID Ras</th>
-		        <th>ID Kematian</th>
-		        <th>Jenis Kelamin</th>
-		        <th>Tanggal Lahir</th>
-		        <th>Bobot Lahir</th>
-		        <th>Pukul Lahir</th>
-		        <th>Lama di Kandungan</th>
-		        <th>Lama Laktasi</th>
-		        <th>Tanggal Lepas Sapih</th>
-		        <th>Blood</th>
-		        <th>Ayah</th>
-		        <th>Ibu</th>
-		        <th>Bobot Tubuh</th>
-		        <th>Panjang Tubuh</th>
-		        <th>Tinggi Tubuh</th>
-		        <th>Cacat Fisik</th>
-		        <th>Ciri Lain</th>
-		        <th>Status Ada</th>
-		        <th>Created At</th>
-		        <th>Updated At</th>
-		        <th>Action</th>
+		    	<th width="5%">No.</th>
+		        <th width="5%">Necktag</th>
+		        <!-- <th>ID Pemilik</th> -->
+		        <th width="5%">ID Ras</th>
+		        <!-- <th>ID Kematian</th> -->
+		        <th width="5%">Jenis Kelamin</th>
+		        <!-- <th>Tanggal Lahir</th> -->
+		        <!-- <th>Bobot Lahir</th> -->
+		        <!-- <th>Pukul Lahir</th> -->
+		        <!-- <th>Lama di Kandungan</th> -->
+		        <!-- <th>Lama Laktasi</th> -->
+		        <!-- <th>Tanggal Lepas Sapih</th> -->
+		        <th width="5%">Blood</th>
+		        <!-- <th>Ayah</th> -->
+		        <!-- <th>Ibu</th> -->
+		        <!-- <th>Bobot Tubuh</th> -->
+		        <!-- <th>Panjang Tubuh</th> -->
+		        <!-- <th>Tinggi Tubuh</th> -->
+		        <!-- <th>Cacat Fisik</th> -->
+		        <!-- <th>Ciri Lain</th> -->
+		        <th width="5%">Status Ada</th>
+		        <th width="20%">Created At</th>
+		        <th width="20%">Updated At</th>
+		        <th width="30%">Action</th>
 		    </tr>
 		</thead>
 		<tfoot>
 		    <tr>
-		    	<th>No.</th>
-		        <th>Necktag</th>
-		        <th>ID Pemilik</th>
-		        <th>ID Ras</th>
-		        <th>ID Kematian</th>
-		        <th>Jenis Kelamin</th>
-		        <th>Tanggal Lahir</th>
-		        <th>Bobot Lahir</th>
-		        <th>Pukul Lahir</th>
-		        <th>Lama di Kandungan</th>
-		        <th>Lama Laktasi</th>
-		        <th>Tanggal Lepas Sapih</th>
-		        <th>Blood</th>
-		        <th>Ayah</th>
-		        <th>Ibu</th>
-		        <th>Bobot Tubuh</th>
-		        <th>Panjang Tubuh</th>
-		        <th>Tinggi Tubuh</th>
-		        <th>Cacat Fisik</th>
-		        <th>Ciri Lain</th>
-		        <th>Status Ada</th>
-		        <th>Created At</th>
-		        <th>Updated At</th>
-		        <th>Action</th>
+		    	<th width="5%">No.</th>
+		        <th width="5%">Necktag</th>
+		        <!-- <th>ID Pemilik</th> -->
+		        <th width="5%">ID Ras</th>
+		        <!-- <th>ID Kematian</th> -->
+		        <th width="5%">Jenis Kelamin</th>
+		        <!-- <th>Tanggal Lahir</th> -->
+		        <!-- <th>Bobot Lahir</th> -->
+		        <!-- <th>Pukul Lahir</th> -->
+		        <!-- <th>Lama di Kandungan</th> -->
+		        <!-- <th>Lama Laktasi</th> -->
+		        <!-- <th>Tanggal Lepas Sapih</th> -->
+		        <th width="5%">Blood</th>
+		        <!-- <th>Ayah</th> -->
+		        <!-- <th>Ibu</th> -->
+		        <!-- <th>Bobot Tubuh</th> -->
+		        <!-- <th>Panjang Tubuh</th> -->
+		        <!-- <th>Tinggi Tubuh</th> -->
+		        <!-- <th>Cacat Fisik</th> -->
+		        <!-- <th>Ciri Lain</th> -->
+		        <th width="5%">Status Ada</th>
+		        <th width="20%">Created At</th>
+		        <th width="20%">Updated At</th>
+		        <th width="30%">Action</th>
 		    </tr>
 		</tfoot>
 	</table>
@@ -79,19 +79,163 @@
 			</div>
 			<div class="modal-body">
 				<span id="form_result"></span>
-				<form method="post" id="tambah_data_form" class="form-horizontal">
+				<form method="post" id="tambah_data_form">
 					@csrf
 
-					<div class="form-group">
-						<label class="control-label">Nama Penyakit</label>
+					<div class="form-group" id="necktag_form">
+						<label class="control-label">Necktag</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="nama_penyakit" id="nama_penyakit" class="form-control">
+							<input type="text" name="necktag" id="necktag" class="form-control" di>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label">Keterangan</label>
+						<label class="control-label">ID Pemilik</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="ket_penyakit" id="ket_penyakit" class="form-control">
+							<select class="form-control" name="pemilik_id" id="pemilik_id">
+								<option></option>
+							  	@foreach ($pemilik as $pid)
+							    <option value="{{ $pid->id }}">{{ $pid->nama_pemilik }}</option>
+								@endforeach    
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">ID Ras</label>
+						<div class="form-line col-md-8">
+							<select class="form-control" name="ras_id" id="ras_id">
+								<option></option>
+							  	@foreach ($ras as $rid)
+							    <option value="{{ $rid->id }}">{{ $rid->jenis_ras }}</option>
+								@endforeach    
+							</select>
+						</div>
+					</div>
+					<div class="form-group" id="kematian_form">
+						<label class="control-label">ID Kematian</label>
+						<div class="form-line col-md-8">
+							<select class="form-control" name="kematian_id" id="kematian_id">
+								<option></option>
+							  	@foreach ($kematian as $kid)
+							    <option value="{{ $kid->id }}">{{ $kid->tgl_kematian }} - {{ $kid->waktu_kematian }} - {{ $kid->penyebab }} - {{ $kid->kondisi }}</option>
+								@endforeach    
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Jenis Kelamin</label>
+						<div class="form-line col-md-8">
+							<select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
+								<option value="J">Jantan</option>
+							    <option value="B">Betina</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Tanggal Lahir</label>
+						<div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">date_range</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" name="tgl_lahir" id="tgl_lahir" class="datepicker form-control" placeholder="Pilih tanggal...">
+                            </div>
+                        </div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Bobot Lahir</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="bobot_lahir" id="bobot_lahir" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Pukul Lahir</label>
+						<div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">access_time</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" name="pukul_lahir" id="pukul_lahir" class="timepicker form-control" placeholder="Pilih waktu...">
+                            </div>
+                        </div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Lama di Kandungan</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="lama_dikandungan" id="lama_dikandungan" class="form-control" placeholder="dalam hari">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Lama Laktasi</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="lama_laktasi" id="lama_laktasi" class="form-control" placeholder="dalam hari">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Tanggal Lepas Sapih</label>
+						<div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">date_range</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" name="tgl_lepas_sapih" id="tgl_lepas_sapih" class="datepicker form-control" placeholder="Pilih tanggal...">
+                            </div>
+                        </div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Blood</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="blood" id="blood" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Ayah</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="necktag_ayah" id="necktag_ayah" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Ibu</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="necktag_ibu" id="necktag_ibu" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Bobot Tubuh</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="bobot_tubuh" id="bobot_tubuh" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Panjang Tubuh</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="panjang_tubuh" id="panjang_tubuh" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Tinggi Tubuh</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="tinggi_tubuh" id="tinggi_tubuh" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Cacat Fisik</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="cacat_fisik" id="cacat_fisik" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Ciri Lain</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="ciri_lain" id="ciri_lain" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Status Kambing</label>
+						<div class="form-line col-md-8">
+							<select class="form-control" name="status_ada" id="status_ada">
+								<option value="true">Ada</option>
+							    <option value="false">Tidak ada</option>
+							</select>
 						</div>
 					</div>
 					<br>
@@ -101,6 +245,166 @@
 						<input type="submit" name="action_button" id="action_button" class="btn btn-warning" value="Add">
 					</div>
 				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- modal view -->
+<div id="viewModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Tambah Data - {{ $page }}</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group" id="necktag_form">
+					<label class="control-label">Necktag</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="necktag" id="vnecktag" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Pemilik</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="pemilik_id" id="vpemilik_id" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Ras</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="ras_id" id="vras_id" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group" id="kematian_form">
+					<label class="control-label">Kematian</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="kematian_id" id="vkematian_id" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Jenis Kelamin</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="jenis_kelamin" id="vjenis_kelamin" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Tanggal Lahir</label>
+					<div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">date_range</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" name="tgl_lahir" id="vtgl_lahir" class="form-control" readonly="true">
+                        </div>
+                    </div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Bobot Lahir</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="bobot_lahir" id="vbobot_lahir" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Pukul Lahir</label>
+					<div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">access_time</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" name="pukul_lahir" id="vpukul_lahir" class="form-control" readonly="true">
+                        </div>
+                    </div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Lama di Kandungan</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="lama_dikandungan" id="vlama_dikandungan" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Lama Laktasi</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="lama_laktasi" id="vlama_laktasi" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Tanggal Lepas Sapih</label>
+					<div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">date_range</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" name="tgl_lepas_sapih" id="vtgl_lepas_sapih" class="form-control" readonly="true">
+                        </div>
+                    </div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Blood</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="blood" id="vblood" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Ayah</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="necktag_ayah" id="vnecktag_ayah" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Ibu</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="necktag_ibu" id="vnecktag_ibu" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Bobot Tubuh</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="bobot_tubuh" id="vbobot_tubuh" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Panjang Tubuh</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="panjang_tubuh" id="vpanjang_tubuh" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Tinggi Tubuh</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="tinggi_tubuh" id="vtinggi_tubuh" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Cacat Fisik</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="cacat_fisik" id="vcacat_fisik" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Ciri Lain</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="ciri_lain" id="vciri_lain" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Status Kambing</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="status_ada" id="vstatus_ada" class="form-control" readonly="true">
+					</div>
+				</div>
+
+				<!-- riwayat -->
+				<!-- <div>
+					<div class="form-group">
+						<label class="control-label">Penyakit</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="status_ada" id="status_ada" class="form-control">
+						</div>
+					</div>
+				</div> -->
+				<br>
 			</div>
 		</div>
 	</div>
@@ -117,7 +421,7 @@
             <div class="modal-body">
                 <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer">	
             	<button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
@@ -128,21 +432,32 @@
 
 @push('script2')
 <script>
-	$.ajaxSetup({
-  		headers: {
-    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  		}
-	});
-
-	$('#penyakit-table').DataTable({
+	$('#ternak-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.penyakit.index') }}",
+        ajax: "{{ route('admin.ternak.index') }}",
         columns: [
 	        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            // {data: 'id', name: 'id'},
-            {data: 'nama_penyakit', name: 'nama_penyakit'},
-            {data: 'ket_penyakit', name: 'ket_penyakit'},
+            {data: 'necktag', name: 'necktag'},
+            // {data: 'pemilik_id', name: 'pemilik_id'},
+            {data: 'ras_id', name: 'ras_id'},
+            // {data: 'kematian_id', name: 'kematian_id'},
+            {data: 'jenis_kelamin', name: 'jenis_kelamin'},
+            // {data: 'tgl_lahir', name: 'tgl_lahir'},
+            // {data: 'bobot_lahir', name: 'bobot_lahir'},
+            // {data: 'pukul_lahir', name: 'pukul_lahir'},
+            // {data: 'lama_dikandungan', name: 'lama_dikandungan'},
+            // {data: 'lama_laktasi', name: 'lama_laktasi'},
+            // {data: 'tgl_lepas_sapih', name: 'tgl_lepas_sapih'},
+            {data: 'blood', name: 'blood'},
+            // {data: 'necktag_ayah', name: 'necktag_ayah'},
+            // {data: 'necktag_ibu', name: 'necktag_ibu'},
+            // {data: 'bobot_tubuh', name: 'bobot_tubuh'},
+            // {data: 'panjang_tubuh', name: 'panjang_tubuh'},
+            // {data: 'tinggi_tubuh', name: 'tinggi_tubuh'},
+            // {data: 'cacat_fisik', name: 'cacat_fisik'},
+            // {data: 'ciri_lain', name: 'ciri_lain'},
+            {data: 'status_ada', name: 'status_ada'},
             {data: 'created_at', name: 'created_at'},
             {data: 'updated_at', name: 'updated_at'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -158,99 +473,6 @@
             });
         }
     });
-
-    $('#tambah_data').click(function(){
-    	$('.modal-title').text('Tambah Data - Penyakit');
-    	$('#action_button').val('Add');
-    	$('#action').val('Add');
-    	$('#form_result').html('');
-    	$('#formModal').modal('show');
-    });
-
-    $('#tambah_data_form').on('submit', function(event){
-    	event.preventDefault();
-    	var action_url = '';
-    	var method_form = '';
-
-    	//tambah
-    	if($('#action').val() == 'Add'){
-    		action_url = "{{ route('admin.penyakit.store') }}";
-    		method_form = "POST";
-    	}
-
-    	//edit
-    	if($('#action').val() == 'Edit'){
-    		var updateId = $('#hidden_id').val();
-    		action_url = "/admin/penyakit/"+updateId;
-    		method_form = "PUT";
-    	}
-
-    	$.ajax({
-    		url: action_url,
-    		method: method_form,
-    		data: $(this).serialize(),
-    		datatype: "json",
-    		success: function(data){
-    			var html = '';
-    			if (data.errors) {
-    				html = '<div class="alert alert-danger">';
-    				for (var count = 0; count < data.errors.length; count++) {
-    					html += '<p>' + data.errors[count] + '</p>';
-    				}
-    				html += '</div>';
-    			}
-    			if (data.success) {
-    				html = '<div class="alert alert-success">' + data.success + '</div>';
-    				$('#tambah_data_form')[0].reset();
-    				$('#penyakit-table').DataTable().ajax.reload();
-    			}
-    			$('#form_result').html(html);
-    		}
-    	});
-    });
-
-    //edit
-    $(document).on('click', '.edit', function(){
-    	var id = $(this).attr('id');
-    	$('#form_result').html('');
-    	$.ajax({
-    		url: "/admin/penyakit/"+id+"/edit",
-    		datatype: "json",
-    		success: function(data){
-    			$('#nama_penyakit').val(data.result.nama_penyakit);
-    			$('#ket_penyakit').val(data.result.ket_penyakit);
-    			$('#hidden_id').val(id);
-		    	$('#action').val('Edit');
-    			$('#action_button').val('Edit');
-    			$('.modal-title').text('Edit Data - Penyakit');
-		    	$('#formModal').modal('show');
-    		}
-    	});
-    });
-
-    //delete
-    var ras_id;
-    $(document).on('click', '.delete', function(){
-    	ras_id = $(this).attr('id');
-    	$('#confirmModal').modal('show');
- 	});
-
- 	$('#ok_button').click(function(){
-  		$.ajax({
-   			url:"/admin/penyakit/"+ras_id,
-   			method: "DELETE",
-   			beforeSend: function(){
-    			$('#ok_button').text('Deleting...');
-   			},
-	   		success: function(data){
-	    		setTimeout(function(){
-	     			$('#confirmModal').modal('hide');
-	     			$('#penyakit-table').DataTable().ajax.reload();
-	     			alert('Data Deleted');
-	    		}, 1000);
-	   		}
-  		});
-  	});
-
 </script>
+<script src="{{ asset('/js/data/dataternak.js') }}"></script>
 @endpush

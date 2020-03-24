@@ -17,12 +17,14 @@
     <!-- <link rel="icon" href="{{ asset('/adminbsb/favicon.ico') }}" type="image/x-icon"> -->
     <!-- Bootstrap Core Css -->
     <link href="{{ asset('/adminbsb/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet"/>
+    <!-- <link href="{{ asset('/bootstrap/css/bootstrap.css') }}" rel="stylesheet"/> -->
+
     <!-- <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> -->
     <!-- Waves Effect Css -->
     <link href="{{ asset('/adminbsb/plugins/node-waves/waves.css') }}" rel="stylesheet" />
     <!-- Animation Css -->
     <link href="{{ asset('/adminbsb/plugins/animate-css/animate.css') }}" rel="stylesheet" />
-    <!-- bootstrap-progressbar -->/
+    <!-- bootstrap-progressbar -->
     <link href="{{ asset('/adminbsb/plugins/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{ asset('/adminbsb/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet"/>
@@ -67,50 +69,6 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- Notifications -->
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
-                            <i class="material-icons">notifications</i>
-                            <!-- <span class="label-count">7</span> -->
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">NOTIFICATIONS</li>
-                            <li class="body">
-                                <ul class="menu" style="list-style-type:none;">
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon-circle bg-light-green">
-                                                <i class="material-icons">person_add</i>
-                                            </div>
-                                            <div class="menu-info">
-                                                <h4>12 new members joined</h4>
-                                                <p>
-                                                    <i class="material-icons">access_time</i> 14 mins ago
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <div class="icon-circle bg-cyan">
-                                                <i class="material-icons">add_shopping_cart</i>
-                                            </div>
-                                            <div class="menu-info">
-                                                <h4>4 sales made</h4>
-                                                <p>
-                                                    <i class="material-icons">access_time</i> 22 mins ago
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="javascript:void(0);">View All Notifications</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- #END# Notifications -->
                     <!-- profile -->
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
@@ -118,7 +76,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li class="header">{{ Auth::user()->name }}</li>
-                            <li class="body">
+                            <li class="body" style="height: 100px;">
                                 <ul class="menu" style="list-style-type:none;">
                                     <li>
                                         <a href="javascript:void(0);">
@@ -253,8 +211,10 @@
 
     <!-- Jquery Core Js -->
     <script src="{{ asset('/adminbsb/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
     <!-- Bootstrap Core Js -->
     <script src="{{ asset('/adminbsb/plugins/bootstrap/js/bootstrap.js') }}"></script>
+    <!-- <script src="{{ asset('/bootstrap/js/bootstrap.js') }}"></script> -->
     <!-- Select Plugin Js -->
     <script src="{{ asset('/adminbsb/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
     <!-- Slimscroll Plugin Js -->
