@@ -14,6 +14,7 @@ class CreateRiwayatPenyakitsTable extends Migration
     public function up()
     {
         Schema::create('riwayat_penyakits', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->integer('penyakit_id')->unsigned();
             $table->foreign('penyakit_id')->references('id')->on('penyakits')->onDelete('cascade');
             $table->char('necktag', 6);

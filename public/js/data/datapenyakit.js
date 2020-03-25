@@ -9,6 +9,7 @@
     	$('#action_button').val('Add');
     	$('#action').val('Add');
     	$('#form_result').html('');
+        $('#tambah_data_form')[0].reset();
     	$('#formModal').modal('show');
     });
 
@@ -92,6 +93,7 @@
 	     			$('#confirmModal').modal('hide');
 	     			$('#penyakit-table').DataTable().ajax.reload();
 	     			alert('Data Deleted');
+                    $('#ok_button').text('OK');
 	    		}, 1000);
 	   		}
   		});

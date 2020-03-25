@@ -9,6 +9,7 @@
     	$('#action_button').val('Add');
     	$('#action').val('Add');
     	$('#form_result').html('');
+        $('#tambah_data_form')[0].reset();
     	$('#formModal').modal('show');
     });
 
@@ -100,6 +101,7 @@
 	     			$('#confirmModal').modal('hide');
 	     			$('#perkawinan-table').DataTable().ajax.reload();
 	     			alert('Data Deleted');
+                    $('#ok_button').text('OK');
 	    		}, 1000);
 	   		},
             error: function (jqXHR, textStatus, errorThrown) { 

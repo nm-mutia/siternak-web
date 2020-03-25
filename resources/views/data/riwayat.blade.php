@@ -9,14 +9,16 @@
 <br>
 <!-- tabel -->
 <div class="table-responsive">
-	<table id="perkawinan-table" class="table table-bordered table-condensed table-striped">
+	<table id="riwayat-table" class="table table-bordered table-condensed table-striped">
 		<thead>
 		    <tr>
 		    	<th>No.</th>
-		        <!-- <th>ID</th> -->
+		        <th>Penyakit</th>
 		        <th>Necktag</th>
-		        <th>Necktag Pasangan</th>
-		        <th>Tanggal Kawin</th>
+		        <th>Tanggal Sakit</th>
+		        <th>Obat</th>
+		        <th>Lama Sakit</th>
+		        <th>Keterangan</th>
 		        <th>Created At</th>
 		        <th>Updated At</th>
 		        <th>Action</th>
@@ -25,10 +27,12 @@
 		<tfoot>
 		    <tr>
 		    	<th>No.</th>
-		        <!-- <th>ID</th> -->
+		        <th>Penyakit</th>
 		        <th>Necktag</th>
-		        <th>Necktag Pasangan</th>
-		        <th>Tanggal Kawin</th>
+		        <th>Tanggal Sakit</th>
+		        <th>Obat</th>
+		        <th>Lama Sakit</th>
+		        <th>Keterangan</th>
 		        <th>Created At</th>
 		        <th>Updated At</th>
 		        <th>Action</th>
@@ -51,37 +55,55 @@
 					@csrf
 
 					<div class="form-group">
+						<label class="control-label">Penyakit</label>
+						<div class="form-line col-md-8">
+							<select class="form-control js-select-search" name="penyakit_id" id="penyakit_id">
+								<option></option>
+							  	@foreach ($penyakit as $pid)
+							    <option value="{{ $pid->id }}">{{ $pid->nama_penyakit }}</option>
+								@endforeach    
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="control-label">Necktag</label>
 						<div class="form-line col-md-8">
 							<select class="form-control js-select-search" name="necktag" id="necktag">
 								<option></option>
 							  	@foreach ($ternak as $tid)
-							    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->ras_id }} - {{ $tid->jenis_kelamin }}</option>
+							    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->ras_id }}</option>
 								@endforeach    
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label">Necktag Pasangan</label>
-						<div class="form-line col-md-8">
-							<select class="form-control js-select-search" name="necktag_psg" id="necktag_psg">
-								<option></option>
-							  	@foreach ($ternak as $tid)
-							    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->ras_id }} - {{ $tid->jenis_kelamin }}</option>
-								@endforeach    
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label">Tanggal Kawin</label>
+						<label class="control-label">Tanggal Sakit</label>
 						<div class="input-group">
                             <span class="input-group-addon">
                                 <i class="material-icons">date_range</i>
                             </span>
                             <div class="form-line">
-                                <input type="text" name="tgl" id="tgl" class="datepicker form-control" placeholder="Pilih tanggal...">
+                                <input type="text" name="tgl_sakit" id="tgl_sakit" class="datepicker form-control" placeholder="Pilih tanggal...">
                             </div>
                         </div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Obat</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="obat" id="obat" class="form-control">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Lama Sakit</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="lama_sakit" id="lama_sakit" class="form-control" placeholder="dalam hari">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Keterangan</label>
+						<div class="form-line col-md-8">
+							<input type="text" name="keterangan" id="keterangan" class="form-control" placeholder="kosongkan jika tidak ada">
+						</div>
 					</div>
 					<br>
 					<div class="form-group" align="center">
@@ -117,16 +139,18 @@
 
 @push('script2')
 <script>
-	$('#perkawinan-table').DataTable({
+	$('#riwayat-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.perkawinan.index') }}",
+        ajax: "{{ route('admin.riwayat.index') }}",
         columns: [
 	        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            // {data: 'id', name: 'id'},
+            {data: 'penyakit_id', name: 'penyakit_id'},
             {data: 'necktag', name: 'necktag'},
-            {data: 'necktag_psg', name: 'necktag_psg'},
-            {data: 'tgl', name: 'tgl'},
+            {data: 'tgl_sakit', name: 'tgl_sakit'},
+            {data: 'obat', name: 'obat'},
+            {data: 'lama_sakit', name: 'lama_sakit'},
+            {data: 'keterangan', name: 'keterangan'},
             {data: 'created_at', name: 'created_at'},
             {data: 'updated_at', name: 'updated_at'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -143,5 +167,5 @@
         }
     });
 </script>
-<script src="{{ asset('/js/data/dataperkawinan.js') }}"></script>
+<script src="{{ asset('/js/data/datariwayat.js') }}"></script>
 @endpush
