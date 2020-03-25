@@ -9,7 +9,11 @@
     	$('#action_button').val('Add');
     	$('#action').val('Add');
     	$('#form_result').html('');
+
     	$('#tambah_data_form')[0].reset();
+    	$('#penyakit_id').val('').change();
+		$('#necktag').val('').change();
+    	
     	$('#formModal').modal('show');
     });
 

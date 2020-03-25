@@ -16,6 +16,13 @@
     	$('#necktag_form').hide();
 
         $('#tambah_data_form')[0].reset();
+        $('#necktag').val('').change();
+        $('#pemilik_id').val('').change();
+        $('#ras_id').val('').change();
+        $('#kematian_id').val('').change();
+        $('#necktag_ayah').val('').change();
+        $('#necktag_ibu').val('').change();
+
     	$('#formModal').modal('show');
     });
 

@@ -9,7 +9,11 @@
     	$('#action_button').val('Add');
     	$('#action').val('Add');
     	$('#form_result').html('');
+
         $('#tambah_data_form')[0].reset();
+        $('#necktag').val('').change();
+        $('#necktag_psg').val('').change();
+
     	$('#formModal').modal('show');
     });
 

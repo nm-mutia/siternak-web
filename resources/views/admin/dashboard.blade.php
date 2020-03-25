@@ -24,7 +24,7 @@
                 </div>
                 <div class="content">
                     <div class="text">TOTAL TERNAK</div>
-                    <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                    <div class="number count-to" data-from="0" data-to="{{ $total_ternak->total }}" data-speed="100" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="content">
                     <div class="text">KELAHIRAN BARU</div>
-                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="number count-to" data-from="0" data-to="@foreach($kelahiran_baru as $lahir){{ $lahir->kelahiran_baru }}@endforeach" data-speed="20" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="content">
                     <div class="text">PERKAWINAN BARU</div>
-                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="number count-to" data-from="0" data-to="@foreach($perkawinan_baru as $kawin){{ $kawin->perkawinan_baru }}@endforeach" data-speed="20" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="content">
                     <div class="text">KEMATIAN BARU</div>
-                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="number count-to" data-from="0" data-to="@foreach($kematian_baru as $mati){{ $mati->kematian_baru }}@endforeach" data-speed="20" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>
