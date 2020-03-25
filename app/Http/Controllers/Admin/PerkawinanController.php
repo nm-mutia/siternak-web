@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Perkawinan;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
+use Validator;
 
 class PerkawinanController extends Controller
 {
@@ -13,15 +16,29 @@ class PerkawinanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'PERKAWINAN';
         $page = 'Perkawinan';
+        $ternak = DB::table('ternaks')->get();
 
-        $data = Perkawinan::all();
-        return view('data.index')->with('data', $data)
-                                 ->with('title', $title)
-                                 ->with('page', $page);
+        if ($request->ajax()) {
+            $data = Perkawinan::latest()->get();
+
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                        $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        return view('data.perkawinan')->with('title', $title)
+                                      ->with('ternak', $ternak)
+                                      ->with('page', $page);
     }
 
     /**
@@ -42,7 +59,27 @@ class PerkawinanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'necktag' => 'required',
+            'necktag_psg' => 'required',
+            'tgl' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'necktag' => $request->necktag,
+            'necktag_psg' => $request->necktag_psg,
+            'tgl' => $request->tgl
+        );
+
+        Perkawinan::create($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
 
     /**
@@ -64,7 +101,10 @@ class PerkawinanController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Perkawinan::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     /**
@@ -76,7 +116,27 @@ class PerkawinanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'necktag' => 'required',
+            'necktag_psg' => 'required',
+            'tgl' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'necktag' => $request->necktag,
+            'necktag_psg' => $request->necktag_psg,
+            'tgl' => $request->tgl
+        );
+
+        Perkawinan::whereId($id)->update($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
 
     /**
@@ -87,6 +147,7 @@ class PerkawinanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Perkawinan::findOrFail($id);
+        $data->delete();
     }
 }

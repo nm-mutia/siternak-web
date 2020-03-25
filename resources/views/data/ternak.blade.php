@@ -14,24 +14,9 @@
 		    <tr>
 		    	<th width="5%">No.</th>
 		        <th width="5%">Necktag</th>
-		        <!-- <th>ID Pemilik</th> -->
 		        <th width="5%">ID Ras</th>
-		        <!-- <th>ID Kematian</th> -->
 		        <th width="5%">Jenis Kelamin</th>
-		        <!-- <th>Tanggal Lahir</th> -->
-		        <!-- <th>Bobot Lahir</th> -->
-		        <!-- <th>Pukul Lahir</th> -->
-		        <!-- <th>Lama di Kandungan</th> -->
-		        <!-- <th>Lama Laktasi</th> -->
-		        <!-- <th>Tanggal Lepas Sapih</th> -->
 		        <th width="5%">Blood</th>
-		        <!-- <th>Ayah</th> -->
-		        <!-- <th>Ibu</th> -->
-		        <!-- <th>Bobot Tubuh</th> -->
-		        <!-- <th>Panjang Tubuh</th> -->
-		        <!-- <th>Tinggi Tubuh</th> -->
-		        <!-- <th>Cacat Fisik</th> -->
-		        <!-- <th>Ciri Lain</th> -->
 		        <th width="5%">Status Ada</th>
 		        <th width="20%">Created At</th>
 		        <th width="20%">Updated At</th>
@@ -42,24 +27,9 @@
 		    <tr>
 		    	<th width="5%">No.</th>
 		        <th width="5%">Necktag</th>
-		        <!-- <th>ID Pemilik</th> -->
 		        <th width="5%">ID Ras</th>
-		        <!-- <th>ID Kematian</th> -->
 		        <th width="5%">Jenis Kelamin</th>
-		        <!-- <th>Tanggal Lahir</th> -->
-		        <!-- <th>Bobot Lahir</th> -->
-		        <!-- <th>Pukul Lahir</th> -->
-		        <!-- <th>Lama di Kandungan</th> -->
-		        <!-- <th>Lama Laktasi</th> -->
-		        <!-- <th>Tanggal Lepas Sapih</th> -->
 		        <th width="5%">Blood</th>
-		        <!-- <th>Ayah</th> -->
-		        <!-- <th>Ibu</th> -->
-		        <!-- <th>Bobot Tubuh</th> -->
-		        <!-- <th>Panjang Tubuh</th> -->
-		        <!-- <th>Tinggi Tubuh</th> -->
-		        <!-- <th>Cacat Fisik</th> -->
-		        <!-- <th>Ciri Lain</th> -->
 		        <th width="5%">Status Ada</th>
 		        <th width="20%">Created At</th>
 		        <th width="20%">Updated At</th>
@@ -85,13 +55,13 @@
 					<div class="form-group" id="necktag_form">
 						<label class="control-label">Necktag</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="necktag" id="necktag" class="form-control" di>
+							<input type="text" name="necktag" id="necktag" class="form-control">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label">ID Pemilik</label>
+						<label class="control-label">Pemilik</label>
 						<div class="form-line col-md-8">
-							<select class="form-control" name="pemilik_id" id="pemilik_id">
+							<select class="form-control js-select-search" name="pemilik_id" id="pemilik_id">
 								<option></option>
 							  	@foreach ($pemilik as $pid)
 							    <option value="{{ $pid->id }}">{{ $pid->nama_pemilik }}</option>
@@ -100,9 +70,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label">ID Ras</label>
+						<label class="control-label">Ras</label>
 						<div class="form-line col-md-8">
-							<select class="form-control" name="ras_id" id="ras_id">
+							<select class="form-control js-select-search" name="ras_id" id="ras_id">
 								<option></option>
 							  	@foreach ($ras as $rid)
 							    <option value="{{ $rid->id }}">{{ $rid->jenis_ras }}</option>
@@ -111,9 +81,9 @@
 						</div>
 					</div>
 					<div class="form-group" id="kematian_form">
-						<label class="control-label">ID Kematian</label>
+						<label class="control-label">Kematian</label>
 						<div class="form-line col-md-8">
-							<select class="form-control" name="kematian_id" id="kematian_id">
+							<select class="form-control js-select-search" name="kematian_id" id="kematian_id">
 								<option></option>
 							  	@foreach ($kematian as $kid)
 							    <option value="{{ $kid->id }}">{{ $kid->tgl_kematian }} - {{ $kid->waktu_kematian }} - {{ $kid->penyebab }} - {{ $kid->kondisi }}</option>
@@ -124,9 +94,9 @@
 					<div class="form-group">
 						<label class="control-label">Jenis Kelamin</label>
 						<div class="form-line col-md-8">
-							<select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
-								<option value="J">Jantan</option>
-							    <option value="B">Betina</option>
+							<select class="form-control" name="jenis_kelamin" id="jenis_kelamin" class="form-control">
+								<option value="Jantan">Jantan</option>
+							    <option value="Betina">Betina</option>
 							</select>
 						</div>
 					</div>
@@ -144,7 +114,7 @@
 					<div class="form-group">
 						<label class="control-label">Bobot Lahir</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="bobot_lahir" id="bobot_lahir" class="form-control">
+							<input type="text" name="bobot_lahir" id="bobot_lahir" class="form-control" placeholder="dalam kilogram">
 						</div>
 					</div>
 					<div class="form-group">
@@ -184,49 +154,63 @@
 					<div class="form-group">
 						<label class="control-label">Blood</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="blood" id="blood" class="form-control">
+							<input type="text" name="blood" id="blood" class="form-control" placeholder="golongan darah">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Ayah</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="necktag_ayah" id="necktag_ayah" class="form-control">
+							<select class="form-control js-select-search" name="necktag_ayah" id="necktag_ayah">
+								<option></option>
+							  	@foreach ($data as $tay)
+								  	@if ($tay->jenis_kelamin == 'Jantan')
+									    <option value="{{ $tay->necktag }}">{{ $tay->necktag }} - Ras {{ $tay->ras_id }}</option>
+								    @endif
+								@endforeach    
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Ibu</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="necktag_ibu" id="necktag_ibu" class="form-control">
+							<select class="form-control js-select-search" name="necktag_ibu" id="necktag_ibu">
+								<option></option>
+							  	@foreach ($data as $tib)
+								    @if ($tib->jenis_kelamin == 'Betina')
+									    <option value="{{ $tay->necktag }}">{{ $tib->necktag }} - Ras {{ $tib->ras_id }}</option>
+								    @endif
+								@endforeach
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Bobot Tubuh</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="bobot_tubuh" id="bobot_tubuh" class="form-control">
+							<input type="text" name="bobot_tubuh" id="bobot_tubuh" class="form-control" placeholder="dalam kilogram">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Panjang Tubuh</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="panjang_tubuh" id="panjang_tubuh" class="form-control">
+							<input type="text" name="panjang_tubuh" id="panjang_tubuh" class="form-control" placeholder="dalam centimeter">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Tinggi Tubuh</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="tinggi_tubuh" id="tinggi_tubuh" class="form-control">
+							<input type="text" name="tinggi_tubuh" id="tinggi_tubuh" class="form-control" placeholder="dalam centimeter">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Cacat Fisik</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="cacat_fisik" id="cacat_fisik" class="form-control">
+							<input type="text" name="cacat_fisik" id="cacat_fisik" class="form-control" placeholder="kosongkan bila tidak ada">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Ciri Lain</label>
 						<div class="form-line col-md-8">
-							<input type="text" name="ciri_lain" id="ciri_lain" class="form-control">
+							<input type="text" name="ciri_lain" id="ciri_lain" class="form-control" placeholder="kosongkan bila tidak ada">
 						</div>
 					</div>
 					<div class="form-group">
@@ -259,12 +243,6 @@
 				<h4 class="modal-title">Tambah Data - {{ $page }}</h4>
 			</div>
 			<div class="modal-body">
-				<div class="form-group" id="necktag_form">
-					<label class="control-label">Necktag</label>
-					<div class="form-line col-md-8">
-						<input type="text" name="necktag" id="vnecktag" class="form-control" readonly="true">
-					</div>
-				</div>
 				<div class="form-group">
 					<label class="control-label">Pemilik</label>
 					<div class="form-line col-md-8">

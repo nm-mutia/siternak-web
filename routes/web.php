@@ -16,7 +16,7 @@ Route::group(['midlleware' => 'web'], function() {
 	Auth::routes();
 
 	//index
-	// Route::get('/', 'HomeController@index')->middleware('auth');
+	// Route::get('/', 'Auth\LoginController@Login');
 	Route::get('/', function(){
 		return view('welcome');
 	});
@@ -31,6 +31,7 @@ Route::group(['midlleware' => 'web'], function() {
 			Route::resource('ternak', 'TernakController');
 			Route::resource('ras', 'RasController');
 			Route::resource('penyakit', 'PenyakitController');
+			Route::resource('riwayat', 'RiwayatPenyakitController');
 			Route::resource('kematian', 'KematianController');
 			Route::resource('pemilik', 'PemilikController');
 			Route::resource('perkawinan', 'PerkawinanController');

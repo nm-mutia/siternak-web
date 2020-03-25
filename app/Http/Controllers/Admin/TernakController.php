@@ -24,6 +24,7 @@ class TernakController extends Controller
         $pemilik = DB::table('pemiliks')->orderBy('nama_pemilik', 'asc')->get();
         $ras = DB::table('ras')->orderBy('jenis_ras', 'asc')->get();
         $kematian = DB::table('kematians')->orderBy('id', 'asc')->get();
+        $datas = Ternak::all();
 
         if ($request->ajax()) {
             $data = Ternak::latest()->get();
@@ -43,6 +44,7 @@ class TernakController extends Controller
         return view('data.ternak')->with('pemilik', $pemilik)
                                   ->with('ras', $ras)
                                   ->with('kematian', $kematian)
+                                  ->with('data', $datas)
                                   ->with('title', $title)
                                   ->with('page', $page);
     }
@@ -69,6 +71,7 @@ class TernakController extends Controller
             'ras_id' => 'required',
             'jenis_kelamin' => 'required',
             'blood' => 'required',
+            'status_ada' => 'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -171,6 +174,7 @@ class TernakController extends Controller
             'ras_id' => 'required',
             'jenis_kelamin' => 'required',
             'blood' => 'required',
+            'status_ada' => 'required'
         );
 
         $error = Validator::make($request->all(), $rules);

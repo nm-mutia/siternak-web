@@ -17,7 +17,7 @@ class Ternak extends Model
     ];
 
     public function penyakit(){
-        return $this->belongsToMany('App\Penyakit');
+        return $this->belongsToMany('App\Penyakit', 'riwayat_penyakits', 'necktag', 'pemilik_id');
     }
 
     public function perkawinan(){

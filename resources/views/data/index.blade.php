@@ -4,6 +4,7 @@
 <link href="{{ asset('/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
+<link href="{{ asset('/css/select2.min.css') }}" rel="stylesheet" />
 @stack('link2')
 @endpush
 
@@ -53,8 +54,11 @@
 <script src="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
 <script src="{{ asset('/datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/datatable/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('/js/select2.min.js') }}"></script>
 <script>
     $(function () {
+        $('.js-select-search').select2({ width: '100%' });
+
         $('.datepicker').bootstrapMaterialDatePicker({
             format: 'dddd DD MMMM YYYY',
             formatSubmit: 'YYYY-MM-DD',

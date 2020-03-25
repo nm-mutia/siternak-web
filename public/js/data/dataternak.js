@@ -71,7 +71,6 @@
     		url: "/admin/ternak/"+id, //show
     		datatype: "json",
     		success: function(data){
-    			$('#vnecktag').val(data.result.necktag);
     			$('#vpemilik_id').val(data.result.pemilik_id);
     			$('#vras_id').val(data.result.ras_id);
     			$('#vkematian_id').val(data.result.kematian_id);
@@ -110,9 +109,9 @@
     		datatype: "json",
     		success: function(data){
     			$('#necktag').val(data.result.necktag);
-    			$('#pemilik_id').val(data.result.pemilik_id);
-    			$('#ras_id').val(data.result.ras_id);
-    			$('#kematian_id').val(data.result.kematian_id);
+    			$('#pemilik_id').val(data.result.pemilik_id).change();
+                $('#ras_id').val(data.result.ras_id).change();
+    			$('#kematian_id').val(data.result.kematian_id).change();
     			$('#jenis_kelamin').val(data.result.jenis_kelamin);
     			$('#tgl_lahir').val(data.result.tgl_lahir);
     			$('#bobot_lahir').val(data.result.bobot_lahir);
@@ -121,8 +120,8 @@
     			$('#lama_laktasi').val(data.result.lama_laktasi);
     			$('#tgl_lepas_sapih').val(data.result.tgl_lepas_sapih);
     			$('#blood').val(data.result.blood);
-    			$('#necktag_ayah').val(data.result.necktag_ayah);
-    			$('#necktag_ibu').val(data.result.necktag_ibu);
+    			$('#necktag_ayah').val(data.result.necktag_ayah).change();
+    			$('#necktag_ibu').val(data.result.necktag_ibu).change();
     			$('#bobot_tubuh').val(data.result.bobot_tubuh);
     			$('#panjang_tubuh').val(data.result.panjang_tubuh);
     			$('#tinggi_tubuh').val(data.result.tinggi_tubuh);
@@ -130,8 +129,9 @@
     			$('#ciri_lain').val(data.result.ciri_lain);
     			$('#status_ada').val(data.result.status_ada);
 
-    			$('#necktag').attr('readonly', true);
+                $('#kematian_form').show();
                 $('#necktag_form').show();
+    			$('#necktag').attr('readonly', true);
     			$('#hidden_id').val(id);
 		    	$('#action').val('Edit');
     			$('#action_button').val('Edit');

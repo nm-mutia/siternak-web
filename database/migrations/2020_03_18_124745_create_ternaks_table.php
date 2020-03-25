@@ -21,7 +21,7 @@ class CreateTernaksTable extends Migration
             $table->foreign('ras_id')->references('id')->on('ras')->onDelete('cascade');
             $table->integer('kematian_id')->unsigned()->nullable();
             $table->foreign('kematian_id')->references('id')->on('kematians')->onDelete('cascade');
-            $table->char('jenis_kelamin', 1);
+            $table->string('jenis_kelamin', 20);
             $table->date('tgl_lahir')->nullable();
             $table->float('bobot_lahir')->nullable();
             $table->time('pukul_lahir')->nullable();
