@@ -177,7 +177,7 @@
 								<option></option>
 							  	@foreach ($data as $tib)
 								    @if ($tib->jenis_kelamin == 'Betina')
-									    <option value="{{ $tay->necktag }}">{{ $tib->necktag }} - Ras {{ $tib->ras_id }}</option>
+									    <option value="{{ $tib->necktag }}">{{ $tib->necktag }} - Ras {{ $tib->ras_id }}</option>
 								    @endif
 								@endforeach
 							</select>

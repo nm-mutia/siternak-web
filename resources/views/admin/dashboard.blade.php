@@ -66,7 +66,7 @@
 
     <!-- search -->
     <div class="s130">
-        <form>
+        <form id="search_form">
             <div class="inner-form">
                 <div class="input-field first-wrap">
                     <div class="svg-wrapper">
@@ -74,10 +74,10 @@
                             <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                         </svg>
                     </div>
-                    <input id="search" type="text" placeholder="scan atau ketikkan necktag barcode" />
+                    <input id="necktag" name="necktag" type="text" placeholder="scan atau ketikkan necktag barcode" />
                 </div>
                 <div class="input-field second-wrap">
-                    <button class="btn-search" type="button">SEARCH</button>
+                    <input type="submit" class="btn-search" name="action_button" id="action_button" value="SEARCH">
                 </div>
             </div>
         </form>
@@ -85,18 +85,18 @@
     <!-- /search -->
 
     <!-- result -->
-    <div style="display: none;">
+    <div id="search_result" style="display: none;">
         <div class="block-header">
             <h2>
-                Detail Kambing - { nomor necktag }
+                Detail Kambing
             </h2>
         </div>
         <div class="row">
             <div class="col-lg-12 col-xs-12">
                 <div class="card">
-                    <div class="header bg-light-green">
-                        <h2>
-                            Amber - Title <small>Description text here...</small>
+                    <div class="header bg-teal">
+                        <h2 id="necktag-r">
+                            Necktag
                         </h2>
                         <ul class="header-dropdown m-r--5">
                             <li>
@@ -117,7 +117,101 @@
                         </ul>
                     </div>
                     <div class="body">
-                        Quis pharetra a pharetra fames blandit. Risus faucibus velit Risus imperdiet mattis neque volutpat, etiam lacinia netus dictum magnis per facilisi sociosqu. Volutpat. Ridiculus nostra.
+                        
+                        <div id="not-exist"></div>
+
+                        <div id="exist">
+                            <!-- inst -->
+                            <div align="center">
+                                <table class="table table-bordered" style="width: 60%;">
+                                    <tr align="center">
+                                        <td style="width: 50%;"><b>Jenis Kelamin</b></td>
+                                        <td id="inst1" style="width: 50%;"></td>
+                                    </tr>
+                                    <tr align="center">
+                                        <td style="width: 50%;"><b>Ras</b></td>
+                                        <td id="inst2" style="width: 50%;"></td>
+                                    </tr>
+                                    <tr align="center">
+                                        <td style="width: 50%;"><b>Tanggal Lahir</b></td>
+                                        <td id="inst3" style="width: 50%;"></td>
+                                    </tr>
+                                    <tr align="center">
+                                        <td style="width: 50%;"><b>Blood</b></td>
+                                        <td id="inst4" style="width: 50%;"></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <br>
+
+                            <!-- parents -->
+                            <div>
+                                <p align="center" style="font-weight: bold; font-size: 20px;">Orang Tua</p>
+                                <span id="span-parent" align="center"></span>
+                                <table class="table" id="t-parent">
+                                    <tr>
+                                        <th></th>
+                                        <th>Necktag</th> 
+                                        <th>Jenis Kelamin</th>
+                                        <th>Ras</th>
+                                        <th>Tanggal Lahir</th>
+                                        <th>Blood</th>
+                                        <th>Ayah</th>
+                                        <th>Ibu</th>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Ayah</b></td>
+                                        <td id="pr01"></td>
+                                        <td id="pr02"></td>
+                                        <td id="pr03"></td>
+                                        <td id="pr04"></td>
+                                        <td id="pr05"></td>
+                                        <td id="pr06"></td>
+                                        <td id="pr07"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Ibu</b></td>
+                                        <td id="pr11"></td>
+                                        <td id="pr12"></td>
+                                        <td id="pr13"></td>
+                                        <td id="pr14"></td>
+                                        <td id="pr15"></td>
+                                        <td id="pr16"></td>
+                                        <td id="pr17"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br>
+                            <!-- siblings -->
+                            <div>
+                                <p align="center" style="font-weight: bold; font-size: 20px;">Saudara</p>
+                                <span id="span-sibling" align="center"></span>
+                                <table class="table" id="t-sibling"></table>
+                            </div>
+                            <br>
+                            <!-- children -->
+                            <div>
+                                <p align="center" style="font-weight: bold; font-size: 20px;">Anak</p>
+                                <span id="span-child" align="center"></span>
+                                <table class="table" id="t-child"></table>
+                            </div>
+                            <br>
+                            <!-- grandparents -->
+                            <div>
+                                <p align="center" style="font-weight: bold; font-size: 20px;">Kakek - Nenek</p>
+                                <span id="span-gp" align="center"></span>
+                                <table class="table" id="t-gp"></table>
+                            </div>
+                            <br>
+                            <!-- grandchildren -->
+                            <div>
+                                <p align="center" style="font-weight: bold; font-size: 20px;">Cucu</p>
+                                <span id="span-gc" align="center"></span>
+                                <table class="table" id="t-gc"></table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -127,6 +221,7 @@
 @endsection
 
 @push('script')
+    <script src="{{ asset('/js/dashboard.js') }}"></script>
     <script src="{{ asset('/adminbsb/plugins/waitme/waitMe.js') }}"></script>
     <script src="{{ asset('/adminbsb/js/pages/cards/colored.js') }}"></script>
 @endpush

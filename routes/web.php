@@ -27,6 +27,8 @@ Route::group(['midlleware' => 'web'], function() {
 		Route::get('/', 'Admin\HomeController@index')->name('admin');
 		
 		Route::namespace('admin')->name('admin.')->group(function(){
+			Route::get('search', 'HomeController@search')->name('search');
+
 			//data
 			Route::resource('ternak', 'TernakController');
 			Route::resource('ras', 'RasController');
