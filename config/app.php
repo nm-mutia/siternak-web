@@ -180,6 +180,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         Yajra\DataTables\ButtonsServiceProvider::class,
 
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
     ],
 
     /*

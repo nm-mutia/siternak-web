@@ -39,13 +39,14 @@ Route::group(['midlleware' => 'web'], function() {
 			Route::resource('perkawinan', 'PerkawinanController');
 
 			//perkawinan
-			Route::get('match', 'HomeController@index')->name('match');
+			Route::get('match', 'HomeController@p_index')->name('match');
+			Route::get('match/ternak', 'HomeController@p_match')->name('match.ternak');
 
 			//grafik
-			Route::get('grafik', 'HomeController@index')->name('grafik');
+			Route::get('grafik', 'GrafikController@index')->name('grafik');
 
 			//laporan
-			Route::get('laporan', 'HomeController@index')->name('laporan');
+			Route::get('laporan', 'LaporanController@index')->name('laporan');
 		});
 	});
 

@@ -12,28 +12,28 @@
 	<table id="ternak-table" class="table table-bordered table-condensed table-striped">
 		<thead>
 		    <tr>
-		    	<th width="5%">No.</th>
-		        <th width="5%">Necktag</th>
-		        <th width="5%">ID Ras</th>
-		        <th width="5%">Jenis Kelamin</th>
-		        <th width="5%">Blood</th>
-		        <th width="5%">Status Ada</th>
-		        <th width="20%">Created At</th>
-		        <th width="20%">Updated At</th>
-		        <th width="30%">Action</th>
+		    	<th>No.</th>
+		        <th>Necktag</th>
+		        <th>ID Ras</th>
+		        <th>Jenis Kelamin</th>
+		        <th>Blood</th>
+		        <th>Status Ada</th>
+		        <th>Created At</th>
+		        <th>Updated At</th>
+		        <th>Action</th>
 		    </tr>
 		</thead>
 		<tfoot>
 		    <tr>
-		    	<th width="5%">No.</th>
-		        <th width="5%">Necktag</th>
-		        <th width="5%">ID Ras</th>
-		        <th width="5%">Jenis Kelamin</th>
-		        <th width="5%">Blood</th>
-		        <th width="5%">Status Ada</th>
-		        <th width="20%">Created At</th>
-		        <th width="20%">Updated At</th>
-		        <th width="30%">Action</th>
+		    	<th>No.</th>
+		        <th>Necktag</th>
+		        <th>ID Ras</th>
+		        <th>Jenis Kelamin</th>
+		        <th>Blood</th>
+		        <th>Status Ada</th>
+		        <th>Created At</th>
+		        <th>Updated At</th>
+		        <th>Action</th>
 		    </tr>
 		</tfoot>
 	</table>

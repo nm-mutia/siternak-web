@@ -36,6 +36,7 @@
                 <div class="content">
                     <div class="text">KELAHIRAN BARU</div>
                     <div class="number count-to" data-from="0" data-to="@foreach($kelahiran_baru as $lahir){{ $lahir->kelahiran_baru }}@endforeach" data-speed="20" data-fresh-interval="20"></div>
+                    <div class="text2"><small>*30 hari terakhir</small></div>
                 </div>
             </div>
         </div>
@@ -47,6 +48,7 @@
                 <div class="content">
                     <div class="text">PERKAWINAN BARU</div>
                     <div class="number count-to" data-from="0" data-to="@foreach($perkawinan_baru as $kawin){{ $kawin->perkawinan_baru }}@endforeach" data-speed="20" data-fresh-interval="20"></div>
+                    <div class="text2"><small>*30 hari terakhir</small></div>
                 </div>
             </div>
         </div>
@@ -58,6 +60,7 @@
                 <div class="content">
                     <div class="text">KEMATIAN BARU</div>
                     <div class="number count-to" data-from="0" data-to="@foreach($kematian_baru as $mati){{ $mati->kematian_baru }}@endforeach" data-speed="20" data-fresh-interval="20"></div>
+                    <div class="text2"><small>*30 hari terakhir</small></div>
                 </div>
             </div>
         </div>

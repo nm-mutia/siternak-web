@@ -3254,6 +3254,10 @@ section.content {
       font-size: 13px;
       margin-top: 11px;
       color: #555; }
+    .info-box-3 .content .text2 {
+      font-size: 13px;
+      margin-top: -8px;
+      color: #fff; }
     .info-box-3 .content .number {
       font-weight: normal;
       font-size: 26px;

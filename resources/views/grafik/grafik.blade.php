@@ -1,8 +1,8 @@
 @extends('layouts.part')
 
 @push('link')
-    <link href="{{ asset('/adminbsb/plugins/morrisjs/morris.css') }}" rel="stylesheet" />
-    <link href="{{ asset('/bootstrap/css/bootstrap.css.map') }}" rel="stylesheet" />
+<!-- <link href="{{ asset('/adminbsb/plugins/morrisjs/morris.css') }}" rel="stylesheet" /> -->
+<link href="{{ asset('/bootstrap/css/bootstrap.css.map') }}" rel="stylesheet" />
 @endpush
 
 @section('title')
@@ -10,7 +10,7 @@
 @endsection
 
 @section('breadcrumb')
-    <li><a href="javascript:void(0);"><i class="material-icons">home</i> Home</a></li>
+    <li><a href="{{ route('admin.ternak.index') }}"><i class="material-icons">home</i> Home</a></li>
     <li class="active"><i class="material-icons">attachment</i> Grafik </li>
 @endsection
 
@@ -34,7 +34,9 @@
                 </ul>
             </div>
             <div class="body">
-                <div id="bar_chart" class="graph"></div>
+                <div style="width: 80%;margin: 0 auto;">
+                    {{ $umur->container() }}
+                </div>
             </div>
         </div>
     </div>
@@ -58,7 +60,9 @@
                 </ul>
             </div>
             <div class="body">
-                <div id="bar_chart" class="graph"></div>
+                <div style="width: 80%;margin: 0 auto;">
+                    {{ $ras->container() }}
+                </div>
             </div>
         </div>
     </div>
@@ -82,7 +86,9 @@
                 </ul>
             </div>
             <div class="body">
-                <div id="area_chart" class="graph"></div>
+                <div style="width: 80%;margin: 0 auto;">
+                    {{ $lahir->container() }}
+                </div>
             </div>
         </div>
     </div>
@@ -106,7 +112,9 @@
                 </ul>
             </div>
             <div class="body">
-                <div id="area_chart" class="graph"></div>
+                <div style="width: 80%;margin: 0 auto;">
+                    {{ $mati->container() }}
+                </div>
             </div>
         </div>
     </div>
@@ -114,7 +122,9 @@
 @endsection
 
 @push('script')
-	<script src="{{ asset('/adminbsb/plugins/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('/adminbsb/plugins/morrisjs/morris.js') }}"></script>
-    <script src="{{ asset('/adminbsb/js/pages/charts/morris.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+{{ $ras->script() }}
+{{ $umur->script() }}
+{{ $lahir->script() }}
+{{ $mati->script() }}
 @endpush

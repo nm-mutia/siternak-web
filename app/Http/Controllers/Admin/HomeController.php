@@ -25,11 +25,10 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $inst = DB::select('SELECT public."search_inst"(?)', [$request->necktag]);
-        // $inst = DB::select('SELECT public."search_inst"(?)', ['SrtEdd']);
 
     	if($inst != null){
     		$sp = preg_split("/[(),]/", $inst[0]->search_inst); 
-	    	//split karena hasil bukan array
+	    	//split karena hasil bukan array, tapi string
 	    	//0: kosong, 1:necktag, 2:jenis_kelamin, 3:ras, 4:tgl_lahir, 5:blood, 6:ayah, 7:ibu, 8:kosong
 
     		$parent = DB::select('SELECT public."search_parent"(?,?)', [$sp[6], $sp[7]]);
@@ -46,7 +45,8 @@ class HomeController extends Controller
 	        	'gparent' => $gparent,
 	        	'gchild' => $gchild
 	        ];	
-    	}else{
+    	}
+        else{
     		$data = [
                 'result' => 'Tidak ada data ternak dengan necktag ' .$request->necktag. '.',
                 'necktag' => $request->necktag
@@ -55,5 +55,18 @@ class HomeController extends Controller
     	}
     	
         return response()->json(['result' => $data]);
+    }
+
+    //fitur perkawinan
+    public function p_index()
+    {
+        $ternak = Ternak::all();
+        return view('perkawinan.kawin')->with('ternak', $ternak);
+    }
+
+    public function p_match(Request $request)
+    {
+        // $ternak = Ternak::all();
+        return response()->json(['result' => 'berhasil']);
     }
 }

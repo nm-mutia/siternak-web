@@ -1,8 +1,6 @@
 $('#search_form').on('submit', function(event){
 	event.preventDefault();
 
-	var action_url = '';
-	var method_form = '';
     var html = '';
     html = '<tr>';
     html += '<th></th>';
@@ -23,8 +21,6 @@ $('#search_form').on('submit', function(event){
 		success: function(data){
 
             if(!data.errors){
-                $('#t-sibling td:last-child').remove();
-
                 var htmls = '', htmlc = '', htmlgp = '', htmlgc = '';
                 var si, sp = [], ss = [], sc = [], sgp = [], sgc = [];
                 //0:necktag, 1:jenis_kelamin, 2:ras, 3:tgl_lahir, 4:blood, 5:ayah, 6:ibu
