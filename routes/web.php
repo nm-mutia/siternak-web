@@ -16,10 +16,7 @@ Route::group(['midlleware' => 'web'], function() {
 	Auth::routes();
 
 	//index
-	// Route::get('/', 'Auth\LoginController@Login');
-	Route::get('/', function(){
-		return view('welcome');
-	});
+	Route::get('/', 'HomeController@index');
 
 	//admin
 	Route::prefix('admin')->middleware('can:isAdmin', 'auth')->group(function(){

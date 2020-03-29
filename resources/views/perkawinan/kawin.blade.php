@@ -23,8 +23,8 @@
 @endsection
 
 @section('breadcrumb')
-<li><a href="{{ route('admin.ternak.index') }}"><i class="material-icons">home</i> Home</a></li>
-<li class="active"><i class="material-icons">attachment</i> Perkawinan</li>
+<li><a href="{{ route('admin') }}"><i class="material-icons">home</i> Home</a></li>
+<li class="active"><i class="material-icons">compare</i> Perkawinan</li>
 @endsection
 
 @section('content')

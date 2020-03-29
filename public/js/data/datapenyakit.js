@@ -55,6 +55,64 @@
     	});
     });
 
+    //view
+    $(document).on('click', '.view', function(){
+        var id = $(this).attr('id');
+        var txt = '', txt2 = '';
+        var rp = [];
+
+        txt = '<tr>';
+        txt += '<th>Necktag</th>';
+        txt += '<th>Tanggal Sakit</th>';
+        txt += '<th>Obat</th>';
+        txt += '<th>Lama Sakit</th>';
+        txt += '<th>Keterangan</th>';
+        txt += '</tr>';
+
+        $.ajax({
+            url: "/admin/penyakit/"+id, //show
+            datatype: "json",
+            success: function(data){
+                $('#vnama_penyakit').val(data.result.nama_penyakit);
+                $('#vketerangan').val(data.result.keterangan);
+                $('#vcreated_at').val(data.result.created_at);
+                $('#vupdated_at').val(data.result.updated_at);
+
+                if(data.riwayat != ''){
+                    $('#riwayat-penyakit').empty().append(txt);
+                    $.each(data.riwayat, function(i, val) {
+                        var rp1 = data.riwayat[i].rp_penyakit.split('(');
+                        var rp2 = rp1[1].split(')');
+                        rp[i] = rp2[0].split(',');
+                        //1: nama penyakit, 2: date, 3: obat, 4: lama sakit, 5: ket
+
+                        txt2 = '<tr>'; 
+                        for(var j = 1; j <= 5; j++){ 
+                            if(rp[i][j-1] == ""){
+                                rp[i][j-1] = '-';
+                            } 
+                            txt2 += '<td>' + rp[i][j-1] + '</td>';
+                        }
+                        txt2 += '</tr>';
+                        $('#riwayat-penyakit').append(txt2);
+                        $('#riwayat-penyakit').show();
+                    });
+                    $('#span-rp').empty();
+                }
+                else{
+                    $('#span-rp').html('<p align="center">Tidak ada data riwayat penyakit ini pada ternak</p>');
+                    $('#riwayat-penyakit').hide();
+                }
+
+                $('.modal-title').text('Data Penyakit - '+id);
+                $('#viewModal').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) { 
+                console.log(jqXHR); 
+            }
+        });
+    });
+
     //edit
     $(document).on('click', '.edit', function(){
     	var id = $(this).attr('id');

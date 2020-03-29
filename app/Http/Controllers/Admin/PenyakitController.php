@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Penyakit;
 use Yajra\Datatables\Datatables;
@@ -26,7 +27,8 @@ class PenyakitController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+                        $btn = '<button type="button" name="view" id="'.$row->id.'" class="view btn btn-warning btn-sm">View</button>';
+                        $btn .= '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
                         $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
                         return $btn;
                     })
@@ -85,7 +87,13 @@ class PenyakitController extends Controller
      */
     public function show($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Penyakit::findOrFail($id);
+
+            $rp = DB::select('SELECT public."rp_penyakit"(?)', [$data->id]);
+
+            return response()->json(['result' => $data, 'riwayat' => $rp]);
+        }
     }
 
     /**

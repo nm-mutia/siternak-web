@@ -25,7 +25,10 @@ class RiwayatPenyakitController extends Controller
         $penyakit = Penyakit::all();
         
         if ($request->ajax()) {
-            $data = DB::table('riwayat_penyakits')->latest()->get();
+            // $data = DB::table('riwayat_penyakits')->latest()->get();
+            $data = DB::table('riwayat_penyakits')->join('public.penyakits', 'penyakits.id', '=', 'riwayat_penyakits.penyakit_id')
+                            ->select('riwayat_penyakits.id', 'penyakits.nama_penyakit as penyakit_id', 'riwayat_penyakits.necktag', 'riwayat_penyakits.tgl_sakit', 'riwayat_penyakits.obat', 'riwayat_penyakits.lama_sakit', 'riwayat_penyakits.keterangan', 'riwayat_penyakits.created_at', 'riwayat_penyakits.updated_at')
+                            ->get();
 
             return Datatables::of($data)
                     ->addIndexColumn()

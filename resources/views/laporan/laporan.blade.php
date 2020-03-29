@@ -9,8 +9,8 @@
 @endsection
 
 @section('breadcrumb')
-    <li><a href="{{ route('admin.ternak.index') }}"><i class="material-icons">home</i> Home</a></li>
-    <li class="active"><i class="material-icons">attachment</i> Laporan </li>
+    <li><a href="{{ route('admin') }}"><i class="material-icons">home</i> Home</a></li>
+    <li class="active"><i class="material-icons">archive</i> Laporan </li>
 @endsection
 
 @section('content')

@@ -53,7 +53,6 @@ class HomeController extends Controller
             ];
     		return response()->json(['errors' => $data]);
     	}
-    	
         return response()->json(['result' => $data]);
     }
 

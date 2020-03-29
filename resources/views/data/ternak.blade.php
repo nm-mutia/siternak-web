@@ -14,7 +14,7 @@
 		    <tr>
 		    	<th>No.</th>
 		        <th>Necktag</th>
-		        <th>ID Ras</th>
+		        <th>Ras</th>
 		        <th>Jenis Kelamin</th>
 		        <th>Blood</th>
 		        <th>Status Ada</th>
@@ -27,7 +27,7 @@
 		    <tr>
 		    	<th>No.</th>
 		        <th>Necktag</th>
-		        <th>ID Ras</th>
+		        <th>Ras</th>
 		        <th>Jenis Kelamin</th>
 		        <th>Blood</th>
 		        <th>Status Ada</th>
@@ -374,14 +374,15 @@
 				</div>
 
 				<!-- riwayat -->
-				<!-- <div>
-					<div class="form-group">
-						<label class="control-label">Penyakit</label>
-						<div class="form-line col-md-8">
-							<input type="text" name="status_ada" id="status_ada" class="form-control">
-						</div>
+				<div>
+					<label class="control-label">Riwayat Penyakit</label>
+					<div>
+						<span id="span-rp"></span>
+						<table id="riwayat-penyakit" class="table">
+							
+						</table>
 					</div>
-				</div> -->
+				</div>
 				<br>
 			</div>
 		</div>

@@ -74,6 +74,17 @@
     //view
     $(document).on('click', '.view', function(){
     	var id = $(this).attr('id');
+        var txt = '', txt2 = '';
+        var rp = [];
+
+        txt = '<tr>';
+        txt += '<th>Nama Penyakit</th>';
+        txt += '<th>Tanggal Sakit</th>';
+        txt += '<th>Obat</th>';
+        txt += '<th>Lama Sakit</th>';
+        txt += '<th>Keterangan</th>';
+        txt += '</tr>';
+
     	$('#form_result').html('');
     	$.ajax({
     		url: "/admin/ternak/"+id, //show
@@ -98,6 +109,32 @@
     			$('#vcacat_fisik').val(data.result.cacat_fisik);
     			$('#vciri_lain').val(data.result.ciri_lain);
     			$('#vstatus_ada').val(data.result.status_ada);
+
+                if(data.riwayat != ''){
+                    $('#riwayat-penyakit').empty().append(txt);
+                    $.each(data.riwayat, function(i, val) {
+                        var rp1 = data.riwayat[i].rp_ternak.split('(');
+                        var rp2 = rp1[1].split(')');
+                        rp[i] = rp2[0].split(',');
+                        //1: nama penyakit, 2: date, 3: obat, 4: lama sakit, 5: ket
+
+                        txt2 = '<tr>'; 
+                        for(var j = 1; j <= 5; j++){ . 
+                            if(rp[i][j-1] == ""){
+                                rp[i][j-1] = '-';
+                            } 
+                            txt2 += '<td>' + rp[i][j-1] + '</td>';
+                        }
+                        txt2 += '</tr>';
+                        $('#riwayat-penyakit').append(txt2);
+                        $('#riwayat-penyakit').show();
+                    });
+                    $('#span-rp').empty();
+                }
+                else{
+                    $('#span-rp').html('<p align="center">Tidak ada data riwayat penyakit</p>');
+                    $('#riwayat-penyakit').hide();
+                }
 
     			$('.modal-title').text('Data Ternak - '+id);
 		    	$('#viewModal').modal('show');

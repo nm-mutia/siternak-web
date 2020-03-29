@@ -72,6 +72,56 @@
 	</div>
 </div>
 
+<!-- modal view -->
+<div id="viewModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Tambah Data - {{ $page }}</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label class="control-label">Nama Penyakit</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="nama_penyakit" id="vnama_penyakit" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Keterangan</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="keterangan" id="vketerangan" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Created At</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="created_at" id="vcreated_at" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Updated At</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="updated_at" id="vupdated_at" class="form-control" readonly="true">
+					</div>
+				</div>
+
+				<!-- riwayat -->
+				<div>
+					<label class="control-label">Riwayat Penyakit pada Ternak</label>
+					<div>
+						<span id="span-rp"></span>
+						<table id="riwayat-penyakit" class="table">
+							
+						</table>
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- modal delete -->
 <div id="confirmModal" class="modal fade" role="dialog">
     <div class="modal-dialog">

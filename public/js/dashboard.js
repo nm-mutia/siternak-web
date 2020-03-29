@@ -54,6 +54,7 @@ $('#search_form').on('submit', function(event){
                         }
                         $('#t-parent').show();
                     });
+                    $('#span-parent').empty();
                 }
                 else{
                     $('#span-parent').html('<p align="center">-</p>');
@@ -80,6 +81,7 @@ $('#search_form').on('submit', function(event){
                         $('#t-sibling').append(htmls);
                         $('#t-sibling').show();
                     });    
+                    $('#span-sibling').empty();
                 }
                 else{
                     $('#span-sibling').html('<p align="center">-</p>');
@@ -106,6 +108,7 @@ $('#search_form').on('submit', function(event){
                         $('#t-child').append(htmlc);
                         $('#t-child').show();
                     });
+                    $('#span-child').empty();
                 }
                 else{
                     $('#span-child').html('<p align="center">-</p>');
@@ -130,8 +133,9 @@ $('#search_form').on('submit', function(event){
                         }
                         htmlgp += '</tr>';
                         $('#t-gp').append(htmlgp);
-                        $('#t-gp').show();                       
+                        $('#t-gp').show();   
                     });
+                    $('#span-gp').empty();                    
                 }
                 else{
                     $('#span-gp').html('<p align="center">-</p>');
@@ -158,6 +162,7 @@ $('#search_form').on('submit', function(event){
                         $('#t-gc').append(htmlgc);
                         $('#t-gc').show();
                     });
+                    $('#span-gc').empty();
                 }
                 else{
                     $('#span-gc').html('<p align="center">-</p>');
