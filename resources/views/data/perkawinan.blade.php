@@ -19,7 +19,7 @@
 		        <th>Tanggal Kawin</th>
 		        <th>Created At</th>
 		        <th>Updated At</th>
-		        <th>Action</th>
+		        <th width="150">Action</th>
 		    </tr>
 		</thead>
 		<tfoot>
@@ -31,7 +31,7 @@
 		        <th>Tanggal Kawin</th>
 		        <th>Created At</th>
 		        <th>Updated At</th>
-		        <th>Action</th>
+		        <th width="150">Action</th>
 		    </tr>
 		</tfoot>
 	</table>
@@ -52,22 +52,26 @@
 
 					<div class="form-group">
 						<label class="control-label">Necktag</label>
-						<div class="form-line col-md-8">
+						<div>
 							<select class="form-control js-select-search" name="necktag" id="necktag">
 								<option></option>
 							  	@foreach ($ternak as $tid)
-							    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->ras_id }} - {{ $tid->jenis_kelamin }}</option>
+							  	@if ($tid->jenis_kelamin == 'Jantan')
+								    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->ras_id }} - {{ $tid->jenis_kelamin }}</option>
+							    @endif
 								@endforeach    
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label">Necktag Pasangan</label>
-						<div class="form-line col-md-8">
+						<div>
 							<select class="form-control js-select-search" name="necktag_psg" id="necktag_psg">
 								<option></option>
 							  	@foreach ($ternak as $tid)
-							    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->ras_id }} - {{ $tid->jenis_kelamin }}</option>
+							  	@if ($tid->jenis_kelamin == 'Betina')
+								    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->ras_id }} - {{ $tid->jenis_kelamin }}</option>
+							    @endif
 								@endforeach    
 							</select>
 						</div>
@@ -94,25 +98,6 @@
 		</div>
 	</div>
 </div>
-
-<!-- modal delete -->
-<div id="confirmModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content" data-type="confirm">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2 class="modal-title">Confirmation</h2>
-            </div>
-            <div class="modal-body">
-                <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
-            </div>
-            <div class="modal-footer">
-            	<button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('script2')
@@ -129,18 +114,18 @@
             {data: 'tgl', name: 'tgl'},
             {data: 'created_at', name: 'created_at'},
             {data: 'updated_at', name: 'updated_at'},
-            {data: 'action', name: 'action', orderable: false, searchable: false},
+            {data: 'action', name: 'action', orderable: false, searchable: false, sClass:'text-center'},
         ],
-        initComplete: function () {
-            this.api().columns().every(function () {
-                var column = this;
-                var input = document.createElement("input");
-                $(input).appendTo($(column.footer()).empty())
-                .on('change', function () {
-                    column.search($(this).val(), false, false, true).draw();
-                });
-            });
-        }
+        // initComplete: function () {
+        //     this.api().columns().every(function () {
+        //         var column = this;
+        //         var input = document.createElement("input");
+        //         $(input).appendTo($(column.footer()).empty())
+        //         .on('change', function () {
+        //             column.search($(this).val(), false, false, true).draw();
+        //         });
+        //     });
+        // }
     });
 </script>
 <script src="{{ asset('/js/data/dataperkawinan.js') }}"></script>

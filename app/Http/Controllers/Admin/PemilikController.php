@@ -59,7 +59,7 @@ class PemilikController extends Controller
     {
         $rules = array(
             'nama_pemilik' => 'required',
-            'ktp' => 'required|digits:16'
+            'ktp' => 'required|digits:16|unique:pemiliks'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -114,7 +114,7 @@ class PemilikController extends Controller
     {
         $rules = array(
             'nama_pemilik' => 'required',
-            'ktp' => 'required|digits:16'
+            'ktp' => 'required|digits:16|unique:pemiliks'
         );
 
         $error = Validator::make($request->all(), $rules);

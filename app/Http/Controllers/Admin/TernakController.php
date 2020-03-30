@@ -31,7 +31,14 @@ class TernakController extends Controller
             $data = Ternak::join('public.ras', 'ras.id', '=', 'ternaks.ras_id')
                             ->select('ternaks.necktag', 'ras.jenis_ras as ras_id', 'ternaks.jenis_kelamin', 'ternaks.blood', 'ternaks.status_ada', 'ternaks.created_at','ternaks.updated_at')
                             ->get();
-
+            foreach($data as $get){
+                if($get->status_ada == true){
+                    $get->status_ada = 'Ada';
+                }else{
+                    $get->status_ada = 'Tidak Ada';
+                }
+            }          
+            
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -162,6 +169,13 @@ class TernakController extends Controller
     {
         if(request()->ajax()){
             $data = Ternak::findOrFail($id);
+
+            if($data->status_ada){
+                $data->status_ada = 'true';
+            }else{
+                $data->status_ada = 'false';
+            }
+
             return response()->json(['result' => $data]);
         }
     }

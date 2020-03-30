@@ -103,11 +103,14 @@
                     </h2>
                     <ul class="header-dropdown m-r--5">
                         <li>
-                            <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse" data-loading-color="lightgreen">
+                            <a href="javascript:void(0);" id="res-refresh">
                                 <i class="material-icons">loop</i>
                             </a>
+                            <!-- <a href="javascript:void(0);" data-toggle="cardloading" data-loading-effect="pulse" data-loading-color="lightgreen">
+                                <i class="material-icons">loop</i>
+                            </a> -->
                         </li>
-                        <li class="dropdown">
+                        <!-- <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons">more_vert</i>
                             </a>
@@ -116,7 +119,7 @@
                                 <li><a href="javascript:void(0);">Another action</a></li>
                                 <li><a href="javascript:void(0);">Something else here</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="body">

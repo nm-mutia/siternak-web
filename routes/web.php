@@ -16,7 +16,7 @@ Route::group(['midlleware' => 'web'], function() {
 	Auth::routes();
 
 	//index
-	Route::get('/', 'HomeController@index');
+	Route::get('/', 'Auth\LoginController@showLoginForm');
 
 	//admin
 	Route::prefix('admin')->middleware('can:isAdmin', 'auth')->group(function(){
@@ -41,6 +41,7 @@ Route::group(['midlleware' => 'web'], function() {
 
 			//grafik
 			Route::get('grafik', 'GrafikController@index')->name('grafik');
+			Route::get('grafik/lahir', 'GrafikController@grafikLahir')->name('grafik.lahir');
 
 			//laporan
 			Route::get('laporan', 'LaporanController@index')->name('laporan');

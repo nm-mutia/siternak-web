@@ -1,3 +1,7 @@
+$('#res-refresh').click(function(){
+    $('#search_result').hide();
+});
+
 $('#search_form').on('submit', function(event){
 	event.preventDefault();
 
