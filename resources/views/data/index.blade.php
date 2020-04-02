@@ -1,22 +1,25 @@
 @extends('layouts.part')
 
 @push('link')
+<!-- <link href="{{ asset('/vendor/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet"> -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="{{ asset('/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
 <link href="{{ asset('/css/select2.min.css') }}" rel="stylesheet" />
 <link href="{{ asset('/adminbsb/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
 @stack('link2')
 @endpush
 
 @section('title')
-<h2>DATA - {{ $title }}</h2>
+<h2>DATA - {{ $title ?? '' }}</h2>
 @endsection
 
 @section('breadcrumb')
 <li><a href="{{ route('admin') }}"><i class="material-icons">home</i> Home</a></li>
 <li><i class="material-icons">widgets</i> Data </li>
-<li class="active"><i class="material-icons">attachment</i> {{ $page }} </li>
+<li class="active"><i class="material-icons">attachment</i> {{ $page ?? '' }} </li>
 @endsection
 
 @section('content')
@@ -25,20 +28,8 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    {{ $title }}
+                    {{ $title ?? '' }}
                 </h2>
-                <!-- <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul> -->
             </div>
             <div class="body">
 
@@ -76,5 +67,16 @@
     });
 </script>
 <script src="{{ asset('/adminbsb/plugins/sweetalert/sweetalert.min.js') }}"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.js"></script>
+
+<script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
 @stack('script2')
 @endpush
+
+
+
+
+
+

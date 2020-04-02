@@ -89,7 +89,7 @@
 @endsection
 
 @push('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+<script src="{{ asset('/js/chart.min.js') }}"></script>
 <script src="{{ asset('/js/grafik.js') }}"></script>
 {{ $ras->script() }}
 {{ $umur->script() }}

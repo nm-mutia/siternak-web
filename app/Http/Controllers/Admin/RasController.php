@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Ras;
+use PDF;
+use SnappyImage;
 use App\Http\Controllers\Controller;
+use App\DataTables\RasDataTable;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
+use Yajra\DataTables\DataTables;
 use Validator;
 
 class RasController extends Controller
@@ -15,30 +18,12 @@ class RasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(RasDataTable $dataTable)
     {
         $title = 'RAS';
         $page = 'Ras';
 
-        // $ras = new Ras;
-        // $columns = $ras->getTableColumns();
-
-        if ($request->ajax()) {
-            $data = Ras::latest()->get();
-
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-                        $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
-                        return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-        return view('data.ras')->with('title', $title)
-                               ->with('page', $page);
+        return $dataTable->render('data.ras', ['title' => $title, 'page' => $page]);
     }
 
     /**

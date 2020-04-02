@@ -17,8 +17,10 @@
     <!-- <link rel="icon" href="{{ asset('/adminbsb/favicon.ico') }}" type="image/x-icon"> -->
     <!-- Bootstrap Core Css -->
     <link href="{{ asset('/adminbsb/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet"/>
+    
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="{{ asset('/bootstrap/css/bootstrap.css') }}" rel="stylesheet"/> -->
-
     <!-- <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> -->
     <!-- Waves Effect Css -->
     <link href="{{ asset('/adminbsb/plugins/node-waves/waves.css') }}" rel="stylesheet" />
@@ -212,17 +214,18 @@
     <!-- Jquery Core Js -->
     <script src="{{ asset('/adminbsb/plugins/jquery/jquery.min.js') }}"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-    <!-- Bootstrap Core Js -->
-    <script src="{{ asset('/adminbsb/plugins/bootstrap/js/bootstrap.js') }}"></script>
-    <!-- <script src="{{ asset('/bootstrap/js/bootstrap.js') }}"></script> -->
-    <!-- Select Plugin Js -->
-    <script src="{{ asset('/adminbsb/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
     <!-- Slimscroll Plugin Js -->
     <script src="{{ asset('/adminbsb/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
     <!-- Waves Effect Plugin Js -->
     <script src="{{ asset('/adminbsb/plugins/node-waves/waves.js') }}"></script>
     <!-- Jquery CountTo Plugin Js -->
     <script src="{{ asset('/adminbsb/plugins/jquery-countto/jquery.countTo.js') }}"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="{{ asset('/adminbsb/plugins/bootstrap/js/bootstrap.js') }}"></script>
+    <!-- <script src="{{ asset('/bootstrap/js/bootstrap.js') }}"></script> -->
+    <!-- Select Plugin Js -->
+    <script src="{{ asset('/adminbsb/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+    
     <!-- Custom Js -->
     <script src="{{ asset('/adminbsb/js/admin.js') }}"></script>
     <script src="{{ asset('/adminbsb/js/pages/index.js') }}"></script>
