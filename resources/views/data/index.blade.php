@@ -2,7 +2,7 @@
 
 @push('link')
 <!-- <link href="{{ asset('/vendor/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet"> -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"> -->
 <link href="{{ asset('/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />

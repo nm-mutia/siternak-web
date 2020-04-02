@@ -3,13 +3,11 @@
 namespace App\DataTables;
 
 use App\Ras;
-use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-// use Yajra\Datatables\Datatables;
 
 class RasDataTable extends DataTable
 {
@@ -24,8 +22,8 @@ class RasDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function($row){
-                $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-                $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Ubah</button>';
+                $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Hapus</button>';
                 return $btn;
             });
     }
@@ -56,7 +54,6 @@ class RasDataTable extends DataTable
                 ->buttons(
                     Button::make('export'),
                     Button::make('print'),
-                    // Button::make('reset'),
                     Button::make('reload')
                 );
     }
@@ -83,7 +80,7 @@ class RasDataTable extends DataTable
                 ->title('Action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(150)
+                ->width(120)
                 ->addClass('text-center'),
         ];
     }

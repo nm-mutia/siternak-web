@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Pemilik;
+use App\Perkawinan;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PemilikDataTable extends DataTable
+class PerkawinanDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -31,10 +31,10 @@ class PemilikDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\PemilikDataTable $model
+     * @param \App\PerkawinanDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Pemilik $model)
+    public function query(Perkawinan $model)
     {
         return $model->newQuery()->select('*');
     }
@@ -47,7 +47,7 @@ class PemilikDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('pemilik-table')
+                    ->setTableId('perkawinan-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -68,10 +68,12 @@ class PemilikDataTable extends DataTable
         return [
             Column::make('id')
                 ->title('ID'),
-            Column::make('nama_pemilik')
-                ->title('Nama'),
-            Column::make('ktp')
-                ->title('KTP'),
+            Column::make('necktag')
+                ->title('Necktag'),
+            Column::make('necktag_psg')
+                ->title('Necktag Pasangan'),
+            Column::make('tgl')
+                ->title('Tanggal'),
             Column::make('created_at')
                 ->title('Created At'),
             Column::make('updated_at')
@@ -92,6 +94,6 @@ class PemilikDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Pemilik_' . date('YmdHis');
+        return 'Perkawinan_' . date('YmdHis');
     }
 }

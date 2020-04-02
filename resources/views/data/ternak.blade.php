@@ -1,7 +1,7 @@
 @extends('data.index')
 
 @section('table-content')
-<div align="right">
+<div align="left">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
 		Tambah Data
 	</button>
@@ -9,34 +9,7 @@
 <br>
 <!-- tabel -->
 <div class="table-responsive">
-	<table id="ternak-table" class="table table-bordered table-condensed table-striped">
-		<thead>
-		    <tr>
-		    	<th>No.</th>
-		        <th>Necktag</th>
-		        <th>Ras</th>
-		        <th>Jenis Kelamin</th>
-		        <th>Blood</th>
-		        <th>Status Ada</th>
-		        <th>Created At</th>
-		        <th>Updated At</th>
-		        <th width="150">Action</th>
-		    </tr>
-		</thead>
-		<tfoot>
-		    <tr>
-		    	<th>No.</th>
-		        <th>Necktag</th>
-		        <th>Ras</th>
-		        <th>Jenis Kelamin</th>
-		        <th>Blood</th>
-		        <th>Status Ada</th>
-		        <th>Created At</th>
-		        <th>Updated At</th>
-		        <th width="150">Action</th>
-		    </tr>
-		</tfoot>
-	</table>
+	{{ $dataTable->table() }}
 </div>
 
 <!-- form modal -->
@@ -391,7 +364,8 @@
 @endsection
 
 @push('script2')
-<script>
+{{ $dataTable->scripts() }}
+<!-- <script>
 	$('#ternak-table').DataTable({
         processing: true,
         serverSide: true,
@@ -433,6 +407,6 @@
         //     });
         // }
     });
-</script>
+</script> -->
 <script src="{{ asset('/js/data/dataternak.js') }}"></script>
 @endpush

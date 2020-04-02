@@ -1,7 +1,7 @@
 @extends('data.index')
 
 @section('table-content')
-<div align="right">
+<div align="left">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
 		Tambah Data
 	</button>

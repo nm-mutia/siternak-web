@@ -16,9 +16,10 @@
     <!-- Favicon-->
     <!-- <link rel="icon" href="{{ asset('/adminbsb/favicon.ico') }}" type="image/x-icon"> -->
     <!-- Bootstrap Core Css -->
+    <!-- <link href="{{ asset('/adminbsb/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet"/> -->
     <link href="{{ asset('/adminbsb/plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet"/>
     
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- <link href="{{ asset('/bootstrap/css/bootstrap.css') }}" rel="stylesheet"/> -->
     <!-- <link href="{{ asset('/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> -->
@@ -39,24 +40,6 @@
 
 </head>
 <body class="theme-teal">
-	<!-- Page Loader -->
-    <!-- <div class="page-loader-wrapper">
-        <div class="loader">
-            <div class="preloader">
-                <div class="spinner-layer pl-red">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
-                </div>
-            </div>
-            <p>Please wait...</p>
-        </div>
-    </div> -->
-    <!-- #END# Page Loader -->
-
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
@@ -145,13 +128,14 @@
                             <span>Data</span>
                         </a>
                         <ul class="ml-menu">
-                            <li><a href="{{ route('admin.ternak.index') }}">Ternak</a></li>
-                            <li><a href="{{ route('admin.ras.index') }}">Ras</a></li>
-                            <li><a href="{{ route('admin.penyakit.index') }}">Penyakit</a></li>
-                            <li><a href="{{ route('admin.riwayat.index') }}">Riwayat Penyakit</a></li>
-                            <li><a href="{{ route('admin.perkawinan.index') }}">Perkawinan</a></li>
-                            <li><a href="{{ route('admin.kematian.index') }}">Ternak Mati</a></li>
                             <li><a href="{{ route('admin.pemilik.index') }}">Pemilik</a></li>
+                            <li><a href="{{ route('admin.penyakit.index') }}">Penyakit</a></li>
+                            <li><a href="{{ route('admin.perkawinan.index') }}">Perkawinan</a></li>
+                            <li><a href="{{ route('admin.ras.index') }}">Ras</a></li>
+                            <li><a href="{{ route('admin.riwayat.index') }}">Riwayat Penyakit</a></li>
+                            <li><a href="{{ route('admin.ternak.index') }}">Ternak</a></li>
+                            <li><a href="{{ route('admin.kematian.index') }}">Ternak Mati</a></li>
+                            
                         </ul>
                     </li>
                     <li>

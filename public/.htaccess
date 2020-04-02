@@ -1,6 +1,3 @@
-<IfModule mod_php7.c>
-    php_value memory_limit 4095M
-</IfModule>
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes

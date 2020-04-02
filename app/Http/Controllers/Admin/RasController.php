@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Ras;
-use PDF;
-use SnappyImage;
-use App\Http\Controllers\Controller;
 use App\DataTables\RasDataTable;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Validator;

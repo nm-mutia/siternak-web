@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Pemilik;
+use App\Penyakit;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PemilikDataTable extends DataTable
+class PenyakitDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,7 +22,8 @@ class PemilikDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function($row){
-                $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Ubah</button>';
+                $btn = '<button type="button" name="view" id="'.$row->id.'" class="view btn btn-warning btn-sm">Lihat</button>';
+                $btn .= '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Ubah</button>';
                 $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Hapus</button>';
                 return $btn;
             });
@@ -31,10 +32,10 @@ class PemilikDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\PemilikDataTable $model
+     * @param \App\PenyakitDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Pemilik $model)
+    public function query(Penyakit $model)
     {
         return $model->newQuery()->select('*');
     }
@@ -47,7 +48,7 @@ class PemilikDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('pemilik-table')
+                    ->setTableId('penyakit-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -68,10 +69,10 @@ class PemilikDataTable extends DataTable
         return [
             Column::make('id')
                 ->title('ID'),
-            Column::make('nama_pemilik')
-                ->title('Nama'),
-            Column::make('ktp')
-                ->title('KTP'),
+            Column::make('nama_penyakit')
+                ->title('Nama Penyakit'),
+            Column::make('ket_penyakit')
+                ->title('Keterangan'),
             Column::make('created_at')
                 ->title('Created At'),
             Column::make('updated_at')
@@ -80,7 +81,7 @@ class PemilikDataTable extends DataTable
                 ->title('Action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(120)
+                ->width(150)
                 ->addClass('text-center'),
         ];
     }
@@ -92,6 +93,6 @@ class PemilikDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Pemilik_' . date('YmdHis');
+        return 'Penyakit_' . date('YmdHis');
     }
 }

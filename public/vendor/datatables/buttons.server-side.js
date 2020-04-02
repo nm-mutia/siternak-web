@@ -197,6 +197,7 @@
         action: function (e, dt, button, config) {
             var url = _buildUrl(dt, 'pdf');
             window.location = url;
+            // window.open(url, '_blank');
         }
     };
 
@@ -224,7 +225,8 @@
 
         action: function (e, dt, button, config) {
             var url = _buildUrl(dt, 'print');
-            window.location = url;
+            // window.location = url;
+            window.open(url, '_blank');
         }
     };
 

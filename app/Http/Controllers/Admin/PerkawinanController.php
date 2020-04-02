@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Perkawinan;
+use App\DataTables\PerkawinanDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -16,29 +17,13 @@ class PerkawinanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(PerkawinanDataTable $dataTable)
     {
         $title = 'PERKAWINAN';
         $page = 'Perkawinan';
         $ternak = DB::table('ternaks')->get();
 
-        if ($request->ajax()) {
-            $data = Perkawinan::latest()->get();
-
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-                        $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
-                        return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-        return view('data.perkawinan')->with('title', $title)
-                                      ->with('ternak', $ternak)
-                                      ->with('page', $page);
+        return $dataTable->render('data.perkawinan', ['title' => $title, 'page' => $page, 'ternak' => $ternak]);
     }
 
     /**

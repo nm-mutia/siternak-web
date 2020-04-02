@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Kematian;
+use App\DataTables\KematianDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Kematian;
 use Yajra\Datatables\Datatables;
 use Validator;
 
@@ -15,27 +16,12 @@ class KematianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(KematianDataTable $dataTable)
     {
         $title = 'TERNAK MATI';
         $page = 'Ternak Mati';
 
-        if ($request->ajax()) {
-            $data = Kematian::latest()->get();
-
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-                        $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
-                        return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
-
-        return view('data.kematian')->with('title', $title)
-                                    ->with('page', $page);
+        return $dataTable->render('data.kematian', ['title' => $title, 'page' => $page]);
     }
 
     /**

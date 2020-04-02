@@ -1,7 +1,7 @@
 @extends('data.index')
 
 @section('table-content')
-<div align="right">
+<div align="left">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
 		Tambah Data
 	</button>
@@ -9,32 +9,7 @@
 <br>
 <!-- tabel -->
 <div class="table-responsive">
-	<table id="perkawinan-table" class="table table-bordered table-condensed table-striped">
-		<thead>
-		    <tr>
-		    	<th>No.</th>
-		        <!-- <th>ID</th> -->
-		        <th>Necktag</th>
-		        <th>Necktag Pasangan</th>
-		        <th>Tanggal Kawin</th>
-		        <th>Created At</th>
-		        <th>Updated At</th>
-		        <th width="150">Action</th>
-		    </tr>
-		</thead>
-		<tfoot>
-		    <tr>
-		    	<th>No.</th>
-		        <!-- <th>ID</th> -->
-		        <th>Necktag</th>
-		        <th>Necktag Pasangan</th>
-		        <th>Tanggal Kawin</th>
-		        <th>Created At</th>
-		        <th>Updated At</th>
-		        <th width="150">Action</th>
-		    </tr>
-		</tfoot>
-	</table>
+	{{ $dataTable->table() }}
 </div>
 
 <!-- form modal -->
@@ -101,32 +76,6 @@
 @endsection
 
 @push('script2')
-<script>
-	$('#perkawinan-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('admin.perkawinan.index') }}",
-        columns: [
-	        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            // {data: 'id', name: 'id'},
-            {data: 'necktag', name: 'necktag'},
-            {data: 'necktag_psg', name: 'necktag_psg'},
-            {data: 'tgl', name: 'tgl'},
-            {data: 'created_at', name: 'created_at'},
-            {data: 'updated_at', name: 'updated_at'},
-            {data: 'action', name: 'action', orderable: false, searchable: false, sClass:'text-center'},
-        ],
-        // initComplete: function () {
-        //     this.api().columns().every(function () {
-        //         var column = this;
-        //         var input = document.createElement("input");
-        //         $(input).appendTo($(column.footer()).empty())
-        //         .on('change', function () {
-        //             column.search($(this).val(), false, false, true).draw();
-        //         });
-        //     });
-        // }
-    });
-</script>
+{{ $dataTable->scripts() }}
 <script src="{{ asset('/js/data/dataperkawinan.js') }}"></script>
 @endpush

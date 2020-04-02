@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Pemilik;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PemilikDataTable extends DataTable
+class RiwayatDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,7 +20,7 @@ class PemilikDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
+            ->queryBuilder($query)
             ->addColumn('action', function($row){
                 $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Ubah</button>';
                 $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Hapus</button>';
@@ -31,12 +31,16 @@ class PemilikDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\PemilikDataTable $model
+     * @param \App\RiwayatDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Pemilik $model)
+    public function query()
     {
-        return $model->newQuery()->select('*');
+         $data = DB::table('riwayat_penyakits')->join('public.penyakits', 'penyakits.id', '=', 'riwayat_penyakits.penyakit_id')
+                ->select('riwayat_penyakits.id', 'penyakits.nama_penyakit as penyakit_id', 'riwayat_penyakits.necktag', 'riwayat_penyakits.tgl_sakit', 'riwayat_penyakits.obat', 'riwayat_penyakits.lama_sakit', 'riwayat_penyakits.keterangan', 'riwayat_penyakits.created_at', 'riwayat_penyakits.updated_at');
+                // ->get();
+
+        return $data;
     }
 
     /**
@@ -47,7 +51,7 @@ class PemilikDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('pemilik-table')
+                    ->setTableId('riwayat-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
@@ -68,10 +72,18 @@ class PemilikDataTable extends DataTable
         return [
             Column::make('id')
                 ->title('ID'),
-            Column::make('nama_pemilik')
-                ->title('Nama'),
-            Column::make('ktp')
-                ->title('KTP'),
+            Column::make('penyakit_id')
+                ->title('Penyakit'),
+            Column::make('necktag')
+                ->title('Necktag'),
+            Column::make('tgl_sakit')
+                ->title('Tanggal Sakit'),
+            Column::make('obat')
+                ->title('Obat'),
+            Column::make('lama_sakit')
+                ->title('Lama Sakit'),
+            Column::make('keterangan')
+                ->title('Keterangan'),
             Column::make('created_at')
                 ->title('Created At'),
             Column::make('updated_at')
@@ -92,6 +104,6 @@ class PemilikDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Pemilik_' . date('YmdHis');
+        return 'Riwayat_' . date('YmdHis');
     }
 }

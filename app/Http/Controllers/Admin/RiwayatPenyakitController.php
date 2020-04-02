@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Penyakit;
 use App\Ternak;
+use App\DataTables\RiwayatDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -17,34 +18,36 @@ class RiwayatPenyakitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(RiwayatDataTable $dataTable)
     {
         $title = 'RIWAYAT PENYAKIT';
         $page = 'Riwayat Penyakit';
         $ternak = Ternak::all();
         $penyakit = Penyakit::all();
         
-        if ($request->ajax()) {
-            // $data = DB::table('riwayat_penyakits')->latest()->get();
-            $data = DB::table('riwayat_penyakits')->join('public.penyakits', 'penyakits.id', '=', 'riwayat_penyakits.penyakit_id')
-                            ->select('riwayat_penyakits.id', 'penyakits.nama_penyakit as penyakit_id', 'riwayat_penyakits.necktag', 'riwayat_penyakits.tgl_sakit', 'riwayat_penyakits.obat', 'riwayat_penyakits.lama_sakit', 'riwayat_penyakits.keterangan', 'riwayat_penyakits.created_at', 'riwayat_penyakits.updated_at')
-                            ->get();
+        // if ($request->ajax()) {
+        //     // $data = DB::table('riwayat_penyakits')->latest()->get();
+        //     $data = DB::table('riwayat_penyakits')->join('public.penyakits', 'penyakits.id', '=', 'riwayat_penyakits.penyakit_id')
+        //                     ->select('riwayat_penyakits.id', 'penyakits.nama_penyakit as penyakit_id', 'riwayat_penyakits.necktag', 'riwayat_penyakits.tgl_sakit', 'riwayat_penyakits.obat', 'riwayat_penyakits.lama_sakit', 'riwayat_penyakits.keterangan', 'riwayat_penyakits.created_at', 'riwayat_penyakits.updated_at')
+        //                     ->get();
 
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-                        $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
-                        return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
+        //     return Datatables::of($data)
+        //             ->addIndexColumn()
+        //             ->addColumn('action', function($row){
+        //                 $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
+        //                 $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+        //                 return $btn;
+        //             })
+        //             ->rawColumns(['action'])
+        //             ->make(true);
+        // }
         
-        return view('data.riwayat')->with('title', $title)
-                                  ->with('ternak', $ternak)
-                                  ->with('penyakit', $penyakit)
-                                  ->with('page', $page);
+        // return view('data.riwayat')->with('title', $title)
+        //                           ->with('ternak', $ternak)
+        //                           ->with('penyakit', $penyakit)
+        //                           ->with('page', $page);
+
+        return $dataTable->render('data.riwayat', ['title' => $title, 'page' => $page, 'ternak' => $ternak, 'penyakit' => $penyakit]);
     }
 
     /**

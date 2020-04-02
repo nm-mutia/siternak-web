@@ -1,7 +1,7 @@
 @extends('data.index')
 
 @section('table-content')
-<div align="right">
+<div align="left">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
 		Tambah Data
 	</button>
@@ -9,7 +9,8 @@
 <br>
 <!-- tabel -->
 <div class="table-responsive">
-	<table id="riwayat-table" class="table table-bordered table-condensed table-striped">
+	{{ $dataTable->table() }}
+	<!-- <table id="riwayat-table" class="table table-bordered table-condensed table-striped">
 		<thead>
 		    <tr>
 		    	<th>No.</th>
@@ -38,7 +39,7 @@
 		        <th>Action</th>
 		    </tr>
 		</tfoot>
-	</table>
+	</table> -->
 </div>
 
 <!-- form modal -->
@@ -119,7 +120,8 @@
 @endsection
 
 @push('script2')
-<script>
+{{ $dataTable->scripts() }}
+<!-- <script>
 	$('#riwayat-table').DataTable({
         processing: true,
         serverSide: true,
@@ -147,6 +149,6 @@
         //     });
         // }
     });
-</script>
+</script> -->
 <script src="{{ asset('/js/data/datariwayat.js') }}"></script>
 @endpush
