@@ -30,7 +30,7 @@
     <!-- bootstrap-progressbar -->
     <link href="{{ asset('/adminbsb/plugins/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
-    <link href="{{ asset('/adminbsb/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet"/>
+    <!-- <link href="{{ asset('/adminbsb/plugins/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet"/> -->
     <!-- Custom Css -->
     <link href="{{ asset('/adminbsb/css/style.css') }}" rel="stylesheet"/>
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
@@ -209,6 +209,8 @@
     <!-- <script src="{{ asset('/bootstrap/js/bootstrap.js') }}"></script> -->
     <!-- Select Plugin Js -->
     <script src="{{ asset('/adminbsb/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
+
+    <script src="{{ asset('/adminbsb/plugins/momentjs/moment.js') }}"></script>
     
     <!-- Custom Js -->
     <script src="{{ asset('/adminbsb/js/admin.js') }}"></script>

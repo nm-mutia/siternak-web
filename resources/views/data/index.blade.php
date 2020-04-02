@@ -42,7 +42,6 @@
 @endsection
 
 @push('script')
-<script src="{{ asset('/adminbsb/plugins/momentjs/moment.js') }}"></script>
 <script src="{{ asset('/adminbsb/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
 <script src="{{ asset('/datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/datatable/dataTables.bootstrap4.min.js') }}"></script>

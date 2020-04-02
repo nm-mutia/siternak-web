@@ -42,7 +42,7 @@ class GrafikController extends Controller
         $chart->labels($label);
 	    $chart->dataset('Jumlah Ternak', 'bar', $data)->options([
 			'fill' => 'true',
-            'backgroundColor' => '#B2DFDB',#CDDC39
+            'backgroundColor' => '#B2DFDB',
 			'borderColor' => '#009688',
             'legend' => [
                 'show' => 'true',

@@ -100,12 +100,6 @@
         </div>
     </div>
 </div>
-<div class="row clearfix js-sweetalert">
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-        <p>An HTML message</p>
-        <button class="btn btn-primary waves-effect" data-type="html-message">CLICK ME</button>
-    </div>
-</div>
 @endsection
 
 @push('script')

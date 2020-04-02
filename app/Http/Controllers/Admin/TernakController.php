@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Yajra\Datatables\Datatables;
+use Yajra\DataTables\DataTables;
 use Validator;
 
 class TernakController extends Controller
@@ -26,7 +26,6 @@ class TernakController extends Controller
         $ras = DB::table('ras')->orderBy('jenis_ras', 'asc')->get();
         $kematian = DB::table('kematians')->orderBy('id', 'asc')->get();
         $datas = Ternak::all();
-        // dd($dataTable);
 
         // if ($request->ajax()) {
         //     // $data = Ternak::latest()->get();
@@ -60,7 +59,14 @@ class TernakController extends Controller
         //                           ->with('title', $title)
         //                           ->with('page', $page);
 
-        return $dataTable->render('data.ternak', ['title' => $title, 'page' => $page, 'data' => $datas, 'kematian' => $kematian, 'ras' => $ras, 'pemilik' => $pemilik]);
+        return $dataTable->render('data.ternak', [
+            'title' => $title, 
+            'page' => $page, 
+            'data' => $datas, 
+            'kematian' => $kematian, 
+            'ras' => $ras, 
+            'pemilik' => $pemilik
+        ]);
     }
 
     /**
