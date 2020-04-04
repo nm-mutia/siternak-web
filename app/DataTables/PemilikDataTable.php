@@ -52,7 +52,9 @@ class PemilikDataTable extends DataTable
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->buttons(
-                        Button::make('export'),
+                        // Button::make('export'),
+                        Button::make('excel'),
+                        Button::make('csv'),
                         Button::make('print'),
                         Button::make('reload')
                     );
