@@ -35,6 +35,9 @@ Route::group(['midlleware' => 'web'], function() {
 			Route::resource('pemilik', 'PemilikController');
 			Route::resource('perkawinan', 'PerkawinanController');
 
+			//barcode
+			Route::get('barcode', 'BarcodeController@index')->name('barcode');
+
 			//perkawinan
 			Route::get('match', 'HomeController@p_index')->name('match');
 			Route::get('match/ternak', 'HomeController@p_match')->name('match.ternak');

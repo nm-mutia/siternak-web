@@ -23,7 +23,7 @@
                 <i class="material-icons">all_inbox</i>
             </div>
             <div class="content">
-                <div class="text">TOTAL TERNAK</div>
+                <div class="text">TOTAL DATA TERNAK</div>
                 <div class="number count-to" data-from="0" data-to="{{ $total_ternak->total }}" data-speed="100" data-fresh-interval="20"></div>
             </div>
         </div>
@@ -77,7 +77,7 @@
                         <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                     </svg>
                 </div>
-                <input id="necktag" name="necktag" type="text" placeholder="scan atau ketikkan necktag barcode" />
+                <input id="necktag" name="necktag" type="text" placeholder="scan necktag barcode atau ketikkan necktag" />
             </div>
             <div class="input-field second-wrap">
                 <input type="submit" class="btn-search" name="action_button" id="action_button" value="SEARCH">

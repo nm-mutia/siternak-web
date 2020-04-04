@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef8ac2749551e9c880afced0671594be",
+    "content-hash": "305f603b31e26937f46ec5893da3e07f",
     "packages": [
         {
             "name": "balping/json-raw-encoder",
@@ -609,6 +609,7 @@
                     "email": "jakub.onderka@gmail.com"
                 }
             ],
+            "abandoned": "php-parallel-lint/php-console-color",
             "time": "2018-09-29T17:23:10+00:00"
         },
         {
@@ -655,6 +656,7 @@
                 }
             ],
             "description": "Highlight PHP code in terminal",
+            "abandoned": "php-parallel-lint/php-console-highlighter",
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
@@ -1442,6 +1444,66 @@
                 "vector"
             ],
             "time": "2019-10-06T11:29:25+00:00"
+        },
+        {
+            "name": "milon/barcode",
+            "version": "6.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/milon/barcode.git",
+                "reference": "71454ba6d4ec3c70103379afb0376f51d0bf17ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/milon/barcode/zipball/71454ba6d4ec3c70103379afb0376f51d0bf17ce",
+                "reference": "71454ba6d4ec3c70103379afb0376f51d0bf17ce",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*|~6",
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Milon\\Barcode\\BarcodeServiceProvider"
+                    ],
+                    "aliases": {
+                        "DNS1D": "Milon\\Barcode\\Facades\\DNS1DFacade",
+                        "DNS2D": "Milon\\Barcode\\Facades\\DNS2DFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Milon\\Barcode": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Nuruzzaman Milon",
+                    "email": "contact@milon.im"
+                }
+            ],
+            "description": "Barcode generator like Qr Code , PDF417,C39, C39+,C39E,C39E+,C93,S25,S25+,I25,I25+,C128,C128A,C128B,C128C,2-Digits UPC-Based Extention,5-Digits UPC-Based Extention,EAN 8,EAN 13,UPC-A,UPC-E,MSI (Variation of Plessey code) ",
+            "keywords": [
+                "CODABAR",
+                "CODE 128",
+                "CODE 39",
+                "barcode",
+                "datamatrix",
+                "ean",
+                "laravel",
+                "pdf417",
+                "qr code",
+                "qrcode"
+            ],
+            "time": "2019-09-17T07:40:26+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3813,16 +3875,16 @@
         },
         {
             "name": "yajra/laravel-datatables-html",
-            "version": "v4.23.1",
+            "version": "v4.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables-html.git",
-                "reference": "00195f383f4ecf4257c761712eda2f6510f3102d"
+                "reference": "a66ed58f7fe66acd77836b43366d3bd8d578a31b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables-html/zipball/00195f383f4ecf4257c761712eda2f6510f3102d",
-                "reference": "00195f383f4ecf4257c761712eda2f6510f3102d",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables-html/zipball/a66ed58f7fe66acd77836b43366d3bd8d578a31b",
+                "reference": "a66ed58f7fe66acd77836b43366d3bd8d578a31b",
                 "shasum": ""
             },
             "require": {
@@ -3869,7 +3931,7 @@
                 "jquery",
                 "laravel"
             ],
-            "time": "2020-03-07T02:47:38+00:00"
+            "time": "2020-04-02T07:43:20+00:00"
         },
         {
             "name": "yajra/laravel-datatables-oracle",

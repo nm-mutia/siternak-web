@@ -212,6 +212,11 @@ class TernakController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
+        if($request->necktag_ayah == $id || $request->necktag_ibu == $id){
+            $err = 'Individu tidak bisa menjadi orangtua untuk dirinya sendiri';
+            return response()->json(['error' => $err]);
+        }
+
         $form_data = array(
             'necktag' => $request->necktag,
             'pemilik_id' => $request->pemilik_id,

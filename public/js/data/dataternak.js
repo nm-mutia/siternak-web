@@ -58,6 +58,9 @@ $('#tambah_data_form').on('submit', function(event){
 				}
 				html += '</div>';
 			}
+			if (data.error) {
+				html = '<div class="alert alert-danger">' + data.error + '</div>';
+			}
 			if (data.success) {
 				html = '<div class="alert alert-success">' + data.success + '</div>';
 				$('#tambah_data_form')[0].reset();

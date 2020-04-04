@@ -50,7 +50,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="{{ route('admin.ternak.index') }}"> {{ config('app.name', 'Laravel') }} - Sistem Informasi Ternak </a>
+                <a class="navbar-brand" href="{{ route('admin') }}"> {{ config('app.name', 'Laravel') }} - Sistem Informasi Ternak </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -137,6 +137,12 @@
                             <li><a href="{{ route('admin.kematian.index') }}">Ternak Mati</a></li>
                             
                         </ul>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.barcode') }}">
+                            <i class="material-icons">view_week</i>
+                            <span>Barcode</span>
+                        </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.match') }}">
