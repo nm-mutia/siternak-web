@@ -93,6 +93,6 @@ class PenyakitDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Penyakit_' . date('YmdHis');
+        return 'SITERNAK_Penyakit_' . date('YmdHis');
     }
 }

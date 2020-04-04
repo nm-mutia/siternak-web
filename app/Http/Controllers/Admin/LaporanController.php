@@ -2,59 +2,96 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Ternak;
-use Perkawinan;
+use App\Ternak;
+use App\Perkawinan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
+use App\Exports\LaporanExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanController extends Controller
 {
     public function index(Request $request)
     {
-        
-        $lahir = $this->lahir();
-	    $mati = $this->mati();
-	    $kawin = $this->kawin();
-	    $sakit = $this->sakit();
-	    $ada = $this->ada();
+        if($request->ajax()){
+            return response()->json([
+                'start' => $request->datefrom,
+                'end' => $request->dateto
+            ]);
+        }
 
-        return view('laporan.laporan');
+        return view('laporan.laporan')->with('start', date("Y-m-d", strtotime('-29 days')))
+                    ->with('end', date("Y-m-d"));
     }
 
-    public function lahir()
+    public function lahir(Request $request)
     {
-    	// $lahir = Ternak::whereBetween('tgl_lahir', [$start, $end])->get();
+        if($request->ajax()){
+            $lahir = Ternak::whereBetween('tgl_lahir', [$request->datefrom, $request->dateto])->get();
 
-    	// $data = Datatables::of($lahir)
-     	//    		->addIndexColumn()
-     	//          ->make(true);
-
-        // return $data;
+            return Datatables::of($lahir)
+                  ->addIndexColumn()
+                  ->make(true);
+        }
     }
 
-    public function mati()
+    public function mati(Request $request)
     {
-    	// $mati = Ternak::join('public.kematians', 'kematians.id', '=', 'ternaks.kematian_id')
-        // 			->whereBetween('tgl_lahir', [$start, $end])
-        // 			->get();
+        if($request->ajax()){
+            $mati = Ternak::select('ternaks.necktag', 'ternaks.kematian_id', 'kematians.tgl_kematian', 'kematians.waktu_kematian', 'kematians.penyebab', 'kematians.kondisi', 'ternaks.pemilik_id', 'ternaks.ras_id', 'ternaks.jenis_kelamin', 'ternaks.tgl_lahir', 'ternaks.bobot_lahir', 'ternaks.pukul_lahir', 'ternaks.lama_dikandungan', 'ternaks.lama_laktasi', 'ternaks.tgl_lepas_sapih', 'ternaks.blood', 'ternaks.necktag_ayah', 'ternaks.necktag_ibu', 'ternaks.bobot_tubuh', 'ternaks.panjang_tubuh', 'ternaks.tinggi_tubuh', 'ternaks.cacat_fisik', 'ternaks.ciri_lain', 'ternaks.status_ada', 'ternaks.created_at', 'ternaks.updated_at')
+                        ->join('public.kematians', 'kematians.id', '=', 'ternaks.kematian_id')
+                        ->whereBetween('kematians.tgl_kematian', [$request->datefrom, $request->dateto])
+                        ->get();
+
+            return Datatables::of($mati)
+                  ->addIndexColumn()
+                  ->make(true);
+        }
     }
 
-    public function kawin()
+    public function kawin(Request $request)
     {
-    	// $kawin = Perkawinan::whereBetween('tgl', [$start, $end])->get();
+        if($request->ajax()){
+            $kawin = Perkawinan::whereBetween('tgl', [$request->datefrom, $request->dateto])->get();
+
+            return Datatables::of($kawin)
+                  ->make(true);
+        }
     }
 
-    public function sakit()
+    public function sakit(Request $request)
     {
-    	// $sakit = DB::table('riwayat_penyakits')->join('public.penyakits', 'penyakits.id', '=', 'riwayat_penyakits.penyakit_id')
-        //             ->select('riwayat_penyakits.id', 'penyakits.nama_penyakit as penyakit_id', 'riwayat_penyakits.necktag', 'riwayat_penyakits.tgl_sakit', 'riwayat_penyakits.obat', 'riwayat_penyakits.lama_sakit', 'riwayat_penyakits.keterangan', 'riwayat_penyakits.created_at', 'riwayat_penyakits.updated_at')
-        //             ->get();
+        if($request->ajax()){
+            $sakit = DB::table('riwayat_penyakits')->join('public.penyakits', 'penyakits.id', '=', 'riwayat_penyakits.penyakit_id')
+                    ->select('riwayat_penyakits.id', 'penyakits.nama_penyakit as penyakit_id', 'riwayat_penyakits.necktag', 'riwayat_penyakits.tgl_sakit', 'riwayat_penyakits.obat', 'riwayat_penyakits.lama_sakit', 'riwayat_penyakits.keterangan', 'riwayat_penyakits.created_at', 'riwayat_penyakits.updated_at')
+                    ->whereBetween('riwayat_penyakits.tgl_sakit', [$request->datefrom, $request->dateto])->get();
+
+            return Datatables::of($sakit)
+                  ->make(true);
+        }
     }
 
-    public function ada()
+    public function ada(Request $request)
     {
-    	// $ada = Ternak::where('status_ada', true)->get();
+        if($request->ajax()){
+            $ada = Ternak::where('status_ada', true)->get();
+
+            return Datatables::of($ada)
+                  ->addIndexColumn()
+                  ->make(true);
+        } 
+    }
+
+    public function export($date) 
+    {
+        $sp = preg_split("/[=&]/", $date); 
+        //0: datefrom, 1:tgl, 2:dateto, 3:tgl
+
+        $export = new LaporanExport($sp[1], $sp[3]);
+
+        return Excel::download($export, 'SITERNAK_Laporan_'.$sp[1].'_'.$sp[3].'.xlsx');
     }
 
 }

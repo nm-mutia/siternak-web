@@ -9,7 +9,7 @@
 <br>
 <!-- tabel -->
 <div class="table-responsive">
-    {{ $dataTable->table() }}
+    {{ $dataTable->table(['class' => 'table table-bordered table-condensed table-striped']) }}
 </div>
 
 <!-- form modal -->

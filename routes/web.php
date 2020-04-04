@@ -45,6 +45,12 @@ Route::group(['midlleware' => 'web'], function() {
 
 			//laporan
 			Route::get('laporan', 'LaporanController@index')->name('laporan');
+			Route::get('laporan/lahir', 'LaporanController@lahir')->name('laporan.lahir');
+			Route::get('laporan/mati', 'LaporanController@mati')->name('laporan.mati');
+			Route::get('laporan/kawin', 'LaporanController@kawin')->name('laporan.kawin');
+			Route::get('laporan/sakit', 'LaporanController@sakit')->name('laporan.sakit');
+			Route::get('laporan/ada', 'LaporanController@ada')->name('laporan.ada');
+			Route::get('laporan/export/{date}', 'LaporanController@export')->name('laporan.export');
 		});
 	});
 

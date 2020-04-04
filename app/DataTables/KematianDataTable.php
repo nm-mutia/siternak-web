@@ -96,6 +96,6 @@ class KematianDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Kematian_' . date('YmdHis');
+        return 'SITERNAK_Kematian_' . date('YmdHis');
     }
 }

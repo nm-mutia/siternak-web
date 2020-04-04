@@ -104,6 +104,6 @@ class RiwayatDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Riwayat_' . date('YmdHis');
+        return 'SITERNAK_Riwayat_' . date('YmdHis');
     }
 }

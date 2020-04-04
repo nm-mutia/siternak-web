@@ -94,6 +94,6 @@ class PerkawinanDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Perkawinan_' . date('YmdHis');
+        return 'SITERNAK_Perkawinan_' . date('YmdHis');
     }
 }

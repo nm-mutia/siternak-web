@@ -140,6 +140,6 @@ class TernakDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Ternak_' . date('YmdHis');
+        return 'SITERNAK_Ternak_' . date('YmdHis');
     }
 }

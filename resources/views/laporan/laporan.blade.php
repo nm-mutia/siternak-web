@@ -2,7 +2,9 @@
 
 @push('link')
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<link href="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+<!-- <link href="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet"> -->
+<link href="{{ asset('/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+<link href="{{ asset('/datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('title')
@@ -22,8 +24,8 @@
                 <h2>Rentang Waktu</h2>
             </div>
             <div class="body">
-                <form method="post" id="match_form">
-                    @csrf
+                <!-- <form> -->
+                    <!-- @csrf -->
 
                     <div class="row clearfix">
                         <div class="col-md-12">
@@ -33,24 +35,14 @@
                                         <i class="material-icons">date_range</i>
                                     </span>
                                     <div class="form-line">
-                                        <input type="text" name="reportrange_val" id="reportrange_val" class="datepicker form-control" placeholder="Pilih tanggal...">
+                                        <input type="text" name="reportrange" id="reportrange" class="form-control" placeholder="Pilih tanggal...">
                                     </div>
-                                    <span class="input-group-addon">
-                                        <input type="submit" name="action" id="action" class="btn btn-primary" value="Filter">
-                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                </form>
-
-
-                <div id="reportrange" style="cursor: pointer; padding: 5px 10px; border: 1px solid #ccc;">
-                    <i class="fa fa-calendar"></i>&nbsp;
-                    <span></span> <i class="fa fa-caret-down"></i>
-                </div>
-
+                <!-- </form> -->
             </div>
         </div>
     </div>
@@ -60,22 +52,18 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
-            <div class="header">
-                <h2>
-                    DATA TERNAK <small>Laporan data ternak berdasarkan range waktu</small>
+            <div class="header row">
+                <h2 class="col-md-9">LAPORAN - DATA TERNAK 
+                    <small>Laporan data ternak berdasarkan range waktu 
+                        <span id="date-span">{{ $start }} sampai {{ $end }}</span>
+                    </small>
                 </h2>
-                <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <div class="col-md-3" align="right">
+                    <button id="dwd-btn" class="btn">
+                        <i class="material-icons">file_download</i>
+                        <span class="icon-name">Download Laporan</span>
+                    </button>
+                </div>
             </div>
             <div class="body">
                 <!-- Nav tabs -->
@@ -90,50 +78,154 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active" id="lahir">
-                        <h4><b>Data Ternak Lahir</b></h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                            sadipscing mel.
-                        </p>
+                        <h4 align="center"><b>Data Ternak Lahir</b></h4>
+                        <div class="table-responsive">
+                            <table id="lahir-table" class="table table-bordered table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Necktag</th>
+                                        <th>ID Pemilik</th>
+                                        <th>ID Ras</th>
+                                        <th>ID Kematian</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Tanggal Lahir</th>
+                                        <th>Bobot Lahir</th>
+                                        <th>Pukul Lahir</th>
+                                        <th>Lama di Kandungan</th>
+                                        <th>Lama Laktasi</th>
+                                        <th>Tanggal Lepas Sapih</th>
+                                        <th>Blood</th>
+                                        <th>Ayah</th>
+                                        <th>Ibu</th>
+                                        <th>Bobot Tubuh</th>
+                                        <th>Panjang Tubuh</th>
+                                        <th>Tinggi Tubuh</th>
+                                        <th>Cacat Fisik</th>
+                                        <th>Ciri Lain</th>
+                                        <th>Status Ada</th>
+                                        <th>Created At</th>
+                                        <th>Updated At</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
+
                     <div role="tabpanel" class="tab-pane fade" id="mati">
-                        <h4><b>Data Ternak Mati</b></h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                            sadipscing mel.
-                        </p>
+                        <h4 align="center"><b>Data Ternak Mati</b></h4>
+                        <div class="table-responsive">
+                            <table id="mati-table" class="table table-bordered table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Necktag</th>
+                                        <th>ID Kematian</th>
+                                        <th>Tanggal Mati</th>
+                                        <th>Waktu Mati</th>
+                                        <th>Penyebab</th>
+                                        <th>Kondisi</th>
+                                        <th>ID Pemilik</th>
+                                        <th>ID Ras</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Tanggal Lahir</th>
+                                        <th>Bobot Lahir</th>
+                                        <th>Pukul Lahir</th>
+                                        <th>Lama di Kandungan</th>
+                                        <th>Lama Laktasi</th>
+                                        <th>Tanggal Lepas Sapih</th>
+                                        <th>Blood</th>
+                                        <th>Ayah</th>
+                                        <th>Ibu</th>
+                                        <th>Bobot Tubuh</th>
+                                        <th>Panjang Tubuh</th>
+                                        <th>Tinggi Tubuh</th>
+                                        <th>Cacat Fisik</th>
+                                        <th>Ciri Lain</th>
+                                        <th>Status Ada</th>
+                                        <th>Created At</th>
+                                        <th>Updated At</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
+
                     <div role="tabpanel" class="tab-pane fade" id="kawin">
-                        <h4><b>Data Ternak Kawin</b></h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                            sadipscing mel.
-                        </p>
+                        <h4 align="center"><b>Data Ternak Kawin</b></h4>
+                        <div class="table-responsive">
+                            <table id="kawin-table" class="table table-bordered table-condensed table-striped" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Necktag</th>
+                                        <th>Necktag Pasangan</th>
+                                        <th>Tanggal</th>
+                                        <th>Created At</th>
+                                        <th>Updated At</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
+
                     <div role="tabpanel" class="tab-pane fade" id="sakit">
-                        <h4><b>Data Ternak Sakit</b></h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                            sadipscing mel.
-                        </p>
+                        <h4 align="center"><b>Data Ternak Sakit</b></h4>
+                        <div class="table-responsive">
+                            <table id="sakit-table" class="table table-bordered table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Penyakit</th>
+                                        <th>Necktag</th>
+                                        <th>Tanggal Sakit</th>
+                                        <th>Obat</th>
+                                        <th>Lama Sakit</th>
+                                        <th>Keterangan</th>
+                                        <th>Created At</th>
+                                        <th>Updated At</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
+
                     <div role="tabpanel" class="tab-pane fade" id="ada">
-                        <h4><b>Data Ternak Ada</b></h4>
-                        <p>
-                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                            sadipscing mel.
-                        </p>
+                        <h4 align="center"><b>Data Ternak Ada</b></h4>
+                        <div class="table-responsive">
+                            <table id="ada-table" class="table table-bordered table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Necktag</th>
+                                        <th>ID Pemilik</th>
+                                        <th>ID Ras</th>
+                                        <th>ID Kematian</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Tanggal Lahir</th>
+                                        <th>Bobot Lahir</th>
+                                        <th>Pukul Lahir</th>
+                                        <th>Lama di Kandungan</th>
+                                        <th>Lama Laktasi</th>
+                                        <th>Tanggal Lepas Sapih</th>
+                                        <th>Blood</th>
+                                        <th>Ayah</th>
+                                        <th>Ibu</th>
+                                        <th>Bobot Tubuh</th>
+                                        <th>Panjang Tubuh</th>
+                                        <th>Tinggi Tubuh</th>
+                                        <th>Cacat Fisik</th>
+                                        <th>Ciri Lain</th>
+                                        <th>Status Ada</th>
+                                        <th>Created At</th>
+                                        <th>Updated At</th>
+                                    </tr>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -143,7 +235,10 @@
 
 @push('script')
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="{{ asset('/datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('/js/laporan.js') }}"></script>
+
 
 <!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/jquery.dataTables.js') }}"></script> -->
 <!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script> -->

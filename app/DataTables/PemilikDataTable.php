@@ -92,6 +92,6 @@ class PemilikDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Pemilik_' . date('YmdHis');
+        return 'SITERNAK_Pemilik_' . date('YmdHis');
     }
 }
