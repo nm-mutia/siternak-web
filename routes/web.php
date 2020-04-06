@@ -37,6 +37,7 @@ Route::group(['midlleware' => 'web'], function() {
 
 			//barcode
 			Route::get('barcode', 'BarcodeController@index')->name('barcode');
+			Route::get('barcode/pdf', 'BarcodeController@generatePdf')->name('barcode.pdf');
 
 			//perkawinan
 			Route::get('match', 'HomeController@p_index')->name('match');

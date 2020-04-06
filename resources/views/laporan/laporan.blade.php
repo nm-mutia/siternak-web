@@ -2,7 +2,6 @@
 
 @push('link')
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<!-- <link href="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') }}" rel="stylesheet"> -->
 <link href="{{ asset('/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('/datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
 @endpush
@@ -53,7 +52,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header row">
-                <h2 class="col-md-9">LAPORAN - DATA TERNAK 
+                <h2 class="col-md-9">
+                    LAPORAN - DATA TERNAK 
                     <small>Laporan data ternak berdasarkan range waktu 
                         <span id="date-span">{{ $start }} sampai {{ $end }}</span>
                     </small>
@@ -238,16 +238,4 @@
 <script src="{{ asset('/datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('/js/laporan.js') }}"></script>
-
-
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/jquery.dataTables.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/buttons.flash.min.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/jszip.min.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/pdfmake.min.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/vfs_fonts.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/buttons.html5.min.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/plugins/jquery-datatable/extensions/export/buttons.print.min.js') }}"></script> -->
-<!-- <script src="{{ asset('/adminbsb/js/pages/tables/jquery-datatable.js') }}"></script> -->
 @endpush

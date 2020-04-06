@@ -23,6 +23,7 @@ $('#search_form').on('submit', function(event){
 		data: $(this).serialize(),
 		datatype: "json",
 		success: function(data){
+            $('#search_form')[0].reset();
 
             if(!data.errors){
                 var htmls = '', htmlc = '', htmlgp = '', htmlgc = '';
