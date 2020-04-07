@@ -38,7 +38,7 @@ class TernakDataTable extends DataTable
      */
     public function query(Ternak $model)
     {
-        $query = $model->newQuery()->select('ternaks.necktag', 'ternaks.pemilik_id', 'ternaks.ras_id', 'ternaks.kematian_id', 'ternaks.jenis_kelamin', 'ternaks.tgl_lahir', 'ternaks.bobot_lahir', 'ternaks.pukul_lahir', 'ternaks.lama_dikandungan', 'ternaks.lama_laktasi', 'ternaks.tgl_lepas_sapih', 'ternaks.blood', 'ternaks.necktag_ayah', 'ternaks.necktag_ibu', 'bobot_tubuh', 'ternaks.panjang_tubuh', 'ternaks.tinggi_tubuh', 'ternaks.cacat_fisik', 'ternaks.ciri_lain', 'ternaks.status_ada', 'ternaks.created_at','ternaks.updated_at');
+        $query = $model->newQuery()->select('ternaks.necktag', 'ternaks.pemilik_id', 'ternaks.ras_id', 'ternaks.kematian_id', 'ternaks.jenis_kelamin', 'ternaks.tgl_lahir', 'ternaks.bobot_lahir', 'ternaks.pukul_lahir', 'ternaks.lama_dikandungan', 'ternaks.lama_laktasi', 'ternaks.tgl_lepas_sapih', 'ternaks.blood', 'ternaks.necktag_ayah', 'ternaks.necktag_ibu', 'bobot_tubuh', 'ternaks.panjang_tubuh', 'ternaks.tinggi_tubuh', 'ternaks.cacat_fisik', 'ternaks.ciri_lain', 'ternaks.status_ada', 'ternaks.created_at','ternaks.updated_at')->latest();
 
         // foreach($query as $query2){
         //     if($query2->status_ada == true){

@@ -27,13 +27,13 @@ Route::group(['midlleware' => 'web'], function() {
 			Route::get('search', 'HomeController@search')->name('search');
 
 			//data
-			Route::resource('ternak', 'TernakController');
-			Route::resource('ras', 'RasController');
-			Route::resource('penyakit', 'PenyakitController');
-			Route::resource('riwayat', 'RiwayatPenyakitController');
-			Route::resource('kematian', 'KematianController');
-			Route::resource('pemilik', 'PemilikController');
-			Route::resource('perkawinan', 'PerkawinanController');
+			Route::resource('ternak', 'TernakController')->except(['create']);
+			Route::resource('ras', 'RasController')->except(['create', 'show']);
+			Route::resource('penyakit', 'PenyakitController')->except(['create']);
+			Route::resource('riwayat', 'RiwayatPenyakitController')->except(['create', 'show']);
+			Route::resource('kematian', 'KematianController')->except(['create', 'show']);
+			Route::resource('pemilik', 'PemilikController')->except(['create', 'show']);
+			Route::resource('perkawinan', 'PerkawinanController')->except(['create', 'show']);
 
 			//barcode
 			Route::get('barcode', 'BarcodeController@index')->name('barcode');
