@@ -28,10 +28,11 @@ Route::group(['midlleware' => 'web'], function() {
 
 			//data
 			Route::resource('ternak', 'TernakController')->except(['create']);
+			Route::get('ternaktrash', 'TernakController@trash')->name('ternak.trash');
 			Route::get('ternak/restore/{id}', 'TernakController@restore')->name('ternak.restore');
-			Route::get('ternak/restore', 'TernakController@restoreAll')->name('ternak.restoreAll');
+			Route::get('ternakrestore', 'TernakController@restoreAll')->name('ternak.restoreAll');
 			Route::get('ternak/fdelete/{id}', 'TernakController@fdelete')->name('ternak.fdelete');
-			Route::get('ternak/fdelete', 'TernakController@fdeleteAll')->name('ternak.fdeleteAll');
+			Route::get('ternakfdelete', 'TernakController@fdeleteAll')->name('ternak.fdeleteAll');
 			Route::resource('ras', 'RasController')->except(['create', 'show']);
 			Route::resource('penyakit', 'PenyakitController')->except(['create']);
 			Route::resource('riwayat', 'RiwayatPenyakitController')->except(['create', 'show']);

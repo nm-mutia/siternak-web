@@ -4,33 +4,30 @@ $.ajaxSetup({
 		}
 });
 
-// function tongsampahDataTables() {
-// 	console.log('halo');
-//     if (!$.fn.dataTable.isDataTable('#tongsampah-table')) {
-// 		$('#tongsampah-table').DataTable({
-// 		    processing: true,
-// 		    serverSide: true,
-// 		    ajax: '/admin/ternak/trash',
-// 		    columns: [
-// 		        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-// 		        {data: 'necktag', name: 'necktag'},
-// 		        {data: 'pemilik_id', name: 'pemilik_id'},
-// 		        {data: 'ras_id', name: 'ras_id'},
-// 		        {data: 'jenis_kelamin', name: 'jenis_kelamin'},
-// 		        {data: 'blood', name: 'blood'},
-// 		        {data: 'necktag_ayah', name: 'necktag_ayah'},
-// 		        {data: 'necktag_ibu', name: 'necktag_ibu'},
-// 		        {data: 'status_ada', name: 'status_ada'},
-// 		        {data: 'created_at', name: 'created_at'},
-// 		        {data: 'updated_at', name: 'updated_at'},
-// 		        {data: 'deleted_at', name: 'deleted_at'},
-// 		        {data: 'action', name: 'action', orderable: false, searchable: false},
-// 		    ],
-// 		});
-// 		console.log('if');
-//     }
-//     console.log('abis if');
-// }
+function tongsampahDT() {
+    if (!$.fn.dataTable.isDataTable('#tongsampah-table')) {
+		$('#tongsampah-table').DataTable({
+		    processing: true,
+		    serverSide: true,
+		    ajax: '/admin/ternaktrash',
+		    columns: [
+		        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+		        {data: 'necktag', name: 'necktag'},
+		        {data: 'pemilik_id', name: 'pemilik_id'},
+		        {data: 'ras_id', name: 'ras_id'},
+		        {data: 'jenis_kelamin', name: 'jenis_kelamin'},
+		        {data: 'blood', name: 'blood'},
+		        {data: 'necktag_ayah', name: 'necktag_ayah'},
+		        {data: 'necktag_ibu', name: 'necktag_ibu'},
+		        {data: 'status_ada', name: 'status_ada'},
+		        {data: 'created_at', name: 'created_at'},
+		        {data: 'updated_at', name: 'updated_at'},
+		        {data: 'deleted_at', name: 'deleted_at'},
+		        {data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'},
+		    ],
+		});
+    }
+}
 
 $('#tambah_data').click(function(){
 	$('.modal-title').text('Tambah Data - Ternak');
@@ -240,6 +237,7 @@ $(document).on('click', '.delete', function(){
             method: "DELETE",
             success: function(data){
                 $('#ternak-table').DataTable().ajax.reload();
+                $('#tongsampah-table').DataTable().ajax.reload();
                 swal("Terhapus!", "Data ternak id " + ternak_id + " berada di tong sampah.", "success");
             },
             error: function(data){
@@ -257,8 +255,8 @@ $(document).on('click', '.delete', function(){
 
 
 // restore
-$('#btn-restore').click(function(){
-	var val = $(this).attr('name');
+$(document).on('click', '.restore', function(){
+	var val = $(this).attr('id');
 
 	swal({
         title: "Anda yakin ingin mengembalikan data ternak ini?",
@@ -273,6 +271,7 @@ $('#btn-restore').click(function(){
             method: "GET",
             success: function(data){
                 $('#ternak-table').DataTable().ajax.reload();
+                $('#tongsampah-table').DataTable().ajax.reload();
                 swal("Berhasil!", "Data ternak id " + val + " berhasil dikembalikan.", "success");
             },
             error: function(data){
@@ -298,10 +297,11 @@ $('#btn-restore-all').click(function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/ternak/restore",
+            url:"/admin/ternakrestore",
             method: "GET",
             success: function(data){
                 $('#ternak-table').DataTable().ajax.reload();
+                $('#tongsampah-table').DataTable().ajax.reload();
                 swal("Berhasil!", "Data ternak berhasil dikembalikan.", "success");
             },
             error: function(data){
@@ -318,8 +318,8 @@ $('#btn-restore-all').click(function(){
 
 
 // force delete
-$('#btn-fdelete').click(function(){
-	var val = $(this).attr('name');
+$(document).on('click', '.fdelete', function(){
+	var val = $(this).attr('id');
 
 	swal({
         title: "Anda yakin ingin menghapus permanen data ternak ini?",
@@ -334,7 +334,7 @@ $('#btn-fdelete').click(function(){
             url:"/admin/ternak/fdelete/"+val,
             method: "GET",
             success: function(data){
-                // $('#tongsampah-table').DataTable().ajax.reload();
+                $('#tongsampah-table').DataTable().ajax.reload();
                 swal("Terhapus!", "Data ternak id " + val + " berhasil di hapus.", "success");
             },
             error: function(data){
@@ -361,10 +361,10 @@ $('#btn-delete-all').click(function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/ternak/fdelete",
+            url:"/admin/ternakfdelete",
             method: "GET",
             success: function(data){
-                // $('#tongsampah-table').DataTable().ajax.reload();
+                $('#tongsampah-table').DataTable().ajax.reload();
                 swal("Terhapus!", "Data ternak berhasil di hapus.", "success");
             },
             error: function(data){

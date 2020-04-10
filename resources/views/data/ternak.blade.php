@@ -11,7 +11,7 @@
 
 <ul class="nav nav-tabs tab-nav-right" role="tablist">
 	<li role="presentation" class="active"><a href="#data-ternak" data-toggle="tab">DATA TERNAK</a></li>
-	<li role="presentation"><a href="#tongsampah" data-toggle="tab">TONG SAMPAH</a></li>
+	<li role="presentation"><a href="#tongsampah" data-toggle="tab" onclick="tongsampahDT();">TONG SAMPAH</a></li>
 </ul>
 
 <div class="tab-content">
@@ -51,28 +51,7 @@
                         <th style="text-align: center;">Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                	@foreach($trash as $tdata)
-                	<tr>
-                		<td>{{ $no++ }}</td>
-                		<td>{{ $tdata->necktag }}</td>
-                		<td>{{ $tdata->pemilik_id }}</td>
-                		<td>{{ $tdata->ras_id }}</td>
-                		<td>{{ $tdata->jenis_kelamin }}</td>
-                		<td>{{ $tdata->blood }}</td>
-                		<td>{{ $tdata->necktag_ayah }}</td>
-                		<td>{{ $tdata->necktag_ibu }}</td>
-                		<td>{{ $tdata->status_ada }}</td>
-                		<td>{{ $tdata->created_at }}</td>
-                		<td>{{ $tdata->updated_at }}</td>
-                		<td>{{ $tdata->deleted_at }}</td>
-                		<td align="center">
-                			<button id="btn-restore" name="{{ $tdata->necktag }}" class="btn btn-warning btn-sm" style="margin: 2px;">Restore</button>
-                			<button id="btn-fdelete" name="{{ $tdata->necktag }}" class="btn btn-danger btn-sm">Hapus Permanen</button>
-                		</td>
-                	</tr>
-                	@endforeach
-                </tbody>
+               
             </table>
 		</div>
 	</div>

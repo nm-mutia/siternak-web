@@ -37,32 +37,8 @@ class TernakController extends Controller
             'kematian' => $kematian, 
             'ras' => $ras, 
             'pemilik' => $pemilik,
-            'trash' => $trash,
-            'no' => $no
-        ]);
-    }
-
-    public function ternakTable(TernakDataTable $dataTable)
-    {
-        $title = 'TERNAK';
-        $page = 'Ternak';
-        $pemilik = DB::table('pemiliks')->orderBy('nama_pemilik', 'asc')->get();
-        $ras = DB::table('ras')->orderBy('jenis_ras', 'asc')->get();
-        $kematian = DB::table('kematians')->orderBy('id', 'asc')->get();
-        $datas = Ternak::all();
-
-        $trash = Ternak::onlyTrashed()->get();
-        $no = 1;
-
-        return $dataTable->render('data.ternak', [
-            'title' => $title, 
-            'page' => $page, 
-            'data' => $datas, 
-            'kematian' => $kematian, 
-            'ras' => $ras, 
-            'pemilik' => $pemilik,
-            'trash' => $trash,
-            'no' => $no
+            // 'trash' => $trash,
+            // 'no' => $no
         ]);
     }
 
@@ -254,6 +230,22 @@ class TernakController extends Controller
         $data->delete();
     }
 
+
+    // trash
+    public function trash()
+    {
+        $ternak = Ternak::onlyTrashed()->get();
+
+        return Datatables::of($ternak)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $btn = '<button type="button" name="restore" id="'.$row->necktag.'" class="restore btn btn-warning btn-sm" style="margin: 2px;">Restore</button>';
+                    $btn .= '<button type="button" name="delete" id="'.$row->necktag.'" class="fdelete btn btn-danger btn-sm" style="margin: 2px;">Hapus Permanen</button>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+    }
 
     //restore
     public function restore($id)
