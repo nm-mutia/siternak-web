@@ -4,6 +4,34 @@ $.ajaxSetup({
 		}
 });
 
+// function tongsampahDataTables() {
+// 	console.log('halo');
+//     if (!$.fn.dataTable.isDataTable('#tongsampah-table')) {
+// 		$('#tongsampah-table').DataTable({
+// 		    processing: true,
+// 		    serverSide: true,
+// 		    ajax: '/admin/ternak/trash',
+// 		    columns: [
+// 		        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+// 		        {data: 'necktag', name: 'necktag'},
+// 		        {data: 'pemilik_id', name: 'pemilik_id'},
+// 		        {data: 'ras_id', name: 'ras_id'},
+// 		        {data: 'jenis_kelamin', name: 'jenis_kelamin'},
+// 		        {data: 'blood', name: 'blood'},
+// 		        {data: 'necktag_ayah', name: 'necktag_ayah'},
+// 		        {data: 'necktag_ibu', name: 'necktag_ibu'},
+// 		        {data: 'status_ada', name: 'status_ada'},
+// 		        {data: 'created_at', name: 'created_at'},
+// 		        {data: 'updated_at', name: 'updated_at'},
+// 		        {data: 'deleted_at', name: 'deleted_at'},
+// 		        {data: 'action', name: 'action', orderable: false, searchable: false},
+// 		    ],
+// 		});
+// 		console.log('if');
+//     }
+//     console.log('abis if');
+// }
+
 $('#tambah_data').click(function(){
 	$('.modal-title').text('Tambah Data - Ternak');
 	$('#action_button').val('Add');
@@ -200,7 +228,7 @@ $(document).on('click', '.delete', function(){
 	
     swal({
         title: "Anda yakin ingin menghapus data ternak ini?",
-        text: "Data tidak dapat dikembalikan!",
+        text: "Data mungkin masih digunakan pada tabel lain!",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
@@ -212,9 +240,9 @@ $(document).on('click', '.delete', function(){
             method: "DELETE",
             success: function(data){
                 $('#ternak-table').DataTable().ajax.reload();
-                swal("Terhapus!", "Data ternak id "+ternak_id+" telah terhapus.", "success");
+                swal("Terhapus!", "Data ternak id " + ternak_id + " berada di tong sampah.", "success");
             },
-            error : function(){
+            error: function(data){
                 swal({
                     title: 'Opps...',
                     text : data.message,
@@ -225,4 +253,128 @@ $(document).on('click', '.delete', function(){
         });
     });
 
+});
+
+
+// restore
+$('#btn-restore').click(function(){
+	var val = $(this).attr('name');
+
+	swal({
+        title: "Anda yakin ingin mengembalikan data ternak ini?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya, kembalikan!",
+        closeOnConfirm: false
+    }, function(){
+        $.ajax({
+            url:"/admin/ternak/restore/"+val,
+            method: "GET",
+            success: function(data){
+                $('#ternak-table').DataTable().ajax.reload();
+                swal("Berhasil!", "Data ternak id " + val + " berhasil dikembalikan.", "success");
+            },
+            error: function(data){
+                swal({
+                    title: 'Opps...',
+                    text : data.message,
+                    type : 'error',
+                    timer : '1500'
+                })
+            }
+        });
+    });
+});
+
+// restore all
+$('#btn-restore-all').click(function(){
+	swal({
+        title: "Anda yakin ingin mengembalikan semua data ternak di tong sampah?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya, kembalikan!",
+        closeOnConfirm: false
+    }, function(){
+        $.ajax({
+            url:"/admin/ternak/restore",
+            method: "GET",
+            success: function(data){
+                $('#ternak-table').DataTable().ajax.reload();
+                swal("Berhasil!", "Data ternak berhasil dikembalikan.", "success");
+            },
+            error: function(data){
+                swal({
+                    title: 'Opps...',
+                    text : data.message,
+                    type : 'error',
+                    timer : '1500'
+                })
+            }
+        });
+    });
+});
+
+
+// force delete
+$('#btn-fdelete').click(function(){
+	var val = $(this).attr('name');
+
+	swal({
+        title: "Anda yakin ingin menghapus permanen data ternak ini?",
+        text: "Data tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya, hapus!",
+        closeOnConfirm: false
+    }, function(){
+        $.ajax({
+            url:"/admin/ternak/fdelete/"+val,
+            method: "GET",
+            success: function(data){
+                // $('#tongsampah-table').DataTable().ajax.reload();
+                swal("Terhapus!", "Data ternak id " + val + " berhasil di hapus.", "success");
+            },
+            error: function(data){
+                swal({
+                    title: 'Opps...',
+                    text : data.message,
+                    type : 'error',
+                    timer : '1500'
+                })
+            }
+        });
+    });
+});
+
+// force delete all
+$('#btn-delete-all').click(function(){
+	swal({
+        title: "Anda yakin ingin menghapus permanen semua data ternak di tong sampah?",
+        text: "Data tidak dapat dikembalikan!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya, hapus!",
+        closeOnConfirm: false
+    }, function(){
+        $.ajax({
+            url:"/admin/ternak/fdelete",
+            method: "GET",
+            success: function(data){
+                // $('#tongsampah-table').DataTable().ajax.reload();
+                swal("Terhapus!", "Data ternak berhasil di hapus.", "success");
+            },
+            error: function(data){
+                swal({
+                    title: 'Opps...',
+                    text : data.message,
+                    type : 'error',
+                    timer : '1500'
+                })
+            }
+        });
+    });
 });

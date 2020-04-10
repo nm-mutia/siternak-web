@@ -3,14 +3,82 @@
 @section('table-content')
 <div align="left">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
-		Tambah Data
+		Tambah Data Ternak
 	</button>
 </div>
+
 <br>
-<!-- tabel -->
-<div class="table-responsive">
-	{{ $dataTable->table(['class' => 'table table-bordered table-condensed table-striped']) }}
+
+<ul class="nav nav-tabs tab-nav-right" role="tablist">
+	<li role="presentation" class="active"><a href="#data-ternak" data-toggle="tab">DATA TERNAK</a></li>
+	<li role="presentation"><a href="#tongsampah" data-toggle="tab">TONG SAMPAH</a></li>
+</ul>
+
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="data-ternak">
+    	<!-- tabel data ternak -->
+		<div class="table-responsive">
+			{{ $dataTable->table(['class' => 'table table-bordered table-condensed table-striped']) }}
+		</div>
+	</div>
+
+	<div role="tabpanel" class="tab-pane fade" id="tongsampah">
+		<div align="left">
+		    <button type="button" name="btn-restore-all" id="btn-restore-all" class="btn btn-info btn-sm">
+				Kembalikan Semua
+			</button>
+			<button type="button" name="btn-delete-all" id="btn-delete-all" class="btn btn-danger btn-sm">
+				Hapus Permanen Semua
+			</button>
+		</div>
+		<br>
+		<div class="table-responsive">
+			<table id="tongsampah-table" class="table table-bordered table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Necktag</th>
+                        <th>ID Pemilik</th>
+                        <th>ID Ras</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Blood</th>
+                        <th>Ayah</th>
+                        <th>Ibu</th>
+                        <th>Status Ada</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                        <th>Deleted At</th>
+                        <th style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	@foreach($trash as $tdata)
+                	<tr>
+                		<td>{{ $no++ }}</td>
+                		<td>{{ $tdata->necktag }}</td>
+                		<td>{{ $tdata->pemilik_id }}</td>
+                		<td>{{ $tdata->ras_id }}</td>
+                		<td>{{ $tdata->jenis_kelamin }}</td>
+                		<td>{{ $tdata->blood }}</td>
+                		<td>{{ $tdata->necktag_ayah }}</td>
+                		<td>{{ $tdata->necktag_ibu }}</td>
+                		<td>{{ $tdata->status_ada }}</td>
+                		<td>{{ $tdata->created_at }}</td>
+                		<td>{{ $tdata->updated_at }}</td>
+                		<td>{{ $tdata->deleted_at }}</td>
+                		<td align="center">
+                			<button id="btn-restore" name="{{ $tdata->necktag }}" class="btn btn-warning btn-sm" style="margin: 2px;">Restore</button>
+                			<button id="btn-fdelete" name="{{ $tdata->necktag }}" class="btn btn-danger btn-sm">Hapus Permanen</button>
+                		</td>
+                	</tr>
+                	@endforeach
+                </tbody>
+            </table>
+		</div>
+	</div>
+
 </div>
+
 
 <!-- form modal -->
 <div id="formModal" class="modal fade" role="dialog">
@@ -377,48 +445,5 @@
 
 @push('script2')
 {{ $dataTable->scripts() }}
-<!-- <script>
-	$('#ternak-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('admin.ternak.index') }}",
-        columns: [
-	        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'necktag', name: 'necktag'},
-            // {data: 'pemilik_id', name: 'pemilik_id'},
-            {data: 'ras_id', name: 'ras_id'},
-            // {data: 'kematian_id', name: 'kematian_id'},
-            {data: 'jenis_kelamin', name: 'jenis_kelamin'},
-            // {data: 'tgl_lahir', name: 'tgl_lahir'},
-            // {data: 'bobot_lahir', name: 'bobot_lahir'},
-            // {data: 'pukul_lahir', name: 'pukul_lahir'},
-            // {data: 'lama_dikandungan', name: 'lama_dikandungan'},
-            // {data: 'lama_laktasi', name: 'lama_laktasi'},
-            // {data: 'tgl_lepas_sapih', name: 'tgl_lepas_sapih'},
-            {data: 'blood', name: 'blood'},
-            // {data: 'necktag_ayah', name: 'necktag_ayah'},
-            // {data: 'necktag_ibu', name: 'necktag_ibu'},
-            // {data: 'bobot_tubuh', name: 'bobot_tubuh'},
-            // {data: 'panjang_tubuh', name: 'panjang_tubuh'},
-            // {data: 'tinggi_tubuh', name: 'tinggi_tubuh'},
-            // {data: 'cacat_fisik', name: 'cacat_fisik'},
-            // {data: 'ciri_lain', name: 'ciri_lain'},
-            {data: 'status_ada', name: 'status_ada'},
-            {data: 'created_at', name: 'created_at'},
-            {data: 'updated_at', name: 'updated_at'},
-            {data: 'action', name: 'action', orderable: false, searchable: false, sClass:'text-center'},
-        ],
-        // initComplete: function () {
-        //     this.api().columns().every(function () {
-        //         var column = this;
-        //         var input = document.createElement("input");
-        //         $(input).appendTo($(column.footer()).empty())
-        //         .on('change', function () {
-        //             column.search($(this).val(), false, false, true).draw();
-        //         });
-        //     });
-        // }
-    });
-</script> -->
 <script src="{{ asset('/js/data/dataternak.js') }}"></script>
 @endpush

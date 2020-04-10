@@ -27,13 +27,42 @@ class TernakController extends Controller
         $kematian = DB::table('kematians')->orderBy('id', 'asc')->get();
         $datas = Ternak::all();
 
+        $trash = Ternak::onlyTrashed()->get();
+        $no = 1;
+
         return $dataTable->render('data.ternak', [
             'title' => $title, 
             'page' => $page, 
             'data' => $datas, 
             'kematian' => $kematian, 
             'ras' => $ras, 
-            'pemilik' => $pemilik
+            'pemilik' => $pemilik,
+            'trash' => $trash,
+            'no' => $no
+        ]);
+    }
+
+    public function ternakTable(TernakDataTable $dataTable)
+    {
+        $title = 'TERNAK';
+        $page = 'Ternak';
+        $pemilik = DB::table('pemiliks')->orderBy('nama_pemilik', 'asc')->get();
+        $ras = DB::table('ras')->orderBy('jenis_ras', 'asc')->get();
+        $kematian = DB::table('kematians')->orderBy('id', 'asc')->get();
+        $datas = Ternak::all();
+
+        $trash = Ternak::onlyTrashed()->get();
+        $no = 1;
+
+        return $dataTable->render('data.ternak', [
+            'title' => $title, 
+            'page' => $page, 
+            'data' => $datas, 
+            'kematian' => $kematian, 
+            'ras' => $ras, 
+            'pemilik' => $pemilik,
+            'trash' => $trash,
+            'no' => $no
         ]);
     }
 
@@ -223,5 +252,32 @@ class TernakController extends Controller
     {
         $data = Ternak::findOrFail($id);
         $data->delete();
+    }
+
+
+    //restore
+    public function restore($id)
+    {
+        $ternak = Ternak::onlyTrashed()->where('necktag',$id);
+        $ternak->restore();
+    }
+
+    public function restoreAll()
+    {
+        $ternak = Ternak::onlyTrashed();
+        $ternak->restore();
+    }
+
+    //force delete
+    public function fdelete($id)
+    {
+        $ternak = Ternak::onlyTrashed()->where('necktag',$id);
+        $ternak->forceDelete();
+    }
+
+    public function fdeleteAll()
+    {
+        $ternak = Ternak::onlyTrashed();
+        $ternak->forceDelete();
     }
 }
