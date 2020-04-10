@@ -17,24 +17,24 @@ class Ternak extends Model
     ];
 
     public function penyakit(){
-        return $this->belongsToMany('App\Penyakit', 'riwayat_penyakits', 'necktag', 'penyakit_id')
+        return $this->belongsToMany(Penyakit::class, 'riwayat_penyakits', 'necktag', 'penyakit_id')
                     ->withPivot('tgl_sakit', 'obat', 'lama_sakit', 'keterangan')
                     ->withTimestamps();
     }
 
     public function perkawinan(){
-        return $this->hasMany('App\Perkawinan');
+        return $this->hasMany(Perkawinan::class);
     }
 
     public function ras(){
-        return $this->belongsTo('App\Ras');
+        return $this->belongsTo(Ras::class);
     }
 
     public function pemilik(){
-        return $this->belongsTo('App\Pemilik');
+        return $this->belongsTo(Pemilik::class);
     }
 
     public function kematian(){
-        return $this->belongsTo('App\Kematian');
+        return $this->belongsTo(Kematian::class);
     }
 }

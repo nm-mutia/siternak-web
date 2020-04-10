@@ -11,6 +11,6 @@ class Perkawinan extends Model
     ];
 
     public function ternak(){
-        return $this->belongsTo('App\Ternak');
+        return $this->belongsTo(Ternak::class);
     }
 }

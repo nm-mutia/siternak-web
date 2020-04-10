@@ -22,8 +22,8 @@ class RiwayatDataTable extends DataTable
         return datatables()
             ->queryBuilder($query)
             ->addColumn('action', function($row){
-                $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Ubah</button>';
-                $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Hapus</button>';
+                $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm" style="margin: 2px;">Ubah</button>';
+                $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm"  style="margin: 2px;">Hapus</button>';
                 return $btn;
             });
     }

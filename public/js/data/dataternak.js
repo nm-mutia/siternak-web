@@ -112,6 +112,8 @@ $(document).on('click', '.view', function(){
 			$('#vcacat_fisik').val(data.result.cacat_fisik);
 			$('#vciri_lain').val(data.result.ciri_lain);
 			$('#vstatus_ada').val(data.result.status_ada);
+			$('#vcreated_at').val(data.result.created_at);
+			$('#vupdated_at').val(data.result.updated_at);
 
             if(data.riwayat != ''){
                 $('#riwayat-penyakit').empty().append(txt);

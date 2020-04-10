@@ -23,9 +23,9 @@ class TernakDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<button type="button" name="view" id="'.$row->necktag.'" class="view btn btn-warning btn-sm">Lihat</button>';
-                $btn .= '<button type="button" name="edit" id="'.$row->necktag.'" class="edit btn btn-primary btn-sm">Ubah</button>';
-                $btn .= '<button type="button" name="delete" id="'.$row->necktag.'" class="delete btn btn-danger btn-sm">Hapus</button>';
+                $btn = '<button type="button" name="view" id="'.$row->necktag.'" class="view btn btn-warning btn-sm" style="margin: 2px;">Lihat</button>';
+                $btn .= '<button type="button" name="edit" id="'.$row->necktag.'" class="edit btn btn-primary btn-sm" style="margin: 2px;">Ubah</button>';
+                $btn .= '<button type="button" name="delete" id="'.$row->necktag.'" class="delete btn btn-danger btn-sm" style="margin: 2px;">Hapus</button>';
                 return $btn;
             });
     }

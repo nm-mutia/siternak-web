@@ -11,6 +11,6 @@ class Kematian extends Model
     ];
 
     public function ternak(){
-        return $this->hasMany('App\Ternak');
+        return $this->hasMany(Ternak::class);
     }
 }

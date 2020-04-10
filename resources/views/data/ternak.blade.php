@@ -345,6 +345,18 @@
 						<input type="text" name="status_ada" id="vstatus_ada" class="form-control" readonly="true">
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="control-label">Created At</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="created_at" id="vcreated_at" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Updated At</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="updated_at" id="vupdated_at" class="form-control" readonly="true">
+					</div>
+				</div>
 
 				<!-- riwayat -->
 				<div>

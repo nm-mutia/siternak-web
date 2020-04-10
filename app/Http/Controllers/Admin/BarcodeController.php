@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Ternak;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+// use PDF;
 use domPDF;
 use DNS1D;
 
@@ -13,7 +14,6 @@ class BarcodeController extends Controller
     public function index(Request $request)
     {
     	$ternak = Ternak::latest()->paginate(15); 
-        // $ternak = Ternak::latest()->get(); 
 	    $no = 1; 
 
         return view('admin.barcode')->with('ternak', $ternak)->with('no', $no);
@@ -28,7 +28,6 @@ class BarcodeController extends Controller
         $html .= '<tr>';
 
         foreach($ternak as $data){
-
             $html .= '<td>'.$no.'</td>';
             $html .= '<td align="center" style="border: lpx solid #ccc; padding-left: 10px; padding-right: 10px;">'.$data->necktag.'<br>';
             $html .= '<img style="padding: 10px;" src="data:image/png;base64,'.DNS1D::getBarcodePNG($data->necktag, "C128", 2, 40).'" alt="barcode"/>';
@@ -43,8 +42,10 @@ class BarcodeController extends Controller
         $html .= '</tr>';
         $html .= '</table>';
 
+        // $pdf = PDF::loadHTML($html);
         $pdf = domPDF::loadHTML($html);
         $pdf->setPaper('A4', 'portrait');
+        // $pdf->setPaper('a4')->setOrientation('portrait')->setOption('margin-bottom', 0);
 
         return $pdf->download('SITERNAK-Barcode.pdf');
 	}

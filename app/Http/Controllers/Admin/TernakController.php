@@ -27,38 +27,6 @@ class TernakController extends Controller
         $kematian = DB::table('kematians')->orderBy('id', 'asc')->get();
         $datas = Ternak::all();
 
-        // if ($request->ajax()) {
-        //     // $data = Ternak::latest()->get();
-        //     $data = Ternak::join('public.ras', 'ras.id', '=', 'ternaks.ras_id')
-        //                     ->select('ternaks.necktag', 'ras.jenis_ras as ras_id', 'ternaks.jenis_kelamin', 'ternaks.blood', 'ternaks.status_ada', 'ternaks.created_at','ternaks.updated_at')
-        //                     ->get();
-        //     foreach($data as $get){
-        //         if($get->status_ada == true){
-        //             $get->status_ada = 'Ada';
-        //         }else{
-        //             $get->status_ada = 'Tidak Ada';
-        //         }
-        //     }          
-            
-        //     return Datatables::of($data)
-        //             ->addIndexColumn()
-        //             ->addColumn('action', function($row){
-        //                 $btn = '<button type="button" name="view" id="'.$row->necktag.'" class="view btn btn-warning btn-sm">View</button>';
-        //                 $btn .= '<button type="button" name="edit" id="'.$row->necktag.'" class="edit btn btn-primary btn-sm">Edit</button>';
-        //                 $btn .= '<button type="button" name="delete" id="'.$row->necktag.'" class="delete btn btn-danger btn-sm">Delete</button>';
-        //                 return $btn;
-        //             })
-        //             ->rawColumns(['action'])
-        //             ->make(true);
-        // }
-
-        // return view('data.ternak')->with('pemilik', $pemilik)
-        //                           ->with('ras', $ras)
-        //                           ->with('kematian', $kematian)
-        //                           ->with('data', $datas)
-        //                           ->with('title', $title)
-        //                           ->with('page', $page);
-
         return $dataTable->render('data.ternak', [
             'title' => $title, 
             'page' => $page, 
