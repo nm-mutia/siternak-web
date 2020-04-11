@@ -64,12 +64,12 @@
                             <li class="body" style="height: 100px;">
                                 <ul class="menu" style="list-style-type:none;">
                                     <li>
-                                        <a href="javascript:void(0);">
+                                        <a href="{{ route('admin.profile') }}">
                                             <div class="icon-circle bg-cyan">
                                                 <i class="material-icons">person</i>
                                             </div>
                                             <div class="menu-info" style="top: -3px;">
-                                                <h4>Profile</h4>
+                                                <h4>Profil</h4>
                                             </div>
                                         </a>
                                     </li>

@@ -32,7 +32,7 @@
 								<option></option>
 							  	@foreach ($ternak as $tid)
 							  	@if ($tid->jenis_kelamin == 'Jantan')
-								    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->ras_id }} - {{ $tid->jenis_kelamin }}</option>
+								    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->jenis_ras }} - {{ $tid->jenis_kelamin }}</option>
 							    @endif
 								@endforeach    
 							</select>
@@ -45,7 +45,7 @@
 								<option></option>
 							  	@foreach ($ternak as $tid)
 							  	@if ($tid->jenis_kelamin == 'Betina')
-								    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->ras_id }} - {{ $tid->jenis_kelamin }}</option>
+								    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->jenis_ras }} - {{ $tid->jenis_kelamin }}</option>
 							    @endif
 								@endforeach    
 							</select>

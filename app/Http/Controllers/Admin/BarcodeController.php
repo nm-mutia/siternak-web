@@ -11,7 +11,7 @@ use DNS1D;
 
 class BarcodeController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
     	$ternak = Ternak::latest()->paginate(15); 
 	    $no = 1; 

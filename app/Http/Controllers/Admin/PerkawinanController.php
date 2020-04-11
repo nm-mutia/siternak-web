@@ -21,7 +21,7 @@ class PerkawinanController extends Controller
     {
         $title = 'PERKAWINAN';
         $page = 'Perkawinan';
-        $ternak = DB::table('ternaks')->get();
+        $ternak = DB::table('ternaks')->join('ras', 'ras.id', '=', 'ternaks.ras_id')->get();
 
         return $dataTable->render('data.perkawinan', ['title' => $title, 'page' => $page, 'ternak' => $ternak]);
     }

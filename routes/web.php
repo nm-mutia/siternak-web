@@ -24,7 +24,15 @@ Route::group(['midlleware' => 'web'], function() {
 		Route::get('/', 'Admin\HomeController@index')->name('admin');
 		
 		Route::namespace('admin')->name('admin.')->group(function(){
+			// search
 			Route::get('search', 'HomeController@search')->name('search');
+
+			// profil
+			Route::get('profile', 'ProfileController@index')->name('profile');
+			Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
+			Route::put('profile/edit', 'ProfileController@update')->name('profile.update');
+			Route::get('password/change', 'ProfileController@changePassword')->name('password.change');
+			Route::post('password/change', 'ProfileController@postChangePassword')->name('password.update');
 
 			//data
 			Route::resource('ternak', 'TernakController')->except(['create']);

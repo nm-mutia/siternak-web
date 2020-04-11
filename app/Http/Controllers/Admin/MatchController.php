@@ -13,7 +13,7 @@ class MatchController extends Controller
 
     public function index()
     {
-        $ternak = Ternak::all();
+        $ternak = Ternak::join('ras', 'ras.id', '=', 'ternaks.ras_id')->get();
         return view('perkawinan.match')->with('ternak', $ternak);
     }
 
