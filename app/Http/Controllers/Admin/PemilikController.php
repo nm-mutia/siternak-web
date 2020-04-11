@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Pemilik;
+use App\Ternak;
 use App\DataTables\PemilikDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -70,10 +71,15 @@ class PemilikController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show($id)
-    // {
-    //     //
-    // }
+    public function show($id)
+    {
+        if(request()->ajax()){
+            $data = Pemilik::findOrFail($id);
+            $ternak = Ternak::where('pemilik_id', '=', $data->id)->get();
+
+            return response()->json(['result' => $data, 'ternak' => $ternak]);
+        }
+    }
 
     /**
      * Show the form for editing the specified resource.

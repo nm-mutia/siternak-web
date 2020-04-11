@@ -3,7 +3,7 @@
 @section('table-content')
 <div align="left">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
-		Tambah Data
+		<i class="material-icons">add</i><span class="icon-name">Tambah Data</span>
 	</button>
 </div>
 <br>

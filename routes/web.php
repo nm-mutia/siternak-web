@@ -37,7 +37,7 @@ Route::group(['midlleware' => 'web'], function() {
 			Route::resource('penyakit', 'PenyakitController')->except(['create']);
 			Route::resource('riwayat', 'RiwayatPenyakitController')->except(['create', 'show']);
 			Route::resource('kematian', 'KematianController')->except(['create', 'show']);
-			Route::resource('pemilik', 'PemilikController')->except(['create', 'show']);
+			Route::resource('pemilik', 'PemilikController')->except(['create']);
 			Route::resource('perkawinan', 'PerkawinanController')->except(['create', 'show']);
 
 			//barcode

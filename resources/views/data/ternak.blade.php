@@ -3,15 +3,15 @@
 @section('table-content')
 <div align="left">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
-		Tambah Data Ternak
+		<i class="material-icons">add</i><span class="icon-name">Tambah Data Ternak</span>
 	</button>
 </div>
 
 <br>
 
 <ul class="nav nav-tabs tab-nav-right" role="tablist">
-	<li role="presentation" class="active"><a href="#data-ternak" data-toggle="tab">DATA TERNAK</a></li>
-	<li role="presentation"><a href="#tongsampah" data-toggle="tab" onclick="tongsampahDT();">TONG SAMPAH</a></li>
+	<li role="presentation" class="active"><a href="#data-ternak" data-toggle="tab"><i class="material-icons">dns</i><span class="icon-name">DATA TERNAK</span></a></li>
+	<li role="presentation"><a href="#tongsampah" data-toggle="tab" onclick="tongsampahDT();"><i class="material-icons">delete</i><span class="icon-name">TONG SAMPAH</span></a></li>
 </ul>
 
 <div class="tab-content">
@@ -24,11 +24,11 @@
 
 	<div role="tabpanel" class="tab-pane fade" id="tongsampah">
 		<div align="left">
-		    <button type="button" name="btn-restore-all" id="btn-restore-all" class="btn btn-info btn-sm">
-				Kembalikan Semua
+		    <button type="button" name="btn-restore-all" id="btn-restore-all" class="btn btn-warning btn-sm">
+				<i class="material-icons">restore</i><span class="icon-name">Kembalikan Semua</span>
 			</button>
 			<button type="button" name="btn-delete-all" id="btn-delete-all" class="btn btn-danger btn-sm">
-				Hapus Permanen Semua
+				<i class="material-icons">delete_forever</i><span class="icon-name">Hapus Permanen Semua</span>
 			</button>
 		</div>
 		<br>
@@ -246,7 +246,7 @@
 					<div class="form-group" align="center">
 						<input type="hidden" name="action" id="action" value="Add">
 						<input type="hidden" name="hidden_id" id="hidden_id">
-						<input type="submit" name="action_button" id="action_button" class="btn btn-warning" value="Add">
+						<input type="submit" name="action_button" id="action_button" class="btn" value="Add">
 					</div>
 				</form>
 			</div>

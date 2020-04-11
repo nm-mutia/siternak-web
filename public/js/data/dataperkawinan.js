@@ -6,7 +6,9 @@ $.ajaxSetup({
 
 $('#tambah_data').click(function(){
 	$('.modal-title').text('Tambah Data - Perkawinan');
-	$('#action_button').val('Add');
+	$('#action_button').val('Tambah');
+	$('#action_button').addClass('btn-success');
+	$('#action_button').removeClass('btn-warning');
 	$('#action').val('Add');
 	$('#form_result').html('');
 
@@ -76,7 +78,9 @@ $(document).on('click', '.edit', function(){
 
 			$('#hidden_id').val(id);
 	    	$('#action').val('Edit');
-			$('#action_button').val('Edit');
+			$('#action_button').val('Ubah');
+			$('#action_button').addClass('btn-warning');
+			$('#action_button').removeClass('btn-success');
 			$('.modal-title').text('Edit Data - Perkawinan');
 	    	$('#formModal').modal('show');
 		},

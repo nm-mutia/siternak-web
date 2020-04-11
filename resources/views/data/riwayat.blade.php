@@ -3,43 +3,13 @@
 @section('table-content')
 <div align="left">
     <button type="button" name="tambah_data" id="tambah_data" class="btn btn-success btn-sm">
-		Tambah Data
+		<i class="material-icons">add</i><span class="icon-name">Tambah Data</span>
 	</button>
 </div>
 <br>
 <!-- tabel -->
 <div class="table-responsive">
 	{{ $dataTable->table(['class' => 'table table-bordered table-condensed table-striped']) }}
-	<!-- <table id="riwayat-table" class="table table-bordered table-condensed table-striped">
-		<thead>
-		    <tr>
-		    	<th>No.</th>
-		        <th>Penyakit</th>
-		        <th>Necktag</th>
-		        <th>Tanggal Sakit</th>
-		        <th>Obat</th>
-		        <th>Lama Sakit</th>
-		        <th>Keterangan</th>
-		        <th>Created At</th>
-		        <th>Updated At</th>
-		        <th>Action</th>
-		    </tr>
-		</thead>
-		<tfoot>
-		    <tr>
-		    	<th>No.</th>
-		        <th>Penyakit</th>
-		        <th>Necktag</th>
-		        <th>Tanggal Sakit</th>
-		        <th>Obat</th>
-		        <th>Lama Sakit</th>
-		        <th>Keterangan</th>
-		        <th>Created At</th>
-		        <th>Updated At</th>
-		        <th>Action</th>
-		    </tr>
-		</tfoot>
-	</table> -->
 </div>
 
 <!-- form modal -->
@@ -121,34 +91,5 @@
 
 @push('script2')
 {{ $dataTable->scripts() }}
-<!-- <script>
-	$('#riwayat-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('admin.riwayat.index') }}",
-        columns: [
-	        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'penyakit_id', name: 'penyakit_id'},
-            {data: 'necktag', name: 'necktag'},
-            {data: 'tgl_sakit', name: 'tgl_sakit'},
-            {data: 'obat', name: 'obat'},
-            {data: 'lama_sakit', name: 'lama_sakit'},
-            {data: 'keterangan', name: 'keterangan'},
-            {data: 'created_at', name: 'created_at'},
-            {data: 'updated_at', name: 'updated_at'},
-            {data: 'action', name: 'action', orderable: false, searchable: false, sClass:'text-center'},
-        ],
-        // initComplete: function () {
-        //     this.api().columns().every(function () {
-        //         var column = this;
-        //         var input = document.createElement("input");
-        //         $(input).appendTo($(column.footer()).empty())
-        //         .on('change', function () {
-        //             column.search($(this).val(), false, false, true).draw();
-        //         });
-        //     });
-        // }
-    });
-</script> -->
 <script src="{{ asset('/js/data/datariwayat.js') }}"></script>
 @endpush

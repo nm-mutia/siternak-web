@@ -6,7 +6,9 @@ $.ajaxSetup({
 
 $('#tambah_data').click(function(){
 	$('.modal-title').text('Tambah Data - Ras');
-	$('#action_button').val('Add');
+	$('#action_button').val('Tambah');
+	$('#action_button').addClass('btn-success');
+	$('#action_button').removeClass('btn-warning');
 	$('#action').val('Add');
 	$('#form_result').html('');
     $('#tambah_data_form')[0].reset();
@@ -69,7 +71,9 @@ $(document).on('click', '.edit', function(){
 			$('#ket_ras').val(data.result.ket_ras);
 			$('#hidden_id').val(id);
 	    	$('#action').val('Edit');
-			$('#action_button').val('Edit');
+			$('#action_button').val('Ubah');
+			$('#action_button').addClass('btn-warning');
+			$('#action_button').removeClass('btn-success');
 			$('.modal-title').text('Edit Data - Ras');
 	    	$('#formModal').modal('show');
 		}

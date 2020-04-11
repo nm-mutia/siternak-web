@@ -31,7 +31,9 @@ function tongsampahDT() {
 
 $('#tambah_data').click(function(){
 	$('.modal-title').text('Tambah Data - Ternak');
-	$('#action_button').val('Add');
+	$('#action_button').val('Tambah');
+	$('#action_button').addClass('btn-success');
+	$('#action_button').removeClass('btn-warning');
 	$('#action').val('Add');
 	$('#action').show();
 	$('#action_button').show();
@@ -209,7 +211,9 @@ $(document).on('click', '.edit', function(){
 			$('#necktag').attr('readonly', true);
 			$('#hidden_id').val(id);
 	    	$('#action').val('Edit');
-			$('#action_button').val('Edit');
+			$('#action_button').val('Ubah');
+			$('#action_button').addClass('btn-warning');
+			$('#action_button').removeClass('btn-success');
 			$('.modal-title').text('Edit Data - Ternak');
 	    	$('#formModal').modal('show');
 		},
@@ -253,6 +257,9 @@ $(document).on('click', '.delete', function(){
 
 });
 
+
+
+// -------------------------------- tong sampah ------------------------------------------
 
 // restore
 $(document).on('click', '.restore', function(){

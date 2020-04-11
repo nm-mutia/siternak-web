@@ -22,9 +22,9 @@ class PenyakitDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function($row){
-                $btn = '<button type="button" name="view" id="'.$row->id.'" class="view btn btn-warning btn-sm">Lihat</button>';
-                $btn .= '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Ubah</button>';
-                $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Hapus</button>';
+                $btn = '<button type="button" name="view" id="'.$row->id.'" class="view btn btn-info btn-sm"><i class="material-icons">remove_red_eye</i></button>';
+                $btn .= '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-warning btn-sm"><i class="material-icons">mode_edit</i></button>';
+                $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm"><i class="material-icons">delete</i></button>';
                 return $btn;
             });
     }

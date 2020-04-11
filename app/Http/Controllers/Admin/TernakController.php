@@ -239,8 +239,8 @@ class TernakController extends Controller
         return Datatables::of($ternak)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $btn = '<button type="button" name="restore" id="'.$row->necktag.'" class="restore btn btn-warning btn-sm" style="margin: 2px;">Restore</button>';
-                    $btn .= '<button type="button" name="delete" id="'.$row->necktag.'" class="fdelete btn btn-danger btn-sm" style="margin: 2px;">Hapus Permanen</button>';
+                    $btn = '<button type="button" name="restore" id="'.$row->necktag.'" class="restore btn btn-warning btn-sm" ><i class="material-icons">restore</i></button>';
+                    $btn .= '<button type="button" name="delete" id="'.$row->necktag.'" class="fdelete btn btn-danger btn-sm" ><i class="material-icons">delete_forever</i></button>';
                     return $btn;
                 })
                 ->rawColumns(['action'])

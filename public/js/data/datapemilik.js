@@ -6,7 +6,9 @@ $.ajaxSetup({
 
 $('#tambah_data').click(function(){
     $('.modal-title').text('Tambah Data - Pemilik');
-    $('#action_button').val('Add');
+    $('#action_button').val('Tambah');
+    $('#action_button').addClass('btn-success');
+    $('#action_button').removeClass('btn-warning');
     $('#action').val('Add');
     $('#form_result').html('');
     $('#tambah_data_form')[0].reset();
@@ -55,6 +57,62 @@ $('#tambah_data_form').on('submit', function(event){
     });
 });
 
+//view
+$(document).on('click', '.view', function(){
+    var id = $(this).attr('id');
+    var txt = '', txt2 = '';
+    var rp = [];
+
+    txt = '<tr>';
+    txt += '<th>Necktag</th>';
+    txt += '<th>Jenis Kelamin</th>';
+    txt += '<th>Blood</th>';
+    txt += '<th>Status Ada</th>';
+    txt += '</tr>';
+
+    $.ajax({
+        url: "/admin/pemilik/"+id, //show
+        datatype: "json",
+        success: function(data){
+            $('#vnama_pemilik').val(data.result.nama_pemilik);
+            $('#vktp').val(data.result.ktp);
+            $('#vcreated_at').val(data.result.created_at);
+            $('#vupdated_at').val(data.result.updated_at);
+
+            if(data.ternak != ''){
+                console.log(data.ternak);
+                $('#ternak-pemilik').empty().append(txt);
+                txt2 = '';
+                $.each(data.ternak, function(i, val) {
+                    txt2 += '<tr>';
+                    txt2 += '<td>' + data.ternak[i].necktag + '</td>';
+                    txt2 += '<td>' + data.ternak[i].jenis_kelamin + '</td>';
+                    txt2 += '<td>' + data.ternak[i].blood + '</td>';
+
+                    if(data.ternak[i].status_ada) data.ternak[i].status_ada = 'Ada';
+                    else data.ternak[i].status_ada = 'Tidak Ada';
+                    
+                    txt2 += '<td>' + data.ternak[i].status_ada + '</td>';
+                    txt2 += '</tr>';
+                });
+                $('#ternak-pemilik').append(txt2);
+                $('#ternak-pemilik').show();
+                $('#span-rp').empty();
+            }
+            else{
+                $('#span-rp').html('<p align="center">Tidak ada data ternak pada pemilik ini</p>');
+                $('#ternak-pemilik').hide();
+            }
+
+            $('.modal-title').text('Data Pemilik - ' + id);
+            $('#viewModal').modal('show');
+        },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            console.log(jqXHR); 
+        }
+    });
+});
+
 //edit
 $(document).on('click', '.edit', function(){
     var id = $(this).attr('id');
@@ -67,7 +125,9 @@ $(document).on('click', '.edit', function(){
             $('#ktp').val(data.result.ktp);
             $('#hidden_id').val(id);
             $('#action').val('Edit');
-            $('#action_button').val('Edit');
+            $('#action_button').val('Ubah');
+            $('#action_button').addClass('btn-warning');
+            $('#action_button').removeClass('btn-success');
             $('.modal-title').text('Edit Data - Pemilik');
             $('#formModal').modal('show');
         }

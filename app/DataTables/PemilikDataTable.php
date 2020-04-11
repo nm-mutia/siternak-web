@@ -22,8 +22,9 @@ class PemilikDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', function($row){
-                $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm" style="margin: 2px;">Ubah</button>';
-                $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm" style="margin: 2px;">Hapus</button>';
+                $btn = '<button type="button" name="view" id="'.$row->id.'" class="view btn btn-info btn-sm" ><i class="material-icons">remove_red_eye</i></button>';
+                $btn .= '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-warning btn-sm" style="margin: 2px;"><i class="material-icons">mode_edit</i></button>';
+                $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm"><i class="material-icons">delete</i></button>';
                 return $btn;
             });
     }
@@ -82,7 +83,7 @@ class PemilikDataTable extends DataTable
                 ->title('Action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(120)
+                ->width(150)
                 ->addClass('text-center'),
         ];
     }
