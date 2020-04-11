@@ -121,38 +121,53 @@
 	                
 	                <div class="form-group">
 	                    <label for="current_password" class="control-label">Password Saat Ini</label>
-	                    <div class="form-line col-md-8">
-							<input id="current_password" type="password" class="form-control" name="current_password" required placeholder="Masukkan Password">
-		                    @if ($errors->has('current_password'))
-		                        <span class="help-block">
-		                            <strong>{{ $errors->first('password') }}</strong>
-		                        </span>
-		                    @endif
-						</div>
+	                     <div class="input-group">
+                            <div class="form-line">
+                                <input id="current_password" type="password" class="form-control" name="current_password" required placeholder="Masukkan Password">
+                                @if ($errors->has('current_password'))
+			                        <span class="help-block">
+			                            <strong>{{ $errors->first('password') }}</strong>
+			                        </span>
+			                    @endif
+                            </div>
+                            <span class="input-group-addon">
+                                <span toggle="#password-field" id="password-field-1" class="toggle-password" style="cursor: pointer;"><i class="material-icons">visibility</i></span>
+                            </span>
+                        </div>
 	                </div>
 	 				
 	                <div class="form-group">
 	                    <label for="password" class="control-label">Password Baru</label>
-	                    <div class="form-line col-md-8">
-		                    <input id="password" type="password" class="form-control" name="password" required placeholder="Masukkan minimal 6 karakter">
-		                    @if ($errors->has('password'))
-		                        <span class="help-block">
-		                            <strong>{{ $errors->first('password') }}</strong>
-		                        </span>
-		                    @endif
-		                </div>
+	                     <div class="input-group">
+                            <div class="form-line">
+                                <input id="password" type="password" class="form-control" name="password" required placeholder="Masukkan minimal 6 karakter">
+                                @if ($errors->has('password'))
+			                        <span class="help-block">
+			                            <strong>{{ $errors->first('password') }}</strong>
+			                        </span>
+			                    @endif
+                            </div>
+                            <span class="input-group-addon">
+                                <span toggle="#password-field" id="password-field-2" class="toggle-password" style="cursor: pointer;"><i class="material-icons">visibility</i></span>
+                            </span>
+                        </div>
 	                </div>
 	 				
 	                <div class="form-group">
 	                    <label for="password-confirm" class="control-label">Konfirmasi Password Baru</label>
-	                    <div class="form-line col-md-8">
-		                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Konfirm Password baru">
-		                    @if ($errors->has('password_confirmation'))
-		                        <span class="help-block">
-		                            <strong>{{ $errors->first('password_confirmation') }}</strong>
-		                        </span>
-		                    @endif
-		                </div>
+	                     <div class="input-group">
+                            <div class="form-line">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required placeholder="Konfirm Password baru">
+			                    @if ($errors->has('password_confirmation'))
+			                        <span class="help-block">
+			                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+			                        </span>
+			                    @endif
+                            </div>
+                            <span class="input-group-addon">
+                                <span toggle="#password-field" id="password-field-3" class="toggle-password" style="cursor: pointer;"><i class="material-icons">visibility</i></span>
+                            </span>
+                        </div>
 	                </div>
 	 				<br>
 	                <div class="form-group">

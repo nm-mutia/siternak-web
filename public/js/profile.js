@@ -90,3 +90,39 @@ $('#ubah_pass_form').on('submit', function(event){
 		}
 	});
 });
+
+$("#password-field-1").click(function() {
+	$(this).html('<i class="material-icons">visibility_off</i>');
+
+  	var input = $("#current_password");
+  	if (input.attr("type") === "password") {
+    	input.attr("type", "text");
+	}else {
+    	input.attr("type", "password");
+    	$(this).html('<i class="material-icons">visibility</i>');
+  	}
+});
+
+$("#password-field-2").click(function() {
+	$(this).html('<i class="material-icons">visibility_off</i>');
+
+  	var input = $("#password");
+  	if (input.attr("type") === "password") {
+    	input.attr("type", "text");
+	}else {
+    	input.attr("type", "password");
+    	$(this).html('<i class="material-icons">visibility</i>');
+  	}
+});
+
+$("#password-field-3").click(function() {
+	$(this).html('<i class="material-icons">visibility_off</i>');
+
+  	var input = $("#password-confirm");
+  	if (input.attr("type") === "password") {
+    	input.attr("type", "text");
+	}else {
+    	input.attr("type", "password");
+    	$(this).html('<i class="material-icons">visibility</i>');
+  	}
+});
