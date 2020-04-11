@@ -32,19 +32,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>Pilih Kode Ternak yang Ingin Dipasangkan</h2>
-                <!-- <ul class="header-dropdown m-r--5">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul> -->
+                <h2>Pilih Kode Ternak (Necktag) yang Ingin Dipasangkan</h2>
             </div>
             <div class="body">
                 <form method="post" id="match_form">
@@ -52,9 +40,7 @@
                 
                     <div class="row clearfix">
                         <div class="col-md-12">
-                            <p>
-                                <b>Jantan</b>
-                            </p>
+                            <p><b>Jantan</b></p>
                             <div class="form-group">
                                 <div>
                                     <select class="form-control js-select-search" name="necktag_jt" id="necktag_jt">
@@ -71,9 +57,7 @@
                     </div>
                     <div class="row clearfix">
                         <div class="col-md-12">
-                            <p>
-                                <b>Betina</b>
-                            </p>
+                            <p><b>Betina</b></p>
                             <div class="form-group">
                                 <div>
                                     <select class="form-control js-select-search" name="necktag_bt" id="necktag_bt">
@@ -104,12 +88,6 @@
 
 @push('script')
 <script src="{{ asset('/js/select2.min.js') }}"></script>
-<script src="{{ asset('/js/perkawinan.js') }}"></script>
+<script src="{{ asset('/js/match.js') }}"></script>
 <script src="{{ asset('/adminbsb/plugins/sweetalert/sweetalert.min.js') }}"></script>
-
-<script>
-    $(function () {
-        $('.js-select-search').select2({ width: '100%' });
-    });
-</script>
 @endpush

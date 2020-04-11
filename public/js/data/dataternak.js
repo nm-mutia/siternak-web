@@ -339,7 +339,7 @@ $(document).on('click', '.fdelete', function(){
     }, function(){
         $.ajax({
             url:"/admin/ternak/fdelete/"+val,
-            method: "GET",
+            method: "DELETE",
             success: function(data){
                 $('#tongsampah-table').DataTable().ajax.reload();
                 swal("Terhapus!", "Data ternak id " + val + " berhasil di hapus.", "success");
@@ -369,7 +369,7 @@ $('#btn-delete-all').click(function(){
     }, function(){
         $.ajax({
             url:"/admin/ternakfdelete",
-            method: "GET",
+            method: "DELETE",
             success: function(data){
                 $('#tongsampah-table').DataTable().ajax.reload();
                 swal("Terhapus!", "Data ternak berhasil di hapus.", "success");

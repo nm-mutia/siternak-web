@@ -55,17 +55,4 @@ class HomeController extends Controller
     	}
         return response()->json(['result' => $data]);
     }
-
-    //fitur perkawinan
-    public function p_index()
-    {
-        $ternak = Ternak::all();
-        return view('perkawinan.kawin')->with('ternak', $ternak);
-    }
-
-    public function p_match(Request $request)
-    {
-        // $ternak = Ternak::all();
-        return response()->json(['result' => 'berhasil']);
-    }
 }
