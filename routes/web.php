@@ -14,14 +14,17 @@
 Route::group(['midlleware' => 'web'], function() {
 	//auth
 	Auth::routes();
+	Auth::routes(['verify' => true]);
 
 	//index
 	Route::get('/', 'Auth\LoginController@showLoginForm');
+	Route::get('/home', 'HomeController@index')->middleware('auth', 'verified')->name('home');
 
 	//admin
-	Route::prefix('admin')->middleware('can:isAdmin', 'auth')->group(function(){
+	Route::prefix('admin')->middleware('can:isAdmin', 'auth', 'verified')->group(function(){
 		//dashboard
 		Route::get('/', 'Admin\HomeController@index')->name('admin');
+
 		
 		Route::namespace('admin')->name('admin.')->group(function(){
 			// search
@@ -71,7 +74,7 @@ Route::group(['midlleware' => 'web'], function() {
 	});
 
 	//peternak
-	Route::prefix('peternak')->middleware('can:isPeternak', 'auth')->group(function(){
+	Route::prefix('peternak')->middleware('can:isPeternak', 'auth', 'verified')->group(function(){
 		Route::get('/', 'Peternak\HomeController@index')->name('peternak');
 
 		Route::name('peternak.')->group(function(){
