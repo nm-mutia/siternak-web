@@ -61,7 +61,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li class="header">{{ Auth::user()->name }}</li>
-                            <li class="body" style="height: 150px;">
+                            <li class="body" style="height: 100px;">
                                 <ul class="menu" style="list-style-type:none;">
                                     <li>
                                         <a href="{{ route('admin.profile') }}">
@@ -73,7 +73,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href="{{ route('home') }}">
                                             <div class="icon-circle bg-cyan">
                                                 <i class="material-icons">dashboard</i>
@@ -82,7 +82,7 @@
                                                 <h4>Dashboard Utama</h4>
                                             </div>
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <div class="icon-circle bg-cyan">

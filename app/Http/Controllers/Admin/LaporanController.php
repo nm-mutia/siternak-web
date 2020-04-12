@@ -76,9 +76,17 @@ class LaporanController extends Controller
     public function ada(Request $request)
     {
         if($request->ajax()){
-            $ada = Ternak::where('status_ada', true)->get();
+            $exists_union = Ternak::join('kematians', 'kematians.id', '=', 'ternaks.kematian_id')
+                                ->where('tgl_kematian', '>', $request->dateto)
+                                ->where('tgl_lahir', '<', $request->dateto)
+                                ->selectRaw('ternaks.*');
 
-            return Datatables::of($ada)
+            $exists = Ternak::where('status_ada', true)
+                        ->where('tgl_lahir', '<', $request->dateto)
+                        ->union($exists_union)
+                        ->get();
+
+            return Datatables::of($exists)
                   ->addIndexColumn()
                   ->make(true);
         } 
