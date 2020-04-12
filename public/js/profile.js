@@ -47,20 +47,6 @@ $('#ubah_data_form').on('submit', function(event){
 	});
 });
 
-$('#edit_password').click(function(){	
-	$('#form_result_pass').html('');
-
-	$.ajax({
-		url: "/admin/password/change",
-		method: "GET",
-		datatype: "json",
-		success: function(data){
-	    	$('#ubahPassModal').modal('show');
-	    	// console.log(data);
-		}
-	});
-});
-
 $('#ubah_pass_form').on('submit', function(event){
 	event.preventDefault();
 	var updateId = $('#hidden_id').val();
@@ -73,20 +59,20 @@ $('#ubah_pass_form').on('submit', function(event){
 		success: function(data){
 			var html = '';
 			if (data.errors) {
-				html = '<div class="alert alert-danger">';
+				html = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 				for (var count = 0; count < data.errors.length; count++) {
 					html += '<p>' + data.errors[count] + '</p>';
 				}
 				html += '</div>';
 			}
+			if (data.error) {
+				html = '<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + data.error + '</div>';
+			}
 			if (data.success) {
-				html = '<div class="alert alert-success">' + data.success + '</div>';
+				html = '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + data.success + '</div>';
 				location.reload();
 			}
 			$('#form_result_pass').html(html);
-		},
-		error : function(data){
-			html = '<div class="alert alert-danger">' + data.errors + '</div>';
 		}
 	});
 });

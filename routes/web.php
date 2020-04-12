@@ -31,7 +31,6 @@ Route::group(['midlleware' => 'web'], function() {
 			Route::get('profile', 'ProfileController@index')->name('profile');
 			Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
 			Route::put('profile/edit', 'ProfileController@update')->name('profile.update');
-			Route::get('password/change', 'ProfileController@changePassword')->name('password.change');
 			Route::post('password/change', 'ProfileController@postChangePassword')->name('password.update');
 
 			//data

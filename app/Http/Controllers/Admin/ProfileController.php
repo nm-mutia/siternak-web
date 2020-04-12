@@ -47,11 +47,6 @@ class ProfileController extends Controller
         return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
 
-    public function changePassword()
-    {
-        return response()->json(['email' => Auth::user()->email]);
-    }
-
     public function postChangePassword(Request $request)
     {
     	$rules = array(
@@ -70,7 +65,7 @@ class ProfileController extends Controller
             if(\Hash::check($request->current_password, Auth::User()->password)){
     			$user = User::find(Auth::user()->id)->update(["password"=> bcrypt($request->password)]);    	
   			}else{
-  				return response()->json(['errors' => 'Detail yang dimasukkan salah!']);
+  				return response()->json(['error' => 'Detail yang dimasukkan salah!']);
   			}
   		}
         return response()->json(['success' => 'Password berhasil diubah!']);
