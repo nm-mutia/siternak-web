@@ -61,6 +61,7 @@ Route::group(['midlleware' => 'web'], function() {
 			//grafik
 			Route::get('grafik', 'GrafikController@index')->name('grafik');
 			Route::get('grafik/lahir', 'GrafikController@grafikLahir')->name('grafik.lahir');
+			Route::get('grafik/mati', 'GrafikController@grafikMati')->name('grafik.mati');
 
 			//laporan
 			Route::get('laporan', 'LaporanController@index')->name('laporan');

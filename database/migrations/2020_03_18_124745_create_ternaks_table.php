@@ -38,6 +38,7 @@ class CreateTernaksTable extends Migration
             $table->string('ciri_lain')->nullable();
             $table->boolean('status_ada')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -53,6 +54,7 @@ class CreateTernaksTable extends Migration
             $table->dropForeign('ternaks_pemilik_id_foreign');
             $table->dropForeign('ternaks_ras_id_foreign');
             $table->dropForeign('ternaks_kematian_id_foreign');
+            $table->dropSoftDeletes();
         });
         Schema::dropIfExists('ternaks');
     }
