@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Penyakit;
 use App\Ternak;
+use Carbon\Carbon;
 use App\DataTables\RiwayatDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -57,25 +58,25 @@ class RiwayatPenyakitController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
-        // $s_penyakit = Penyakit::find($request->penyakit_id);
+        $s_penyakit = Penyakit::find($request->penyakit_id);
 
-        // $s_penyakit->ternak()->attach($request->necktag, [
-        //     'tgl_sakit' => $request->tgl_sakit,
-        //     'obat' => $request->obat,
-        //     'lama_sakit' => $request->lama_sakit,
-        //     'keterangan' => $request->keterangan 
-        // ]);
-
-        $form_data = array(
-            'penyakit_id' => $request->penyakit_id,
-            'necktag' => $request->necktag,
+        $s_penyakit->ternak()->attach($request->necktag, [
             'tgl_sakit' => $request->tgl_sakit,
             'obat' => $request->obat,
             'lama_sakit' => $request->lama_sakit,
-            'keterangan' => $request->keterangan
-        );
+            'keterangan' => $request->keterangan 
+        ]);
 
-        $riwayat = DB::table('riwayat_penyakits')->insert($form_data);
+        // $form_data = array(
+        //     'penyakit_id' => $request->penyakit_id,
+        //     'necktag' => $request->necktag,
+        //     'tgl_sakit' => $request->tgl_sakit,
+        //     'obat' => $request->obat,
+        //     'lama_sakit' => $request->lama_sakit,
+        //     'keterangan' => $request->keterangan,
+        // );
+
+        // $riwayat = DB::table('riwayat_penyakits')->insert($form_data);
 
         return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
@@ -131,13 +132,11 @@ class RiwayatPenyakitController extends Controller
             'tgl_sakit' => $request->tgl_sakit,
             'obat' => $request->obat,
             'lama_sakit' => $request->lama_sakit,
-            'keterangan' => $request->keterangan
+            'keterangan' => $request->keterangan,
+            'updated_at' => Carbon::now()
         );
 
         DB::table('riwayat_penyakits')->whereId($id)->update($form_data);
-
-        // $u_ternak = Ternak::findOrFail($request->necktag);
-        // $u_ternak->penyakit()->updateExistingPivot($request->penyakit_id, $form_data);
 
         return response()->json(['success' => 'Data telah berhasil diubah.']);
     }

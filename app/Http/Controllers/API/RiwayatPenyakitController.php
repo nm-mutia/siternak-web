@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Penyakit;
-use App\Ternak;
+use Carbon\Carbon;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -51,7 +50,9 @@ class RiwayatPenyakitController extends Controller
             'tgl_sakit' => $request->tgl_sakit,
             'obat' => $request->obat,
             'lama_sakit' => $request->lama_sakit,
-            'keterangan' => $request->keterangan
+            'keterangan' => $request->keterangan,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         );
 
         $riwayat = DB::table('riwayat_penyakits')->insert($form_data);
@@ -104,7 +105,8 @@ class RiwayatPenyakitController extends Controller
             'tgl_sakit' => $request->tgl_sakit,
             'obat' => $request->obat,
             'lama_sakit' => $request->lama_sakit,
-            'keterangan' => $request->keterangan
+            'keterangan' => $request->keterangan,
+            'updated_at' => Carbon::now()
         );
 
         DB::table('riwayat_penyakits')->whereId($id)->update($form_data);
