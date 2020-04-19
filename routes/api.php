@@ -20,6 +20,14 @@ Route::prefix('v1')->namespace('API')->group(function(){
 	Route::middleware('auth:api')->group(function(){
 		Route::post('details', 'UserController@get_user_details_info');
 		Route::get('logout', 'UserController@logout');
+
+
+		Route::apiResource('ras', 'RasController');
+
+		// admin
+		Route::prefix('admin')->middleware('can:isAdmin')->group(function(){
+		});
+
 	});
 
 });
