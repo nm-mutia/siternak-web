@@ -21,7 +21,7 @@ class BarcodeController extends Controller
 
     public function generatePdf()
     {
-        $ternak = Ternak::latest()->get();
+        $ternak = Ternak::get();
         $no = 1;
         $html = '<h2 align="center">SITERNAK - Barcode Necktag</h2>';
         $html .= '<table>';
@@ -33,7 +33,7 @@ class BarcodeController extends Controller
             $html .= '<img style="padding: 10px;" src="data:image/png;base64,'.DNS1D::getBarcodePNG($data->necktag, "C128", 2, 40).'" alt="barcode"/>';
             $html .= '<br>'.$data->necktag.'</td>';
 
-            if($no++ %3 == 0){
+            if($no++ %4 == 0){
                 $html .= '</tr>';
                 $html .= '<tr style="margin-bottom: 10px;">';
             }
@@ -42,10 +42,9 @@ class BarcodeController extends Controller
         $html .= '</tr>';
         $html .= '</table>';
 
-        // $pdf = PDF::loadHTML($html);
         $pdf = domPDF::loadHTML($html);
-        $pdf->setPaper('A4', 'portrait');
-        // $pdf->setPaper('a4')->setOrientation('portrait')->setOption('margin-bottom', 0);
+        $pdf->setPaper('A4', 'landscape');
+        // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
 
         return $pdf->download('SITERNAK-Barcode.pdf');
 	}

@@ -186,6 +186,8 @@ return [
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 
         Milon\Barcode\BarcodeServiceProvider::class,
+
+        Laravel\Passport\PassportServiceProvider::class,
     ],
 
     /*

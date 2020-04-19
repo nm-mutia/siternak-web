@@ -15,6 +15,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/helpers": "^1.2",
+        "laravel/passport": "^8.4",
         "laravel/tinker": "^2.0",
         "milon/barcode": "^6.0",
         "wemersonjanuario/wkhtmltopdf-windows": "0.12.2.3",

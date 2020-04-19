@@ -38,48 +38,165 @@ class GrafikController extends Controller
 
     public function grafikRas()
     {
-    	$label = array();
-    	$data = array();
+        $count = Ternak::where('status_ada', '=', true)
+                        ->rightJoin('ras', 'ras.id', '=', 'ternaks.ras_id')
+                        ->groupBy('ras.jenis_ras')
+                        ->orderBy('ras.jenis_ras')
+                        ->selectRaw('ras.jenis_ras as ras, coalesce(count(ternaks.necktag), 0) as jumlah')
+                        ->get();
 
-        $count = DB::table('grafik_ras')->get();
+        $count_jantan = Ternak::where('status_ada', '=', true)
+                        ->where('jenis_kelamin', '=', 'Jantan')
+                        ->rightJoin('ras', 'ras.id', '=', 'ternaks.ras_id')
+                        ->groupBy('ras.jenis_ras')
+                        ->orderBy('ras.jenis_ras')
+                        ->selectRaw('ras.jenis_ras as ras, coalesce(count(ternaks.necktag), 0) as jumlah')
+                        ->get();
+
+        $count_betina = Ternak::where('status_ada', '=', true)
+                        ->where('jenis_kelamin', '=', 'Betina')
+                        ->rightJoin('ras', 'ras.id', '=', 'ternaks.ras_id')
+                        ->groupBy('ras.jenis_ras')
+                        ->orderBy('ras.jenis_ras')
+                        ->selectRaw('ras.jenis_ras as ras, coalesce(count(ternaks.necktag), 0) as jumlah')
+                        ->get();
 
         foreach($count as $ras){
         	$label[] = $ras->ras;
         	$data[] = $ras->jumlah;
         }
 
+        foreach($count_jantan as $ras){
+            $jantan[] = $ras->jumlah;
+        }
+
+        foreach($count_betina as $ras){
+            $betina[] = $ras->jumlah;
+        }
+
         $chart = new RasChart;
         $chart->title('Grafik Ternak - Ras');
         $chart->displayLegend(true);
         $chart->labels($label);
+
+        $chart->dataset('Jantan','bar', $jantan)->options([
+            'responsive' => true,
+            'fill' => 'true',
+            'backgroundColor' => '#36A7C9',
+            'borderColor' => '#1A89B4',
+             'tooltip' => [
+                'show' => 'true'
+            ],
+        ]);
+
+        $chart->dataset('Betina','bar', $betina)->options([
+            'responsive' => true,
+            'fill' => 'true',
+            'backgroundColor' => '#F8B195',
+            'borderColor' => '#f67280',
+             'tooltip' => [
+                'show' => 'true'
+            ],
+        ]);
+
 	    $chart->dataset('Jumlah Ternak', 'bar', $data)->options([
             'responsive' => true,
-			'fill' => true,
+            'fill' => true,
             'backgroundColor' => '#B2DFDB',
-			'borderColor' => '#009688',
+            'borderColor' => '#009688',
             'tooltip' => [
                 'show' => true
             ],
-		]);
+        ]);
 
 		return $chart;
     }
 
     public function grafikUmur()
     {
-    	$label = array();
-    	$data = array();
+        $count = Ternak::where('status_ada', '=', true)
+                        ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) - 
+    extract(year from ternaks.tgl_lahir)), 0) as tahun')
+                        ->groupBy('tahun')
+                        ->orderBy('tahun')
+                        ->get();
 
-        $count = DB::table('grafik_umur')->get();
+        $count_jantan = Ternak::where('status_ada', '=', true)
+                        ->where('jenis_kelamin', '=', 'Jantan')
+                        ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) - 
+    extract(year from ternaks.tgl_lahir)), 0) as tahun')
+                        ->groupBy('tahun')
+                        ->orderBy('tahun')
+                        ->get();
+
+        $count_betina = Ternak::where('status_ada', '=', true)
+                        ->where('jenis_kelamin', '=', 'Betina')
+                        ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) - 
+    extract(year from ternaks.tgl_lahir)), 0) as tahun')
+                        ->groupBy('tahun')
+                        ->orderBy('tahun')
+                        ->get();
 
         foreach($count as $umur){
         	$label[] = $umur->tahun;
         	$data[] = $umur->jumlah;
         }
+        
+        foreach($count_jantan as $umur){
+            $umurj[] = $umur->tahun;
+            $jt[] = $umur->jumlah;
+        }
+
+        foreach($count_betina as $umur){
+            $umurb[] = $umur->tahun;
+            $bt[] = $umur->jumlah;
+        }
+
+        $j = 0;
+        $b = 0;
+
+        for($i = 0; $i < count($label); $i++){
+            if($label[$i] == $umurj[$j]){
+                $jantan[$i] = $jt[$j];
+                $j++;
+            }
+            else{
+                $jantan[$i] = 0;
+            }
+
+            if($label[$i] == $umurb[$b]){
+                $betina[$i] = $bt[$b];
+                $b++;
+            }
+            else{
+                $betina[$i] = 0;
+            }
+        }
 
         $chart = new UmurChart;
         $chart->title('Grafik Ternak - Umur');
         $chart->labels($label);
+
+        $chart->dataset('Jantan','bar', $jantan)->options([
+            'responsive' => true,
+            'fill' => 'true',
+            'backgroundColor' => '#36A7C9',
+            'borderColor' => '#1A89B4',
+             'tooltip' => [
+                'show' => 'true'
+            ],
+        ]);
+
+        $chart->dataset('Betina','bar', $betina)->options([
+            'responsive' => true,
+            'fill' => 'true',
+            'backgroundColor' => '#F8B195',
+            'borderColor' => '#f67280',
+             'tooltip' => [
+                'show' => 'true'
+            ],
+        ]);
+
 	    $chart->dataset('Jumlah Ternak', 'bar', $data)->options([
             'responsive' => true,
 			'fill' => true,
@@ -98,10 +215,6 @@ class GrafikController extends Controller
 
     public function grafikLahir(Request $request)
     {
-    	$label = array();
-    	$data = array();
-        $jantan = array();
-        $betina = array();
         $yearNow = date('Y');
 
         if ($request->ajax()) {
@@ -189,10 +302,6 @@ class GrafikController extends Controller
 
     public function grafikMati(Request $request)
     {
-    	$label = array();
-    	$data = array();
-        $jantan = array();
-        $betina = array();
         $yearNow = date('Y');
 
         if ($request->ajax()) {

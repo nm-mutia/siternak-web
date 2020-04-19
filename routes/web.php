@@ -20,7 +20,7 @@ Route::group(['midlleware' => 'web'], function() {
 	Route::get('/', 'Auth\LoginController@showLoginForm');
 	Route::get('/home', 'HomeController@index')->middleware('auth', 'verified')->name('home');
 
-	//admin
+	//--------------------- admin --------------------------------------
 	Route::prefix('admin')->middleware('can:isAdmin', 'auth', 'verified')->group(function(){
 		//dashboard
 		Route::get('/', 'Admin\HomeController@index')->name('admin');

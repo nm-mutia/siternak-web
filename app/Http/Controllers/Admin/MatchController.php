@@ -36,7 +36,7 @@ class MatchController extends Controller
 			if($betina == $j_parent_sp[1]){
 				return response()->json([
 					'result' => 'gagal', 
-					'message' => 'Tidak boleh dikawinkan karena hubungan anak dan orangtua'
+					'message' => 'Tidak boleh dikawinkan karena hubungan ibu dan anak'
 				]);
 			}
 		}
@@ -60,7 +60,7 @@ class MatchController extends Controller
 			if($betina == $j_child_sp[1]){
 				return response()->json([
 					'result' => 'gagal', 
-					'message' => 'Tidak boleh dikawinkan karena hubungan orangtua dan anak'
+					'message' => 'Tidak boleh dikawinkan karena hubungan ayah dan anak'
 				]);
 			}
 		}
