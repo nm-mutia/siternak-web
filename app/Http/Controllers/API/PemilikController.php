@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Pemilik;
+use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,12 @@ class PemilikController extends Controller
      */
     public function index()
     {
-        //
+        $pemilik = Pemilik::all();
+
+        return response()->json([
+            'status' => 'success',
+            'pemilik'  => $pemilik,
+        ], 200);
     }
 
     /**
@@ -25,7 +32,28 @@ class PemilikController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'nama_pemilik' => 'required',
+            'ktp' => 'required|digits:16|unique:pemiliks'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['error' => $error->errors()]);
+        }
+
+        $form_data = array(
+            'nama_pemilik' => $request->nama_pemilik,
+            'ktp' => $request->ktp
+        );
+
+        $pemilik = Pemilik::create($form_data);
+
+        return response()->json([
+            'status' => 'success',
+            'pemilik'  => $pemilik,
+        ], 200);
     }
 
     /**
@@ -36,7 +64,12 @@ class PemilikController extends Controller
      */
     public function show($id)
     {
-        //
+        $pemilik = Pemilik::find($id);
+        
+        return response()->json([
+            'status' => 'success',
+            'pemilik'  => $pemilik,
+        ], 200);
     }
 
     /**
@@ -48,7 +81,29 @@ class PemilikController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'nama_pemilik' => 'required',
+            'ktp' => 'required|digits:16'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['error' => $error->errors()]);
+        }
+
+        $form_data = array(
+            'nama_pemilik' => $request->nama_pemilik,
+            'ktp' => $request->ktp
+        );
+
+        Pemilik::whereId($id)->update($form_data);
+        $pemilik = Pemilik::find($id);
+        
+        return response()->json([
+            'status' => 'success',
+            'pemilik' => $pemilik,
+        ], 200);
     }
 
     /**
@@ -59,6 +114,12 @@ class PemilikController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Pemilik::find($id);
+        $data->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Data pemilik id ". $id ." telah berhasil dihapus.",
+        ], 200);
     }
 }

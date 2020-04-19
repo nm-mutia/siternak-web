@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Penyakit;
+use App\Ternak;
+use Validator;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +18,12 @@ class RiwayatPenyakitController extends Controller
      */
     public function index()
     {
-        //
+        $riwayat = DB::table('riwayat_penyakits')->get();
+
+        return response()->json([
+            'status' => 'success',
+            'riwayat' => $riwayat,
+        ], 200);
     }
 
     /**
@@ -25,7 +34,32 @@ class RiwayatPenyakitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'penyakit_id' => 'required',
+            'necktag' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['error' => $error->errors()]);
+        }
+
+        $form_data = array(
+            'penyakit_id' => $request->penyakit_id,
+            'necktag' => $request->necktag,
+            'tgl_sakit' => $request->tgl_sakit,
+            'obat' => $request->obat,
+            'lama_sakit' => $request->lama_sakit,
+            'keterangan' => $request->keterangan
+        );
+
+        $riwayat = DB::table('riwayat_penyakits')->insert($form_data);
+
+        return response()->json([
+            'status' => 'success',
+            'riwayat' => $riwayat,
+        ], 200);
     }
 
     /**
@@ -36,7 +70,12 @@ class RiwayatPenyakitController extends Controller
      */
     public function show($id)
     {
-        //
+        $riwayat = DB::table('riwayat_penyakits')->find($id);
+        
+        return response()->json([
+            'status' => 'success',
+            'riwayat' => $riwayat,
+        ], 200);
     }
 
     /**
@@ -48,7 +87,33 @@ class RiwayatPenyakitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'penyakit_id' => 'required',
+            'necktag' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['error' => $error->errors()]);
+        }
+
+        $form_data = array(
+            'penyakit_id' => $request->penyakit_id,
+            'necktag' => $request->necktag,
+            'tgl_sakit' => $request->tgl_sakit,
+            'obat' => $request->obat,
+            'lama_sakit' => $request->lama_sakit,
+            'keterangan' => $request->keterangan
+        );
+
+        DB::table('riwayat_penyakits')->whereId($id)->update($form_data);
+        $riwayat = DB::table('riwayat_penyakits')->find($id);
+        
+        return response()->json([
+            'status' => 'success',
+            'riwayat' => $riwayat,
+        ], 200);
     }
 
     /**
@@ -59,6 +124,11 @@ class RiwayatPenyakitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = DB::table('riwayat_penyakits')->where('id', $id)->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Data riwayat penyakit id ". $id ." telah berhasil dihapus.",
+        ], 200);
     }
 }

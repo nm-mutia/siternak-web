@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Ras;
+use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Validator;
 
 class RasController extends Controller
 {

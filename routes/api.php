@@ -23,6 +23,12 @@ Route::prefix('v1')->namespace('API')->group(function(){
 
 
 		Route::apiResource('ras', 'RasController');
+		Route::apiResource('pemilik', 'PemilikController');
+		Route::apiResource('penyakit', 'PenyakitController');
+		Route::apiResource('kematian', 'KematianController');
+		Route::apiResource('ternak', 'TernakController');
+		Route::apiResource('perkawinan', 'PerkawinanController');
+		Route::apiResource('riwayat', 'RiwayatPenyakitController');
 
 		// admin
 		Route::prefix('admin')->middleware('can:isAdmin')->group(function(){

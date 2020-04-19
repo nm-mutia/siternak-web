@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Penyakit;
+use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,12 @@ class PenyakitController extends Controller
      */
     public function index()
     {
-        //
+        $penyakit = Penyakit::all();
+
+        return response()->json([
+            'status' => 'success',
+            'penyakit' => $penyakit,
+        ], 200);
     }
 
     /**
@@ -25,7 +32,28 @@ class PenyakitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'nama_penyakit' => 'required',
+            'ket_penyakit' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['error' => $error->errors()]);
+        }
+
+        $form_data = array(
+            'nama_penyakit' => $request->nama_penyakit,
+            'ket_penyakit' => $request->ket_penyakit
+        );
+
+        $penyakit = Penyakit::create($form_data);
+
+        return response()->json([
+            'status' => 'success',
+            'penyakit' => $penyakit,
+        ], 200);
     }
 
     /**
@@ -36,7 +64,12 @@ class PenyakitController extends Controller
      */
     public function show($id)
     {
-        //
+        $penyakit = Penyakit::find($id);
+        
+        return response()->json([
+            'status' => 'success',
+            'penyakit' => $penyakit,
+        ], 200);
     }
 
     /**
@@ -48,7 +81,29 @@ class PenyakitController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'nama_penyakit' => 'required',
+            'ket_penyakit' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['error' => $error->errors()]);
+        }
+
+        $form_data = array(
+            'nama_penyakit' => $request->nama_penyakit,
+            'ket_penyakit' => $request->ket_penyakit
+        );
+
+        Penyakit::whereId($id)->update($form_data);
+        $penyakit = Penyakit::find($id);
+        
+        return response()->json([
+            'status' => 'success',
+            'penyakit' => $penyakit,
+        ], 200);
     }
 
     /**
@@ -59,6 +114,12 @@ class PenyakitController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Penyakit::find($id);
+        $data->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Data penyakit id ". $id ." telah berhasil dihapus.",
+        ], 200);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Ternak;
 use App\Perkawinan;
 use App\DataTables\PerkawinanDataTable;
 use App\Http\Controllers\Controller;
@@ -54,6 +55,13 @@ class PerkawinanController extends Controller
 
         if($error->fails()){
             return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $cek1 = Ternak::find($request->necktag);
+        $cek2 = Ternak::find($request->necktag_psg);
+
+        if($cek1->jenis_kelamin == $cek2->jenis_kelamin){
+            return response()->json(['error' => 'Tidak dapat kawin jika jenis kelamin sama']);
         }
 
         $form_data = array(
@@ -111,6 +119,13 @@ class PerkawinanController extends Controller
 
         if($error->fails()){
             return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $cek1 = Ternak::find($request->necktag);
+        $cek2 = Ternak::find($request->necktag_psg);
+
+        if($cek1->jenis_kelamin == $cek2->jenis_kelamin){
+            return response()->json(['error' => 'Tidak dapat kawin jika jenis kelamin sama']);
         }
 
         $form_data = array(

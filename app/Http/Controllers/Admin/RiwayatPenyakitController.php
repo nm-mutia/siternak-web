@@ -25,28 +25,6 @@ class RiwayatPenyakitController extends Controller
         $ternak = Ternak::all();
         $penyakit = Penyakit::all();
         
-        // if ($request->ajax()) {
-        //     // $data = DB::table('riwayat_penyakits')->latest()->get();
-        //     $data = DB::table('riwayat_penyakits')->join('public.penyakits', 'penyakits.id', '=', 'riwayat_penyakits.penyakit_id')
-        //                     ->select('riwayat_penyakits.id', 'penyakits.nama_penyakit as penyakit_id', 'riwayat_penyakits.necktag', 'riwayat_penyakits.tgl_sakit', 'riwayat_penyakits.obat', 'riwayat_penyakits.lama_sakit', 'riwayat_penyakits.keterangan', 'riwayat_penyakits.created_at', 'riwayat_penyakits.updated_at')
-        //                     ->get();
-
-        //     return Datatables::of($data)
-        //             ->addIndexColumn()
-        //             ->addColumn('action', function($row){
-        //                 $btn = '<button type="button" name="edit" id="'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-        //                 $btn .= '<button type="button" name="delete" id="'.$row->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
-        //                 return $btn;
-        //             })
-        //             ->rawColumns(['action'])
-        //             ->make(true);
-        // }
-        
-        // return view('data.riwayat')->with('title', $title)
-        //                           ->with('ternak', $ternak)
-        //                           ->with('penyakit', $penyakit)
-        //                           ->with('page', $page);
-
         return $dataTable->render('data.riwayat', ['title' => $title, 'page' => $page, 'ternak' => $ternak, 'penyakit' => $penyakit]);
     }
 
@@ -79,14 +57,25 @@ class RiwayatPenyakitController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
-        $s_penyakit = Penyakit::find($request->penyakit_id);
+        // $s_penyakit = Penyakit::find($request->penyakit_id);
 
-        $s_penyakit->ternak()->attach($request->necktag, [
+        // $s_penyakit->ternak()->attach($request->necktag, [
+        //     'tgl_sakit' => $request->tgl_sakit,
+        //     'obat' => $request->obat,
+        //     'lama_sakit' => $request->lama_sakit,
+        //     'keterangan' => $request->keterangan 
+        // ]);
+
+        $form_data = array(
+            'penyakit_id' => $request->penyakit_id,
+            'necktag' => $request->necktag,
             'tgl_sakit' => $request->tgl_sakit,
             'obat' => $request->obat,
             'lama_sakit' => $request->lama_sakit,
-            'keterangan' => $request->keterangan 
-        ]);
+            'keterangan' => $request->keterangan
+        );
+
+        $riwayat = DB::table('riwayat_penyakits')->insert($form_data);
 
         return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
@@ -137,14 +126,18 @@ class RiwayatPenyakitController extends Controller
         }
 
         $form_data = array(
+            'penyakit_id' => $request->penyakit_id,
+            'necktag' => $request->necktag,
             'tgl_sakit' => $request->tgl_sakit,
             'obat' => $request->obat,
             'lama_sakit' => $request->lama_sakit,
             'keterangan' => $request->keterangan
         );
 
-        $u_ternak = Ternak::findOrFail($request->necktag);
-        $u_ternak->penyakit()->updateExistingPivot($request->penyakit_id, $form_data);
+        DB::table('riwayat_penyakits')->whereId($id)->update($form_data);
+
+        // $u_ternak = Ternak::findOrFail($request->necktag);
+        // $u_ternak->penyakit()->updateExistingPivot($request->penyakit_id, $form_data);
 
         return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
