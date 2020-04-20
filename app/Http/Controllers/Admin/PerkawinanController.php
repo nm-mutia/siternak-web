@@ -22,7 +22,7 @@ class PerkawinanController extends Controller
     {
         $title = 'PERKAWINAN';
         $page = 'Perkawinan';
-        $ternak = DB::table('ternaks')->join('ras', 'ras.id', '=', 'ternaks.ras_id')->get();
+        $ternak = Ternak::join('ras', 'ras.id', '=', 'ternaks.ras_id')->get();
 
         return $dataTable->render('data.perkawinan', ['title' => $title, 'page' => $page, 'ternak' => $ternak]);
     }
@@ -55,13 +55,6 @@ class PerkawinanController extends Controller
 
         if($error->fails()){
             return response()->json(['errors' => $error->errors()->all()]);
-        }
-
-        $cek1 = Ternak::find($request->necktag);
-        $cek2 = Ternak::find($request->necktag_psg);
-
-        if($cek1->jenis_kelamin == $cek2->jenis_kelamin){
-            return response()->json(['error' => 'Tidak dapat kawin jika jenis kelamin sama']);
         }
 
         $form_data = array(
@@ -121,13 +114,6 @@ class PerkawinanController extends Controller
             return response()->json(['errors' => $error->errors()->all()]);
         }
 
-        $cek1 = Ternak::find($request->necktag);
-        $cek2 = Ternak::find($request->necktag_psg);
-
-        if($cek1->jenis_kelamin == $cek2->jenis_kelamin){
-            return response()->json(['error' => 'Tidak dapat kawin jika jenis kelamin sama']);
-        }
-
         $form_data = array(
             'necktag' => $request->necktag,
             'necktag_psg' => $request->necktag_psg,
@@ -149,5 +135,18 @@ class PerkawinanController extends Controller
     {
         $data = Perkawinan::findOrFail($id);
         $data->delete();
+    }
+
+    // necktag pasangan
+    public function getPasangan($id)
+    {
+        $tes = Ternak::find($id);
+
+        $ternak = Ternak::join('ras', 'ras.id', '=', 'ternaks.ras_id')
+                        ->where('necktag', '<>', $id)
+                        ->where('jenis_kelamin', '<>', $tes->jenis_kelamin)
+                        ->get();
+
+        return response()->json(['ternak' => $ternak]);
     }
 }

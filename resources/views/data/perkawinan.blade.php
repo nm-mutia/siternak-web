@@ -40,10 +40,7 @@
 						<label class="control-label">Necktag Pasangan</label>
 						<div>
 							<select class="form-control js-select-search" name="necktag_psg" id="necktag_psg">
-								<option></option>
-							  	@foreach ($ternak as $tid)
-								    <option value="{{ $tid->necktag }}">{{ $tid->necktag }} - Ras {{ $tid->jenis_ras }} - {{ $tid->jenis_kelamin }}</option>
-								@endforeach    
+								
 							</select>
 						</div>
 					</div>

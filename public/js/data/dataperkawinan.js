@@ -4,6 +4,26 @@ $.ajaxSetup({
 		}
 });
 
+$('select[name="necktag"]').on('change', function() {
+    var necktagID = $(this).val();
+    if(necktagID) {
+        $.ajax({
+            url: '/admin/perkawinan/pasangan/'+necktagID,
+            type: "GET",
+            dataType: "json",
+            success:function(data) {
+                $('select[name="necktag_psg"]').empty();
+
+                $.each(data.ternak, function(key, value) {
+                    $('select[name="necktag_psg"]').append('<option value="'+ value.necktag +'">'+ value.necktag +' - '+ value.jenis_ras +' - '+ value.jenis_kelamin +'</option>');
+                });
+            }
+        });
+    }else{
+        $('select[name="necktag_psg"]').empty();
+    }
+});
+
 $('#tambah_data').click(function(){
 	$('.modal-title').text('Tambah Data - Perkawinan');
 	$('#action_button').val('Tambah');
@@ -52,6 +72,8 @@ $('#tambah_data_form').on('submit', function(event){
 				html += '</div>';
 			}
 			if (data.error) {
+				console.log("halo");
+				console.log(data.error);
 				html = '<div class="alert alert-danger">' + data.error + '</div>';
 			}
 			if (data.success) {
@@ -59,6 +81,7 @@ $('#tambah_data_form').on('submit', function(event){
 				$('#tambah_data_form')[0].reset();
 				$('#perkawinan-table').DataTable().ajax.reload();
 			}
+				console.log("haloff");
 			$('#form_result').html(html);
 		},
         error: function (jqXHR, textStatus, errorThrown) { 
