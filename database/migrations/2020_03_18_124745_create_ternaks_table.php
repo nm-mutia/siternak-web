@@ -54,6 +54,7 @@ class CreateTernaksTable extends Migration
             $table->dropForeign('ternaks_pemilik_id_foreign');
             $table->dropForeign('ternaks_ras_id_foreign');
             $table->dropForeign('ternaks_kematian_id_foreign');
+            $table->dropForeign('ternaks_peternakan_id_foreign');
         });
         Schema::dropIfExists('ternaks');
     }

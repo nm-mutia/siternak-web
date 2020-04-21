@@ -23,6 +23,7 @@ class TernakController extends Controller
         $title = 'TERNAK';
         $page = 'Ternak';
         $pemilik = DB::table('pemiliks')->orderBy('nama_pemilik', 'asc')->get();
+        $peternakan = DB::table('peternakans')->orderBy('nama_peternakan', 'asc')->get();
         $ras = DB::table('ras')->orderBy('jenis_ras', 'asc')->get();
         $kematian = DB::table('kematians')->orderBy('id', 'asc')->get();
         $datas = Ternak::join('ras', 'ras.id', '=', 'ternaks.ras_id')->get();
@@ -33,7 +34,8 @@ class TernakController extends Controller
             'data' => $datas, 
             'kematian' => $kematian, 
             'ras' => $ras, 
-            'pemilik' => $pemilik
+            'pemilik' => $pemilik,
+            'peternakan' => $peternakan
         ]);
     }
 

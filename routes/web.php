@@ -48,8 +48,12 @@ Route::group(['midlleware' => 'web'], function() {
 			Route::resource('riwayat', 'RiwayatPenyakitController')->except(['create', 'show']);
 			Route::resource('kematian', 'KematianController')->except(['create', 'show']);
 			Route::resource('pemilik', 'PemilikController')->except(['create']);
+			Route::resource('peternakan', 'PeternakanController')->except(['create']);
 			Route::resource('perkawinan', 'PerkawinanController')->except(['create', 'show']);
 			Route::get('perkawinan/pasangan/{id}', 'PerkawinanController@getPasangan');
+
+			// data peternak
+			Route::resource('peternak', 'PeternakController')->except(['create']);
 
 			//barcode
 			Route::get('barcode', 'BarcodeController@index')->name('barcode');

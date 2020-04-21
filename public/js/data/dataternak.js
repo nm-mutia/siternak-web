@@ -1,7 +1,7 @@
 $.ajaxSetup({
-		headers: {
+	headers: {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
+	}
 });
 
 function tongsampahDT() {
@@ -14,6 +14,7 @@ function tongsampahDT() {
 		        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
 		        {data: 'necktag', name: 'necktag'},
 		        {data: 'pemilik_id', name: 'pemilik_id'},
+                {data: 'peternakan_id', name: 'peternakan_id'},
 		        {data: 'ras_id', name: 'ras_id'},
 		        {data: 'jenis_kelamin', name: 'jenis_kelamin'},
 		        {data: 'blood', name: 'blood'},
@@ -45,6 +46,7 @@ $('#tambah_data').click(function(){
     $('#tambah_data_form')[0].reset();
     $('#necktag').val('').change();
     $('#pemilik_id').val('').change();
+    $('#peternakan_id').val('').change();
     $('#ras_id').val('').change();
     $('#kematian_id').val('').change();
     $('#necktag_ayah').val('').change();
@@ -121,6 +123,7 @@ $(document).on('click', '.view', function(){
 		datatype: "json",
 		success: function(data){
 			$('#vpemilik_id').val(data.result.pemilik_id);
+            $('#vpeternakan_id').val(data.result.peternakan_id);
 			$('#vras_id').val(data.result.ras_id);
 			$('#vkematian_id').val(data.result.kematian_id);
 			$('#vjenis_kelamin').val(data.result.jenis_kelamin);
@@ -187,6 +190,7 @@ $(document).on('click', '.edit', function(){
 		success: function(data){
 			$('#necktag').val(data.result.necktag);
 			$('#pemilik_id').val(data.result.pemilik_id).change();
+            $('#peternakan_id').val(data.result.peternakan_id).change();
             $('#ras_id').val(data.result.ras_id).change();
 			$('#kematian_id').val(data.result.kematian_id).change();
 			$('#jenis_kelamin').val(data.result.jenis_kelamin);

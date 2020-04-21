@@ -132,12 +132,21 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    @can('isAdmin')
+                    <li>
+                        <a href="{{ route('admin.peternak.index') }}">
+                            <i class="material-icons">people</i>
+                            <span>Peternak</span>
+                        </a>
+                    </li>
+                    @endcan
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">widgets</i>
                             <span>Data</span>
                         </a>
                         <ul class="ml-menu">
+                            <li><a href="{{ route('admin.peternakan.index') }}">Peternakan</a></li>
                             <li><a href="{{ route('admin.kematian.index') }}">Kematian</a></li>
                             <li><a href="{{ route('admin.pemilik.index') }}">Pemilik</a></li>
                             <li><a href="{{ route('admin.penyakit.index') }}">Penyakit</a></li>

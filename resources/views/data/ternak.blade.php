@@ -39,6 +39,7 @@
                         <th>No.</th>
                         <th>Necktag</th>
                         <th>ID Pemilik</th>
+                        <th>ID Peternakan</th>
                         <th>ID Ras</th>
                         <th>Jenis Kelamin</th>
                         <th>Blood</th>
@@ -85,6 +86,17 @@
 								<option></option>
 							  	@foreach ($pemilik as $pid)
 							    <option value="{{ $pid->id }}">{{ $pid->nama_pemilik }}</option>
+								@endforeach    
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Peternakan</label>
+						<div>
+							<select class="form-control js-select-search" name="peternakan_id" id="peternakan_id">
+								<option></option>
+							  	@foreach ($peternakan as $pid)
+							    <option value="{{ $pid->id }}">{{ $pid->id }} - {{ $pid->nama_peternakan }}</option>
 								@endforeach    
 							</select>
 						</div>
@@ -267,6 +279,12 @@
 					<label class="control-label">Pemilik</label>
 					<div class="form-line col-md-8">
 						<input type="text" name="pemilik_id" id="vpemilik_id" class="form-control" readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Peternakan</label>
+					<div class="form-line col-md-8">
+						<input type="text" name="peternakan_id" id="vpeternakan_id" class="form-control" readonly="true">
 					</div>
 				</div>
 				<div class="form-group">
