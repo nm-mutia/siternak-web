@@ -39,14 +39,14 @@ class HomeController extends Controller
 
     	if($inst != null){
     		$sp = preg_split("/[(),]/", $inst[0]->search_inst); 
-	    	//split karena hasil bukan array, tapi string
-	    	//0: kosong, 1:necktag, 2:jenis_kelamin, 3:ras, 4:tgl_lahir, 5:blood, 6:ayah, 7:ibu, 8:kosong
+            //split karena hasil bukan array, tapi string
+            //0: kosong, 1:necktag, 2:jenis_kelamin, 3:ras, 4:tgl_lahir, 5:blood, 6:peternakan, 7:ayah, 8:ibu, 9:kosong
 
-    		$parent = DB::select('SELECT public."search_parent"(?,?)', [$sp[6], $sp[7]]);
-	        $sibling = DB::select('SELECT public."search_sibling"(?,?,?)', [$sp[1], $sp[6], $sp[7]]);
-	        $child = DB::select('SELECT public."search_child"(?)', [$sp[1]]);
-	        $gparent = DB::select('SELECT public."search_gparent"(?,?)', [$sp[6], $sp[7]]);
-	        $gchild = DB::select('SELECT public."search_gchild"(?)', [$sp[1]]);
+            $parent = DB::select('SELECT public."search_parent"(?,?)', [$sp[7], $sp[8]]);
+            $sibling = DB::select('SELECT public."search_sibling"(?,?,?)', [$sp[1], $sp[7], $sp[8]]);
+            $child = DB::select('SELECT public."search_child"(?)', [$sp[1]]);
+            $gparent = DB::select('SELECT public."search_gparent"(?,?)', [$sp[7], $sp[8]]);
+            $gchild = DB::select('SELECT public."search_gchild"(?)', [$sp[1]]);
 	        
 	        $data = [
 	        	'inst' => $inst,

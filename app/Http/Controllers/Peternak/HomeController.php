@@ -7,33 +7,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Ternak;
 use App\Perkawinan;
-use Auth;
 
 class HomeController extends Controller
 {
     public function index()
     {
-    	$user = Auth::user();
-    	$ternak = Ternak::join('peternaks', 'peternaks.peternakan_id', '=', 'ternaks.peternakan_id')
-    					->where('peternaks.username', '=', $user->username)
-    					->count();
+    	$ternak = Ternak::count();
 
-        $lahir = Ternak::join('peternaks', 'peternaks.peternakan_id', '=', 'ternaks.peternakan_id')
-        				->where('peternaks.username', '=', $user->username)
-				        ->where('tgl_lahir', '>', date("Y-m-d", strtotime('-29 days')))
+        $lahir = Ternak::where('tgl_lahir', '>', date("Y-m-d", strtotime('-29 days')))
                         ->whereNotNull('tgl_lahir')
                         ->selectRaw('count(*)')->first();
 
-        $kawin = Perkawinan::join('ternaks', 'ternaks.necktag', '=', 'perkawinans.necktag')
-				        ->join('peternaks', 'peternaks.peternakan_id', '=', 'ternaks.peternakan_id')
-        				->where('peternaks.username', '=', $user->username)
-				        ->where('tgl', '>', date("Y-m-d", strtotime('-29 days')))
+        $kawin = Perkawinan::where('tgl', '>', date("Y-m-d", strtotime('-29 days')))
                         ->whereNotNull('tgl')
                         ->selectRaw('count(*)/2 as count')->first();
 
         $mati = Ternak::join('kematians', 'kematians.id', '=', 'ternaks.kematian_id')
-				        ->join('peternaks', 'peternaks.peternakan_id', '=', 'ternaks.peternakan_id')
-        				->where('peternaks.username', '=', $user->username)
                         ->whereNotNull('ternaks.kematian_id')
                         ->where('kematians.tgl_kematian', '>', date("Y-m-d", strtotime('-29 days')))
                         ->selectRaw('count(*)')->first();
@@ -48,11 +37,6 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $inst = DB::select('SELECT public."search_inst"(?)', [$request->necktag]);
-
-        // $user = Auth::user();
-        // $peternak = Peternak::where('username', '=', $user->username);
-        // $ternak = Ternak::where('necktag', '=', $request->necktag);
-        // && ($ternak->peternakan_id == $peternak->peternakan_id)
 
         if($inst != null ){
             $sp = preg_split("/[(),]/", $inst[0]->search_inst); 
