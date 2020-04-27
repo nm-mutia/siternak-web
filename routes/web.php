@@ -107,7 +107,6 @@
 			Route::resource('riwayat', 'RiwayatPenyakitController')->except(['create', 'show']);
 			Route::resource('kematian', 'KematianController')->except(['create', 'show']);
 			Route::resource('pemilik', 'PemilikController')->except(['create']);
-			Route::resource('peternakan', 'PeternakanController')->except(['create']);
 			Route::resource('perkawinan', 'PerkawinanController')->except(['create', 'show']);
 			Route::get('perkawinan/pasangan/{id}', 'PerkawinanController@getPasangan');
 
