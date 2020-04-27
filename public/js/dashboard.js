@@ -2,6 +2,17 @@ $('#res-refresh').click(function(){
     $('#search_result').hide();
 });
 
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
 $('#search_form').on('submit', function(event){
 	event.preventDefault();
 
@@ -13,12 +24,13 @@ $('#search_form').on('submit', function(event){
     html += '<th>Ras</th>';
     html += '<th>Tanggal Lahir</th>';
     html += '<th>Blood</th>';
+    html += '<th>Peternakan</th>';
     html += '<th>Ayah</th>';
     html += '<th>Ibu</th>';
     html += '</tr>';
 
 	$.ajax({
-		url: "/admin/search",
+		url: url_seg+"/search",
 		method: "GET",
 		data: $(this).serialize(),
 		datatype: "json",
@@ -28,7 +40,7 @@ $('#search_form').on('submit', function(event){
             if(!data.errors){
                 var htmls = '', htmlc = '', htmlgp = '', htmlgc = '';
                 var si, sp = [], ss = [], sc = [], sgp = [], sgc = [];
-                //0:necktag, 1:jenis_kelamin, 2:ras, 3:tgl_lahir, 4:blood, 5:ayah, 6:ibu
+                //0:necktag, 1:jenis_kelamin, 2:ras, 3:tgl_lahir, 4:blood, 5:peternakan, 6:ayah, 7:ibu
 
                 //instance (1)
                 $.each(data.result['inst'], function(i, val) {
@@ -37,7 +49,7 @@ $('#search_form').on('submit', function(event){
                     si = si2[0].split(','); 
                 });
                 $('#necktag-r').text(si[0]);
-                for(var i = 1; i <= 4; i++){ //instances (hanya butuh index 1 - 4)
+                for(var i = 1; i <= 5; i++){ //instances (hanya butuh index 1 - 5)
                     if(si[i] == ""){
                         si[i] = '-';
                     }
@@ -51,7 +63,7 @@ $('#search_form').on('submit', function(event){
                         var sp2 = sp1[1].split(')');
                         sp[i] = sp2[0].split(','); 
 
-                        for(var j = 1; j <= 7; j++){
+                        for(var j = 1; j <= 8; j++){
                             if(sp[i][j-1] == ""){
                                 sp[i][j-1] = '-';
                             } 
@@ -76,7 +88,7 @@ $('#search_form').on('submit', function(event){
 
                         htmls = '<tr>'; 
                         htmls += '<td>'+ (i+1) +'</td>';
-                        for(var j = 1; j <= 7; j++){
+                        for(var j = 1; j <= 8; j++){
                             if(ss[i][j-1] == ""){
                                 ss[i][j-1] = '-';
                             } 
@@ -103,7 +115,7 @@ $('#search_form').on('submit', function(event){
 
                         htmlc = '<tr>'; 
                         htmlc += '<td>'+ (i+1) +'</td>';
-                        for(var j = 1; j <= 7; j++){
+                        for(var j = 1; j <= 8; j++){
                             if(sc[i][j-1] == ""){
                                 sc[i][j-1] = '-';
                             } 
@@ -130,7 +142,7 @@ $('#search_form').on('submit', function(event){
 
                         htmlgp = '<tr>'; 
                         htmlgp += '<td>'+ (i+1) +'</td>';
-                        for(var j = 1; j <= 7; j++){
+                        for(var j = 1; j <= 8; j++){
                             if(sgp[i][j-1] == ""){
                                 sgp[i][j-1] = '-';
                             } 
@@ -157,7 +169,7 @@ $('#search_form').on('submit', function(event){
 
                         htmlgc = '<tr>'; 
                         htmlgc += '<td>'+ (i+1) +'</td>';
-                        for(var j = 1; j <= 7; j++){
+                        for(var j = 1; j <= 8; j++){
                             if(sgc[i][j-1] == ""){
                                 sgc[i][j-1] = '-';
                             } 

@@ -146,6 +146,10 @@
                                     <td style="width: 50%;"><b>Blood</b></td>
                                     <td id="inst4" style="width: 50%;"></td>
                                 </tr>
+                                <tr align="center">
+                                    <td style="width: 50%;"><b>Peternakan</b></td>
+                                    <td id="inst5" style="width: 50%;"></td>
+                                </tr>
                             </table>
                         </div>
 
@@ -163,6 +167,7 @@
                                     <th>Ras</th>
                                     <th>Tanggal Lahir</th>
                                     <th>Blood</th>
+                                    <th>Peternakan</th>
                                     <th>Ayah</th>
                                     <th>Ibu</th>
                                 </tr>
@@ -175,6 +180,7 @@
                                     <td id="pr05"></td>
                                     <td id="pr06"></td>
                                     <td id="pr07"></td>
+                                    <td id="pr08"></td>
                                 </tr>
                                 <tr>
                                     <td><b>Ibu</b></td>
@@ -185,6 +191,7 @@
                                     <td id="pr15"></td>
                                     <td id="pr16"></td>
                                     <td id="pr17"></td>
+                                    <td id="pr18"></td>
                                 </tr>
                             </table>
                         </div>

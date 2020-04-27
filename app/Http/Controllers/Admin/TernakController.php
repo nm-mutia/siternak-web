@@ -95,7 +95,8 @@ class TernakController extends Controller
             'tinggi_tubuh' => $request->tinggi_tubuh,
             'cacat_fisik' => $request->cacat_fisik,
             'ciri_lain' => $request->ciri_lain,
-            'status_ada' => $request->status_ada
+            'status_ada' => $request->status_ada,
+            'peternakan_id' => $request->peternakan_id
         );
 
         Ternak::create($form_data);
@@ -121,6 +122,10 @@ class TernakController extends Controller
             if($data->ras_id != null){
                 $rid = DB::table('ras')->where('id', $data->ras_id)->first();
                 $data->ras_id = $rid->jenis_ras;
+            }
+            if($data->peternakan_id != null){
+                $ptid = DB::table('peternakans')->where('id', $data->peternakan_id)->first();
+                $data->peternakan_id = $ptid->nama_peternakan;
             }
             if($data->kematian_id != null){
                 $kid = DB::table('kematians')->where('id', $data->kematian_id)->first();
@@ -207,7 +212,8 @@ class TernakController extends Controller
             'tinggi_tubuh' => $request->tinggi_tubuh,
             'cacat_fisik' => $request->cacat_fisik,
             'ciri_lain' => $request->ciri_lain,
-            'status_ada' => $request->status_ada
+            'status_ada' => $request->status_ada,
+            'peternakan_id' => $request->peternakan_id
         );
 
         Ternak::where('necktag',$id)->update($form_data);

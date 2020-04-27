@@ -94,7 +94,7 @@ class ProfileController extends Controller
             if(\Hash::check($request->current_password, Auth::User()->password)){
                 $data = Auth::user();
 
-                $ptk = Peternak::where('username', $data->username)->update(["password" => $request->password]);      
+                // $ptk = Peternak::where('username', $data->username)->update(["password" => $request->password]);      
                 $user = User::find($data->id)->update(["password"=> bcrypt($request->password)]);  
             }else{
                 return response()->json(['error' => 'Detail yang dimasukkan salah!']);

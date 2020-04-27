@@ -43,4 +43,44 @@ class HomeController extends Controller
         							  ->with('perkawinan_baru', $kawin)
         							  ->with('kematian_baru', $mati);
     }
+
+
+    public function search(Request $request)
+    {
+        $inst = DB::select('SELECT public."search_inst"(?)', [$request->necktag]);
+
+        // $user = Auth::user();
+        // $peternak = Peternak::where('username', '=', $user->username);
+        // $ternak = Ternak::where('necktag', '=', $request->necktag);
+        // && ($ternak->peternakan_id == $peternak->peternakan_id)
+
+        if($inst != null ){
+            $sp = preg_split("/[(),]/", $inst[0]->search_inst); 
+            //split karena hasil bukan array, tapi string
+            //0: kosong, 1:necktag, 2:jenis_kelamin, 3:ras, 4:tgl_lahir, 5:blood, 6:peternakan, 7:ayah, 8:ibu, 9:kosong
+
+            $parent = DB::select('SELECT public."search_parent"(?,?)', [$sp[7], $sp[8]]);
+            $sibling = DB::select('SELECT public."search_sibling"(?,?,?)', [$sp[1], $sp[7], $sp[8]]);
+            $child = DB::select('SELECT public."search_child"(?)', [$sp[1]]);
+            $gparent = DB::select('SELECT public."search_gparent"(?,?)', [$sp[7], $sp[8]]);
+            $gchild = DB::select('SELECT public."search_gchild"(?)', [$sp[1]]);
+            
+            $data = [
+                'inst' => $inst,
+                'parent' => $parent,
+                'sibling' => $sibling,
+                'child' => $child,
+                'gparent' => $gparent,
+                'gchild' => $gchild
+            ];  
+        }
+        else{
+            $data = [
+                'result' => 'Tidak ada data ternak dengan necktag ' .$request->necktag. '.',
+                'necktag' => $request->necktag
+            ];
+            return response()->json(['errors' => $data]);
+        }
+        return response()->json(['result' => $data]);
+    }
 }

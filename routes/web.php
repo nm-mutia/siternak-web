@@ -86,6 +86,8 @@
 
 		Route::namespace('peternak')->name('peternak.')->group(function(){
 			Route::get('dashboard', 'HomeController@index')->name('dashboard');
+			// search
+			Route::get('search', 'HomeController@search')->name('search');
 
 			// profil
 			Route::get('profile', 'ProfileController@index')->name('profile');
