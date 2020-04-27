@@ -4,6 +4,19 @@ $.ajaxSetup({
 		}
 });
 
+
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
+
 $('#tambah_data').click(function(){
 	$('.modal-title').text('Tambah Data - Penyakit');
 	$('#action_button').val('Tambah');
@@ -22,14 +35,14 @@ $('#tambah_data_form').on('submit', function(event){
 
 	//tambah
 	if($('#action').val() == 'Add'){
-		action_url = "/admin/penyakit";
+		action_url = url_seg+"/penyakit";
 		method_form = "POST";
 	}
 
 	//edit
 	if($('#action').val() == 'Edit'){
 		var updateId = $('#hidden_id').val();
-		action_url = "/admin/penyakit/"+updateId;
+		action_url = url_seg+"/penyakit/"+updateId;
 		method_form = "PUT";
 	}
 
@@ -72,7 +85,7 @@ $(document).on('click', '.view', function(){
     txt += '</tr>';
 
     $.ajax({
-        url: "/admin/penyakit/"+id, //show
+        url: url_seg+"/penyakit/"+id, //show
         datatype: "json",
         success: function(data){
             $('#vnama_penyakit').val(data.result.nama_penyakit);
@@ -120,7 +133,7 @@ $(document).on('click', '.edit', function(){
 	var id = $(this).attr('id');
 	$('#form_result').html('');
 	$.ajax({
-		url: "/admin/penyakit/"+id+"/edit",
+		url: url_seg+"/penyakit/"+id+"/edit",
 		datatype: "json",
 		success: function(data){
 			$('#nama_penyakit').val(data.result.nama_penyakit);
@@ -150,7 +163,7 @@ $(document).on('click', '.delete', function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/penyakit/"+penyakit_id,
+            url: url_seg+"/penyakit/"+penyakit_id,
             method: "DELETE",
             success: function(data){
                 $('#penyakit-table').DataTable().ajax.reload();

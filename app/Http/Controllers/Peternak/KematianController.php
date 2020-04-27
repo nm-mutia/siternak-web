@@ -16,7 +16,7 @@ class KematianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(KematianDataTable $dataTable)
     {
         $title = 'TERNAK MATI';
         $page = 'Ternak Mati';

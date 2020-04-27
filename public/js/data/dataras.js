@@ -4,6 +4,19 @@ $.ajaxSetup({
 	}
 });
 
+
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
+
 $('#tambah_data').click(function(){
 	$('.modal-title').text('Tambah Data - Ras');
 	$('#action_button').val('Tambah');
@@ -22,7 +35,7 @@ $('#tambah_data_form').on('submit', function(event){
 
 	//tambah
 	if($('#action').val() == 'Add'){
-		action_url = "/admin/ras";
+		action_url = url_seg+"/ras";
 		method_form = "POST";
 	}
 
@@ -30,7 +43,7 @@ $('#tambah_data_form').on('submit', function(event){
 	if($('#action').val() == 'Edit'){
 		var updateId = $('#hidden_id').val();
 		// action_url = "{{ route('admin.ras.update',"+updateId+") }}";
-		action_url = "/admin/ras/"+updateId;
+		action_url = url_seg+"/ras/"+updateId;
 		method_form = "PUT";
 	}
 
@@ -64,7 +77,7 @@ $(document).on('click', '.edit', function(){
 	$('#form_result').html('');
 	$.ajax({
 		// url: "{{ route('admin.ras.edit',"+id+") }}",
-		url: "/admin/ras/"+id+"/edit",
+		url: url_seg+"/ras/"+id+"/edit",
 		datatype: "json",
 		success: function(data){
 			$('#jenis_ras').val(data.result.jenis_ras);
@@ -94,7 +107,7 @@ $(document).on('click', '.delete', function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/ras/"+ras_id,
+            url: url_seg+"/ras/"+ras_id,
             method: "DELETE",
             success: function(data){
                 $('#ras-table').DataTable().ajax.reload();

@@ -4,6 +4,19 @@ $.ajaxSetup({
     }
 });
 
+
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
+
 $('#tambah_data').click(function(){
     $('.modal-title').text('Tambah Data - Pemilik');
     $('#action_button').val('Tambah');
@@ -22,14 +35,14 @@ $('#tambah_data_form').on('submit', function(event){
 
     //tambah
     if($('#action').val() == 'Add'){
-        action_url = "/admin/pemilik";
+        action_url = url_seg+"/pemilik";
         method_form = "POST";
     }
 
     //edit
     if($('#action').val() == 'Edit'){
         var updateId = $('#hidden_id').val();
-        action_url = "/admin/pemilik/"+updateId;
+        action_url = url_seg+"/pemilik/"+updateId;
         method_form = "PUT";
     }
 
@@ -71,7 +84,7 @@ $(document).on('click', '.view', function(){
     txt += '</tr>';
 
     $.ajax({
-        url: "/admin/pemilik/"+id, //show
+        url: url_seg+"/pemilik/"+id, //show
         datatype: "json",
         success: function(data){
             $('#vnama_pemilik').val(data.result.nama_pemilik);
@@ -118,7 +131,7 @@ $(document).on('click', '.edit', function(){
     var id = $(this).attr('id');
     $('#form_result').html('');
     $.ajax({
-        url: "/admin/pemilik/"+id+"/edit",
+        url: url_seg+"/pemilik/"+id+"/edit",
         datatype: "json",
         success: function(data){
             $('#nama_pemilik').val(data.result.nama_pemilik);
@@ -148,7 +161,7 @@ $(document).on('click', '.delete', function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/pemilik/"+pemilik_id,
+            url: url_seg+"/pemilik/"+pemilik_id,
             method: "DELETE",
             success: function(data){
                 $('#pemilik-table').DataTable().ajax.reload();

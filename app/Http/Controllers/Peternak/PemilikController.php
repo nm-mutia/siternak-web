@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Peternak;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Pemilik;
+use App\Ternak;
+use App\DataTables\PemilikDataTable;
+use Yajra\Datatables\Datatables;
+use Validator;
 
 class PemilikController extends Controller
 {
@@ -12,9 +17,12 @@ class PemilikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PemilikDataTable $dataTable)
     {
-        //
+        $title = 'PEMILIK';
+        $page = 'Pemilik';
+
+        return $dataTable->render('data.pemilik', ['title' => $title, 'page' => $page]);
     }
 
     /**
@@ -35,7 +43,25 @@ class PemilikController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'nama_pemilik' => 'required',
+            'ktp' => 'required|digits:16|unique:pemiliks'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'nama_pemilik' => $request->nama_pemilik,
+            'ktp' => $request->ktp
+        );
+
+        Pemilik::create($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
 
     /**
@@ -46,7 +72,12 @@ class PemilikController extends Controller
      */
     public function show($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Pemilik::findOrFail($id);
+            $ternak = Ternak::where('pemilik_id', '=', $data->id)->get();
+
+            return response()->json(['result' => $data, 'ternak' => $ternak]);
+        }
     }
 
     /**
@@ -57,7 +88,10 @@ class PemilikController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Pemilik::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     /**
@@ -69,7 +103,25 @@ class PemilikController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'nama_pemilik' => 'required',
+            'ktp' => 'required|digits:16'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'nama_pemilik' => $request->nama_pemilik,
+            'ktp' => $request->ktp
+        );
+
+        Pemilik::whereId($id)->update($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
 
     /**
@@ -80,6 +132,7 @@ class PemilikController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Pemilik::findOrFail($id);
+        $data->delete();
     }
 }

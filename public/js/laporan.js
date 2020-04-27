@@ -4,6 +4,20 @@ $.ajaxSetup({
     }
 });
 
+
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
+
+
 var start = moment().subtract(29, 'days');
 var end = moment();
 var from = '', to = '';
@@ -31,7 +45,7 @@ $('#reportrange').daterangepicker({
     }
 }, function(start, end, label) {
     $.ajax({
-        url: "/admin/laporan",
+        url: url_seg+"/laporan",
         method: "GET", 
         data: {
             datefrom: start.format('YYYY-MM-DD'), 
@@ -57,11 +71,12 @@ $('#reportrange').daterangepicker({
 
 cb(start, end);
 
+
 $('#lahir-table').DataTable({
     processing: true,
     serverSide: true,
     ajax: {
-        url: '/admin/laporan/lahir',
+        url: url_seg+'/laporan/lahir',
         method: 'GET',
         data: function(d){
             d.datefrom = from;
@@ -72,6 +87,7 @@ $('#lahir-table').DataTable({
         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
         {data: 'necktag', name: 'necktag'},
         {data: 'pemilik_id', name: 'pemilik_id'},
+        {data: 'peternakan_id', name: 'peternakan_id'},
         {data: 'ras_id', name: 'ras_id'},
         {data: 'kematian_id', name: 'kematian_id'},
         {data: 'jenis_kelamin', name: 'jenis_kelamin'},
@@ -99,7 +115,7 @@ $('#mati-table').DataTable({
     processing: true,
     serverSide: true,
     ajax: {
-        url: '/admin/laporan/mati',
+        url: url_seg+'/laporan/mati',
         method: 'GET',
         data: function(d){
             d.datefrom = from;
@@ -115,6 +131,7 @@ $('#mati-table').DataTable({
         {data: 'penyebab', name: 'penyebab'},
         {data: 'kondisi', name: 'kondisi'},
         {data: 'pemilik_id', name: 'pemilik_id'},
+        {data: 'peternakan_id', name: 'peternakan_id'},
         {data: 'ras_id', name: 'ras_id'},
         {data: 'jenis_kelamin', name: 'jenis_kelamin'},
         {data: 'tgl_lahir', name: 'tgl_lahir'},
@@ -141,7 +158,7 @@ $('#kawin-table').DataTable({
     processing: true,
     serverSide: true,
     ajax: {
-        url: '/admin/laporan/kawin',
+        url: url_seg+'/laporan/kawin',
         method: 'GET',
         data: function(d){
             d.datefrom = from;
@@ -162,7 +179,7 @@ $('#sakit-table').DataTable({
     processing: true,
     serverSide: true,
     ajax: {
-        url: '/admin/laporan/sakit',
+        url: url_seg+'/laporan/sakit',
         method: 'GET',
         data: function(d){
             d.datefrom = from;
@@ -186,7 +203,7 @@ $('#ada-table').DataTable({
     processing: true,
     serverSide: true,
     ajax: {
-        url: '/admin/laporan/ada',
+        url: url_seg+'/laporan/ada',
         method: 'GET',
         data: function(d){
             d.datefrom = from;
@@ -197,6 +214,7 @@ $('#ada-table').DataTable({
         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
         {data: 'necktag', name: 'necktag'},
         {data: 'pemilik_id', name: 'pemilik_id'},
+        {data: 'peternakan_id', name: 'peternakan_id'},
         {data: 'ras_id', name: 'ras_id'},
         {data: 'kematian_id', name: 'kematian_id'},
         {data: 'jenis_kelamin', name: 'jenis_kelamin'},
@@ -225,6 +243,6 @@ $('#dwd-btn').click(function(){
         datefrom: from,
         dateto: to
     };
-    var url = "/admin/laporan/export/" + $.param(dateparam);
+    var url = url_seg+"/laporan/export/" + $.param(dateparam);
     window.location = url;
 });

@@ -11,7 +11,15 @@
 @endsection
 
 @section('breadcrumb')
-<li><a href="{{ route('admin') }}"><i class="material-icons">home</i> Home </a></li>
+<li>
+    @can('isAdmin')
+    <a href="{{ route('admin') }}">
+    @else
+    <a href="{{ route('peternak') }}">
+    @endcan
+        <i class="material-icons">home</i> Home 
+    </a>
+</li>
 <li class="active"><i class="material-icons">view_week</i> Barcode </li>
 @endsection
 
@@ -25,7 +33,11 @@
                     <small>Barcode necktag pada ternak</small>
                 </h2>
                 <div class="col-md-3" align="right">
+                    @can('isAdmin')
                 	<a href="{{ route('admin.barcode.pdf') }}">
+                    @else
+                    <a href="{{ route('peternak.barcode.pdf') }}">
+                    @endcan
 	                    <button id="bar-dwd-btn" class="btn">
 	                        <i class="material-icons">file_download</i>
 	                        <span class="icon-name">Download Barcode Necktag</span>

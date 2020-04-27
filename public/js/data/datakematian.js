@@ -4,6 +4,19 @@ $.ajaxSetup({
     }
 });
 
+
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
+
 $('#tambah_data').click(function(){
     $('.modal-title').text('Tambah Data - Ternak Mati');
     $('#action_button').val('Tambah');
@@ -22,14 +35,14 @@ $('#tambah_data_form').on('submit', function(event){
 
     //tambah
     if($('#action').val() == 'Add'){
-        action_url = "/admin/kematian";
+        action_url = url_seg+"/kematian";
         method_form = "POST";
     }
 
     //edit
     if($('#action').val() == 'Edit'){
         var updateId = $('#hidden_id').val();
-        action_url = "/admin/kematian/"+updateId;
+        action_url = url_seg+"/kematian/"+updateId;
         method_form = "PUT";
     }
 
@@ -65,7 +78,7 @@ $(document).on('click', '.edit', function(){
     var id = $(this).attr('id');
     $('#form_result').html('');
     $.ajax({
-        url: "/admin/kematian/"+id+"/edit",
+        url: url_seg+"/kematian/"+id+"/edit",
         datatype: "json",
         success: function(data){
             $('#tgl_kematian').val(data.result.tgl_kematian);
@@ -97,7 +110,7 @@ $(document).on('click', '.delete', function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/kematian/"+kematian_id,
+            url: url_seg+"/kematian/"+kematian_id,
             method: "DELETE",
             success: function(data){
                 $('#kematian-table').DataTable().ajax.reload();

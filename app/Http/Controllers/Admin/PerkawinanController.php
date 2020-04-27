@@ -137,7 +137,7 @@ class PerkawinanController extends Controller
         $data->delete();
     }
 
-    // necktag pasangan
+    // necktag pasangan - dependent dropdown
     public function getPasangan($id)
     {
         $tes = Ternak::find($id);

@@ -4,6 +4,19 @@ $.ajaxSetup({
 		}
 });
 
+
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
+
 $('#tambah_data').click(function(){
 	$('.modal-title').text('Tambah Data - Riwayat Penyakit');
 	$('#action_button').val('Tambah');
@@ -26,14 +39,14 @@ $('#tambah_data_form').on('submit', function(event){
 
 	//tambah
 	if($('#action').val() == 'Add'){
-		action_url = "/admin/riwayat";
+		action_url = url_seg+"/riwayat";
 		method_form = "POST";
 	}
 
 	//edit
 	if($('#action').val() == 'Edit'){
 		var updateId = $('#hidden_id').val();
-		action_url = "/admin/riwayat/"+updateId;
+		action_url = url_seg+"/riwayat/"+updateId;
 		method_form = "PUT";
 	}
 
@@ -69,7 +82,7 @@ $(document).on('click', '.edit', function(){
 	var id = $(this).attr('id');
 	$('#form_result').html('');
 	$.ajax({
-		url: "/admin/riwayat/"+id+"/edit",
+		url: url_seg+"/riwayat/"+id+"/edit",
 		datatype: "json",
 		success: function(data){
 			$('#penyakit_id').val(data.result.penyakit_id).change();
@@ -107,7 +120,7 @@ $(document).on('click', '.delete', function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/riwayat/"+riwayat_id,
+            url: url_seg+"/riwayat/"+riwayat_id,
             method: "DELETE",
             success: function(data){
                 $('#riwayat-table').DataTable().ajax.reload();

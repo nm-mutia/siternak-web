@@ -9,7 +9,15 @@
 @endsection
 
 @section('breadcrumb')
-<li><a href="{{ route('admin') }}"><i class="material-icons">home</i> Home</a></li>
+<li>
+    @can('isAdmin')
+    <a href="{{ route('admin') }}">
+    @else
+    <a href="{{ route('peternak') }}">
+    @endcan
+        <i class="material-icons">home</i> Home
+    </a>
+</li>
 <li class="active"><i class="material-icons">pie_chart</i> Grafik </li>
 @endsection
 
@@ -97,6 +105,17 @@
 {{ $mati->script() }}
 
 <script type="text/javascript">
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
 // lahir
 $(document).on('click', '.g-lahir', function(){
     var id = $(this).attr('id');
@@ -104,7 +123,7 @@ $(document).on('click', '.g-lahir', function(){
     // 0:g, 1:lahir, 2:tahun
 
     $.ajax({
-        url: "/admin/grafik/lahir",
+        url: url_seg+"/grafik/lahir",
         method: "GET",
         data: {
             tahun: id[2],
@@ -135,7 +154,7 @@ $(document).on('click', '.g-mati', function(){
     // 0:g, 1:lahir, 2:tahun
 
     $.ajax({
-        url: "/admin/grafik/mati",
+        url: url_seg+"/grafik/mati",
         method: "GET",
         data: {
             tahun: id[2],

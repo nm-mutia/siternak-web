@@ -4,15 +4,28 @@ $.ajaxSetup({
 		}
 });
 
+
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
+
 $('select[name="necktag"]').on('change', function() {
     var necktagID = $(this).val();
     if(necktagID) {
         $.ajax({
-            url: '/admin/perkawinan/pasangan/'+necktagID,
+            url: url_seg+'/perkawinan/pasangan/'+necktagID,
             type: "GET",
             dataType: "json",
             success:function(data) {
-                $('select[name="necktag_psg"]').empty();
+                // $('select[name="necktag_psg"]').empty();
 
                 $.each(data.ternak, function(key, value) {
                     $('select[name="necktag_psg"]').append('<option value="'+ value.necktag +'">'+ value.necktag +' - '+ value.jenis_ras +' - '+ value.jenis_kelamin +'</option>');
@@ -46,14 +59,14 @@ $('#tambah_data_form').on('submit', function(event){
 
 	//tambah
 	if($('#action').val() == 'Add'){
-		action_url = "/admin/perkawinan";
+		action_url = url_seg+"/perkawinan";
 		method_form = "POST";
 	}
 
 	//edit
 	if($('#action').val() == 'Edit'){
 		var updateId = $('#hidden_id').val();
-		action_url = "/admin/perkawinan/"+updateId;
+		action_url = url_seg+"/perkawinan/"+updateId;
 		method_form = "PUT";
 	}
 
@@ -95,7 +108,7 @@ $(document).on('click', '.edit', function(){
 	var id = $(this).attr('id');
 	$('#form_result').html('');
 	$.ajax({
-		url: "/admin/perkawinan/"+id+"/edit",
+		url: url_seg+"/perkawinan/"+id+"/edit",
 		datatype: "json",
 		success: function(data){
 			$('#necktag').val(data.result.necktag).change();
@@ -130,7 +143,7 @@ $(document).on('click', '.delete', function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/perkawinan/"+perkawinan_id,
+            url: url_seg+"/perkawinan/"+perkawinan_id,
             method: "DELETE",
             success: function(data){
                 $('#perkawinan-table').DataTable().ajax.reload();

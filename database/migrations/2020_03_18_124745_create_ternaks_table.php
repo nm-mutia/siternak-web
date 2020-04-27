@@ -17,6 +17,8 @@ class CreateTernaksTable extends Migration
             $table->char('necktag', 6)->primary();
             $table->integer('pemilik_id')->unsigned()->nullable();
             $table->foreign('pemilik_id')->references('id')->on('pemiliks')->onDelete('cascade');
+            $table->integer('peternakan_id')->unsigned();
+            $table->foreign('peternakan_id')->references('id')->on('peternakans')->onDelete('cascade');
             $table->integer('ras_id')->unsigned();
             $table->foreign('ras_id')->references('id')->on('ras')->onDelete('cascade');
             $table->integer('kematian_id')->unsigned()->nullable();

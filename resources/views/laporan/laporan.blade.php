@@ -11,7 +11,15 @@
 @endsection
 
 @section('breadcrumb')
-<li><a href="{{ route('admin') }}"><i class="material-icons">home</i> Home</a></li>
+<li>
+    @can('isAdmin')
+    <a href="{{ route('admin') }}">
+    @else
+    <a href="{{ route('peternak') }}">
+    @endcan
+        <i class="material-icons">home</i> Home
+    </a>
+</li>
 <li class="active"><i class="material-icons">archive</i> Laporan </li>
 @endsection
 
@@ -86,6 +94,7 @@
                                         <th>No.</th>
                                         <th>Necktag</th>
                                         <th>ID Pemilik</th>
+                                        <th>ID Peternakan</th>
                                         <th>ID Ras</th>
                                         <th>ID Kematian</th>
                                         <th>Jenis Kelamin</th>
@@ -126,6 +135,7 @@
                                         <th>Penyebab</th>
                                         <th>Kondisi</th>
                                         <th>ID Pemilik</th>
+                                        <th>ID Peternakan</th>
                                         <th>ID Ras</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Tanggal Lahir</th>
@@ -199,6 +209,7 @@
                                         <th>No.</th>
                                         <th>Necktag</th>
                                         <th>ID Pemilik</th>
+                                        <th>ID Peternakan</th>
                                         <th>ID Ras</th>
                                         <th>ID Kematian</th>
                                         <th>Jenis Kelamin</th>

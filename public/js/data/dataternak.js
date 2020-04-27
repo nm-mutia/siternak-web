@@ -4,12 +4,25 @@ $.ajaxSetup({
 	}
 });
 
+
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
+
 function tongsampahDT() {
     if (!$.fn.dataTable.isDataTable('#tongsampah-table')) {
 		$('#tongsampah-table').DataTable({
 		    processing: true,
 		    serverSide: true,
-		    ajax: '/admin/ternaktrash',
+		    ajax: url_seg+'/ternaktrash',
 		    columns: [
 		        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
 		        {data: 'necktag', name: 'necktag'},
@@ -27,6 +40,9 @@ function tongsampahDT() {
 		        {data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'},
 		    ],
 		});
+    }
+    else{
+        $('#tongsampah-table').DataTable().ajax.reload();
     }
 }
 
@@ -62,14 +78,14 @@ $('#tambah_data_form').on('submit', function(event){
 
 	//tambah
 	if($('#action').val() == 'Add'){
-		action_url = "/admin/ternak";
+		action_url = url_seg+"/ternak";
 		method_form = "POST";
 	}
 
 	//edit
 	if($('#action').val() == 'Edit'){
 		var updateId = $('#hidden_id').val();
-		action_url = "/admin/ternak/"+updateId;
+		action_url = url_seg+"/ternak/"+updateId;
 		method_form = "PUT";
 	}
 
@@ -119,7 +135,7 @@ $(document).on('click', '.view', function(){
 
 	$('#form_result').html('');
 	$.ajax({
-		url: "/admin/ternak/"+id, //show
+		url: url_seg+"/ternak/"+id, //show
 		datatype: "json",
 		success: function(data){
 			$('#vpemilik_id').val(data.result.pemilik_id);
@@ -185,7 +201,7 @@ $(document).on('click', '.edit', function(){
 	var id = $(this).attr('id');
 	$('#form_result').html('');
 	$.ajax({
-		url: "/admin/ternak/"+id+"/edit", //edit
+		url: url_seg+"/ternak/"+id+"/edit", //edit
 		datatype: "json",
 		success: function(data){
 			$('#necktag').val(data.result.necktag);
@@ -241,11 +257,10 @@ $(document).on('click', '.delete', function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/ternak/"+ternak_id,
+            url: url_seg+"/ternak/"+ternak_id,
             method: "DELETE",
             success: function(data){
                 $('#ternak-table').DataTable().ajax.reload();
-                $('#tongsampah-table').DataTable().ajax.reload();
                 swal("Terhapus!", "Data ternak id " + ternak_id + " berada di tong sampah.", "success");
             },
             error: function(data){
@@ -278,7 +293,7 @@ $(document).on('click', '.restore', function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/ternak/restore/"+val,
+            url: url_seg+"/ternak/restore/"+val,
             method: "GET",
             success: function(data){
                 $('#ternak-table').DataTable().ajax.reload();
@@ -308,7 +323,7 @@ $('#btn-restore-all').click(function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/ternakrestore",
+            url: url_seg+"/ternakrestore",
             method: "GET",
             success: function(data){
                 $('#ternak-table').DataTable().ajax.reload();
@@ -342,7 +357,7 @@ $(document).on('click', '.fdelete', function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/ternak/fdelete/"+val,
+            url: url_seg+"/ternak/fdelete/"+val,
             method: "DELETE",
             success: function(data){
                 $('#tongsampah-table').DataTable().ajax.reload();
@@ -372,7 +387,7 @@ $('#btn-delete-all').click(function(){
         closeOnConfirm: false
     }, function(){
         $.ajax({
-            url:"/admin/ternakfdelete",
+            url: url_seg+"/ternakfdelete",
             method: "DELETE",
             success: function(data){
                 $('#tongsampah-table').DataTable().ajax.reload();

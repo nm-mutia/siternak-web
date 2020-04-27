@@ -61,6 +61,7 @@ class TernakController extends Controller
             'ras_id' => 'required',
             'jenis_kelamin' => 'required',
             'blood' => 'required',
+            'tgl_lahir' => 'required',
             'status_ada' => 'required'
         );
 
@@ -78,6 +79,7 @@ class TernakController extends Controller
         $form_data = array(
             'necktag' => $necktag,
             'pemilik_id' => $request->pemilik_id,
+            'peternakan_id' => $request->peternakan_id,
             'ras_id' => $request->ras_id,
             'kematian_id' => $request->kematian_id,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -96,7 +98,6 @@ class TernakController extends Controller
             'cacat_fisik' => $request->cacat_fisik,
             'ciri_lain' => $request->ciri_lain,
             'status_ada' => $request->status_ada,
-            'peternakan_id' => $request->peternakan_id
         );
 
         Ternak::create($form_data);
@@ -178,6 +179,7 @@ class TernakController extends Controller
             'ras_id' => 'required',
             'jenis_kelamin' => 'required',
             'blood' => 'required',
+            'tgl_lahir' => 'required',
             'status_ada' => 'required'
         );
 

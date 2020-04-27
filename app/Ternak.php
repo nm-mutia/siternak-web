@@ -16,7 +16,7 @@ class Ternak extends Model
     protected $fillable = [
         'necktag', 'pemilik_id', 'ras_id', 'kematian_id', 'jenis_kelamin', 'tgl_lahir',
         'bobot_lahir', 'pukul_lahir', 'lama_dikandungan', 'lama_laktasi', 'tgl_lepas_sapih', 'blood',
-        'necktag_ayah', 'necktag_ibu', 'bobot_tubuh', 'panjang_tubuh', 'tinggi_tubuh', 'cacat_fisik', 'ciri_lain', 'status_ada'
+        'necktag_ayah', 'necktag_ibu', 'bobot_tubuh', 'panjang_tubuh', 'tinggi_tubuh', 'cacat_fisik', 'ciri_lain', 'status_ada', 'peternakan_id'
     ];
 
     public function penyakit(){

@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Peternak;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Ras;
+use App\DataTables\RasDataTable;
+use Validator;
 
 class RasController extends Controller
 {
@@ -12,9 +16,12 @@ class RasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RasDataTable $dataTable)
     {
-        //
+        $title = 'RAS';
+        $page = 'Ras';
+
+        return $dataTable->render('data.ras', ['title' => $title, 'page' => $page]);
     }
 
     /**
@@ -35,7 +42,25 @@ class RasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'jenis_ras' => 'required',
+            'ket_ras' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'jenis_ras' => $request->jenis_ras,
+            'ket_ras' => $request->ket_ras
+        );
+
+        Ras::create($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
 
     /**
@@ -57,7 +82,10 @@ class RasController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Ras::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     /**
@@ -69,7 +97,25 @@ class RasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'jenis_ras' => 'required',
+            'ket_ras' => 'required'
+        );
+
+        $error = Validator::make($request->all(), $rules);
+
+        if($error->fails()){
+            return response()->json(['errors' => $error->errors()->all()]);
+        }
+
+        $form_data = array(
+            'jenis_ras' => $request->jenis_ras,
+            'ket_ras' => $request->ket_ras
+        );
+
+        Ras::whereId($id)->update($form_data);
+
+        return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
 
     /**
@@ -80,6 +126,7 @@ class RasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Ras::findOrFail($id);
+        $data->delete();
     }
 }

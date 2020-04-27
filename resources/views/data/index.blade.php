@@ -17,7 +17,15 @@
 @endsection
 
 @section('breadcrumb')
-<li><a href="{{ route('admin') }}"><i class="material-icons">home</i> Home</a></li>
+<li>
+    @can('isAdmin')
+    <a href="{{ route('admin') }}">
+    @else
+    <a href="{{ route('peternak') }}">
+    @endcan
+        <i class="material-icons">home</i> Home
+    </a>
+</li>
 <li><i class="material-icons">widgets</i> Data </li>
 <li class="active"><i class="material-icons">attachment</i> {{ $page ?? '' }} </li>
 @endsection

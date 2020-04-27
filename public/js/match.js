@@ -1,3 +1,15 @@
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+    url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+    url_seg = "/peternak";
+}
+
+
 $(function () {
     $('.js-select-search').select2({ width: '100%' });
 });
@@ -6,7 +18,7 @@ $('#match_form').on('submit', function(event){
     event.preventDefault();
 
     $.ajax({
-        url: "/admin/match/ternak",
+        url: url_seg+"/match/ternak",
         method: "GET",
         data: $(this).serialize(),
         datatype: "json",

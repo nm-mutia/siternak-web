@@ -38,6 +38,9 @@ class GrafikController extends Controller
 
     public function grafikRas()
     {
+        $jantan = array();
+        $betina = array();
+
         $count = Ternak::where('status_ada', '=', true)
                         ->rightJoin('ras', 'ras.id', '=', 'ternaks.ras_id')
                         ->groupBy('ras.jenis_ras')
@@ -79,25 +82,29 @@ class GrafikController extends Controller
         $chart->displayLegend(true);
         $chart->labels($label);
 
-        $chart->dataset('Jantan','bar', $jantan)->options([
-            'responsive' => true,
-            'fill' => 'true',
-            'backgroundColor' => '#36A7C9',
-            'borderColor' => '#1A89B4',
-             'tooltip' => [
-                'show' => 'true'
-            ],
-        ]);
+        if($count_jantan != null){
+            $chart->dataset('Jantan','bar', $jantan)->options([
+                'responsive' => true,
+                'fill' => 'true',
+                'backgroundColor' => '#36A7C9',
+                'borderColor' => '#1A89B4',
+                 'tooltip' => [
+                    'show' => 'true'
+                ],
+            ]);
+        }
 
-        $chart->dataset('Betina','bar', $betina)->options([
-            'responsive' => true,
-            'fill' => 'true',
-            'backgroundColor' => '#F8B195',
-            'borderColor' => '#f67280',
-             'tooltip' => [
-                'show' => 'true'
-            ],
-        ]);
+        if($count_betina != null){
+            $chart->dataset('Betina','bar', $betina)->options([
+                'responsive' => true,
+                'fill' => 'true',
+                'backgroundColor' => '#F8B195',
+                'borderColor' => '#f67280',
+                 'tooltip' => [
+                    'show' => 'true'
+                ],
+            ]);
+        }
 
 	    $chart->dataset('Jumlah Ternak', 'bar', $data)->options([
             'responsive' => true,
@@ -114,6 +121,11 @@ class GrafikController extends Controller
 
     public function grafikUmur()
     {
+        $umurj = array();
+        $umurb = array();
+        $jantan = array();
+        $betina = array();
+
         $count = Ternak::where('status_ada', '=', true)
                         ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) - 
     extract(year from ternaks.tgl_lahir)), 0) as tahun')
@@ -156,20 +168,24 @@ class GrafikController extends Controller
         $b = 0;
 
         for($i = 0; $i < count($label); $i++){
-            if($label[$i] == $umurj[$j]){
-                $jantan[$i] = $jt[$j];
-                $j++;
-            }
-            else{
-                $jantan[$i] = 0;
+            if($umurj != null){
+                if($label[$i] == $umurj[$j]){
+                    $jantan[$i] = $jt[$j];
+                    $j++;
+                }
+                else{
+                    $jantan[$i] = 0;
+                }
             }
 
-            if($label[$i] == $umurb[$b]){
-                $betina[$i] = $bt[$b];
-                $b++;
-            }
-            else{
-                $betina[$i] = 0;
+            if($umurb != null){
+                if($label[$i] == $umurb[$b]){
+                    $betina[$i] = $bt[$b];
+                    $b++;
+                }
+                else{
+                    $betina[$i] = 0;
+                }
             }
         }
 
@@ -177,25 +193,29 @@ class GrafikController extends Controller
         $chart->title('Grafik Ternak - Umur');
         $chart->labels($label);
 
-        $chart->dataset('Jantan','bar', $jantan)->options([
-            'responsive' => true,
-            'fill' => 'true',
-            'backgroundColor' => '#36A7C9',
-            'borderColor' => '#1A89B4',
-             'tooltip' => [
-                'show' => 'true'
-            ],
-        ]);
+        if($count_jantan != null){
+            $chart->dataset('Jantan','bar', $jantan)->options([
+                'responsive' => true,
+                'fill' => 'true',
+                'backgroundColor' => '#36A7C9',
+                'borderColor' => '#1A89B4',
+                 'tooltip' => [
+                    'show' => 'true'
+                ],
+            ]);
+        }
 
-        $chart->dataset('Betina','bar', $betina)->options([
-            'responsive' => true,
-            'fill' => 'true',
-            'backgroundColor' => '#F8B195',
-            'borderColor' => '#f67280',
-             'tooltip' => [
-                'show' => 'true'
-            ],
-        ]);
+        if($count_betina != null){
+            $chart->dataset('Betina','bar', $betina)->options([
+                'responsive' => true,
+                'fill' => 'true',
+                'backgroundColor' => '#F8B195',
+                'borderColor' => '#f67280',
+                 'tooltip' => [
+                    'show' => 'true'
+                ],
+            ]);
+        }
 
 	    $chart->dataset('Jumlah Ternak', 'bar', $data)->options([
             'responsive' => true,
