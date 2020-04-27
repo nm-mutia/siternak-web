@@ -64,7 +64,11 @@
                             <li class="body" style="height: 100px;">
                                 <ul class="menu" style="list-style-type:none;">
                                     <li>
+                                        @can('isAdmin')
                                         <a href="{{ route('admin.profile') }}">
+                                        @elsecan('isPeternak')
+                                        <a href="{{ route('peternak.profile') }}">
+                                        @endcan
                                             <div class="icon-circle bg-cyan">
                                                 <i class="material-icons">person</i>
                                             </div>
@@ -127,7 +131,11 @@
                 <ul class="list">
                     <li class="header">MENU</li>
                     <li>
+                        @can('isAdmin')
                         <a href="{{ route('admin') }}">
+                        @elsecan('isPeternak')
+                        <a href="{{ route('peternak') }}">
+                        @endcan 
                             <i class="material-icons">home</i>
                             <span>Dashboard</span>
                         </a>
@@ -146,6 +154,7 @@
                             <span>Data</span>
                         </a>
                         <ul class="ml-menu">
+                            @can('isAdmin')
                             <li><a href="{{ route('admin.peternakan.index') }}">Peternakan</a></li>
                             <li><a href="{{ route('admin.kematian.index') }}">Kematian</a></li>
                             <li><a href="{{ route('admin.pemilik.index') }}">Pemilik</a></li>
@@ -154,29 +163,55 @@
                             <li><a href="{{ route('admin.ras.index') }}">Ras</a></li>
                             <li><a href="{{ route('admin.riwayat.index') }}">Riwayat Penyakit</a></li>
                             <li><a href="{{ route('admin.ternak.index') }}">Ternak</a></li>
+                            @elsecan('isPeternak')
+                            <li><a href="{{ route('peternak.peternakan.index') }}">Peternakan</a></li>
+                            <li><a href="{{ route('peternak.kematian.index') }}">Kematian</a></li>
+                            <li><a href="{{ route('peternak.pemilik.index') }}">Pemilik</a></li>
+                            <li><a href="{{ route('peternak.penyakit.index') }}">Penyakit</a></li>
+                            <li><a href="{{ route('peternak.perkawinan.index') }}">Perkawinan</a></li>
+                            <li><a href="{{ route('peternak.ras.index') }}">Ras</a></li>
+                            <li><a href="{{ route('peternak.riwayat.index') }}">Riwayat Penyakit</a></li>
+                            <li><a href="{{ route('peternak.ternak.index') }}">Ternak</a></li>
+                            @endcan
                             
                         </ul>
                     </li>
                     <li>
+                        @can('isAdmin')
                         <a href="{{ route('admin.barcode') }}">
+                        @elsecan('isPeternak')
+                        <a href="{{ route('peternak.barcode') }}">
+                        @endcan
                             <i class="material-icons">view_week</i>
                             <span>Barcode</span>
                         </a>
                     </li>
                     <li>
+                        @can('isAdmin')
                         <a href="{{ route('admin.match') }}">
+                        @elsecan('isPeternak')
+                        <a href="{{ route('peternak.match') }}">
+                        @endcan
                             <i class="material-icons">compare</i>
                             <span>Perkawinan</span>
                         </a>
                     </li>
                     <li>
+                        @can('isAdmin')
                         <a href="{{ route('admin.grafik') }}">
+                        @elsecan('isPeternak')
+                        <a href="{{ route('peternak.grafik') }}">
+                        @endcan
                             <i class="material-icons">pie_chart</i>
                             <span>Grafik</span>
                         </a>
                     </li>
                     <li>
+                        @can('isAdmin')
                         <a href="{{ route('admin.laporan') }}">
+                        @elsecan('isPeternak')
+                        <a href="{{ route('peternak.laporan') }}">
+                        @endcan
                             <i class="material-icons">archive</i>
                             <span>Laporan</span>
                         </a>

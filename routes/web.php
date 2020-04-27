@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['midlleware' => 'web'], function() {
+// Route::group(['midlleware' => 'web'], function() {
 	//auth
 	Auth::routes();
 	Auth::routes(['verify' => true]);
@@ -79,14 +79,52 @@ Route::group(['midlleware' => 'web'], function() {
 		});
 	});
 
-	//peternak
+
+	//---------------------------------peternak--------------------------------------------
 	Route::prefix('peternak')->middleware('can:isPeternak', 'auth', 'verified')->group(function(){
 		Route::get('/', 'Peternak\HomeController@index')->name('peternak');
 
-		Route::name('peternak.')->group(function(){
-			Route::get('dashboard', 'Peternak\HomeController@index')->name('dashboard');
+		Route::namespace('peternak')->name('peternak.')->group(function(){
+			Route::get('dashboard', 'HomeController@index')->name('dashboard');
+
+			// profil
+			Route::get('profile', 'ProfileController@index')->name('profile');
+			Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
+			Route::put('profile/edit', 'ProfileController@update')->name('profile.update');
+			Route::post('password/change', 'ProfileController@postChangePassword')->name('password.update');
+
+			//data
+			Route::resource('ternak', 'TernakController')->except(['create']);
+			Route::resource('ras', 'RasController')->except(['create', 'show']);
+			Route::resource('penyakit', 'PenyakitController')->except(['create']);
+			Route::resource('riwayat', 'RiwayatPenyakitController')->except(['create', 'show']);
+			Route::resource('kematian', 'KematianController')->except(['create', 'show']);
+			Route::resource('pemilik', 'PemilikController')->except(['create']);
+			Route::resource('perkawinan', 'PerkawinanController')->except(['create', 'show']);
+
+			//barcode
+			Route::get('barcode', 'BarcodeController@index')->name('barcode');
+			Route::get('barcode/pdf', 'BarcodeController@generatePdf')->name('barcode.pdf');
+
+			//perkawinan
+			Route::get('match', 'MatchController@index')->name('match');
+			Route::get('match/ternak', 'MatchController@match')->name('match.ternak');
+
+			//grafik
+			Route::get('grafik', 'GrafikController@index')->name('grafik');
+			Route::get('grafik/lahir', 'GrafikController@grafikLahir')->name('grafik.lahir');
+			Route::get('grafik/mati', 'GrafikController@grafikMati')->name('grafik.mati');
+
+			//laporan
+			Route::get('laporan', 'LaporanController@index')->name('laporan');
+			Route::get('laporan/lahir', 'LaporanController@lahir')->name('laporan.lahir');
+			Route::get('laporan/mati', 'LaporanController@mati')->name('laporan.mati');
+			Route::get('laporan/kawin', 'LaporanController@kawin')->name('laporan.kawin');
+			Route::get('laporan/sakit', 'LaporanController@sakit')->name('laporan.sakit');
+			Route::get('laporan/ada', 'LaporanController@ada')->name('laporan.ada');
+			Route::get('laporan/export/{date}', 'LaporanController@export')->name('laporan.export');
 		});
 	});
 
-});
+// });
 

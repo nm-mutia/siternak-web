@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-    	$ternak = DB::table('total_ternak')->first();
+    	$ternak = Ternak::count();
 
         $lahir = Ternak::where('tgl_lahir', '>', date("Y-m-d", strtotime('-29 days')))
                         ->whereNotNull('tgl_lahir')
@@ -27,7 +27,7 @@ class HomeController extends Controller
                         ->where('kematians.tgl_kematian', '>', date("Y-m-d", strtotime('-29 days')))
                         ->selectRaw('count(*)')->first();
 
-        return view('admin.dashboard')->with('total_ternak', $ternak)
+        return view('home.dashboard')->with('total_ternak', $ternak)
         							  ->with('kelahiran_baru', $lahir)
         							  ->with('perkawinan_baru', $kawin)
         							  ->with('kematian_baru', $mati);

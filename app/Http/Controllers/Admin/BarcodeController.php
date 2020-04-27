@@ -16,7 +16,7 @@ class BarcodeController extends Controller
     	$ternak = Ternak::latest()->paginate(15); 
 	    $no = 1; 
 
-        return view('admin.barcode')->with('ternak', $ternak)->with('no', $no);
+        return view('home.barcode')->with('ternak', $ternak)->with('no', $no);
     }
 
     public function generatePdf()

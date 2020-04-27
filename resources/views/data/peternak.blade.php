@@ -45,7 +45,7 @@
 
                     <div id="register">
 	                    <div>
-	                    	<h5 align="center">REGISTER PETERNAK</h5>
+	                    	<h5 align="center">REGISTRASI AKUN PETERNAK</h5>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="control-label">Username</label>

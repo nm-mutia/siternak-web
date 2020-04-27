@@ -8,6 +8,13 @@
                 <div class="card-header bg-teal">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @if( session('failure') )
+                    <div class="alert alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">×</button> 
+                        <strong>{{ $failure }}</strong>
+                    </div>
+                    @endif
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

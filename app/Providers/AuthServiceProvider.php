@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
+use App\Peternak;
+use Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -33,7 +35,13 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('isPeternak', function($user) {
-            return $user->role == 'peternak';
+            if(Peternak::where('username', $user->username)->exists()){
+                return $user->role == 'peternak';
+            }
+            else{
+                Auth::logout();
+                return redirect()->route('login')->with(['failure' => 'Tidak terauthorisasi - Register dari Admin!']);
+            }
         });
 
     }
