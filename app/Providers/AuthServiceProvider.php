@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 use App\Peternak;
 use Auth;
+use Redirect;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -40,7 +41,7 @@ class AuthServiceProvider extends ServiceProvider
             }
             else{
                 Auth::logout();
-                return redirect()->route('login')->with(['failure' => 'Tidak terauthorisasi - Register dari Admin!']);
+                return Redirect::route('login')->with('failure', 'Tidak terauthorisasi - Register dari Admin!');
             }
         });
 

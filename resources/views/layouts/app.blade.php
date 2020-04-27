@@ -64,7 +64,7 @@
                                             {{ __('Dashboard Admin') }}
                                         </a>
                                     @else
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{ route('peternak') }}">
                                             {{ __('Dashboard Peternak') }}
                                         </a>
                                     @endcan

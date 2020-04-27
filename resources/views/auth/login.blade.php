@@ -9,10 +9,10 @@
 
                 <div class="card-body">
                     @if( session('failure') )
-                    <div class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert">×</button> 
-                        <strong>{{ $failure }}</strong>
-                    </div>
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">×</button> 
+                            {{ session('failure') }}
+                        </div>
                     @endif
 
                     <form method="POST" action="{{ route('login') }}">

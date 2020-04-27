@@ -4,11 +4,24 @@ $.ajaxSetup({
 	}
 });
 
+
+var segments = location.pathname.split('/');
+var seg = segments[1];
+var url_seg;
+
+if(seg == 'admin'){
+	url_seg = "/admin";
+}
+else if(seg == 'peternak'){
+	url_seg = "/peternak";
+}
+
+
 $('#edit_profil').click(function(){	
 	$('#form_result').html('');
 
 	$.ajax({
-		url: "/admin/profile/edit",
+		url: url_seg+"/profile/edit",
 		datatype: "json",
 		success: function(data){
 			$('#name').val(data.result.name);
@@ -25,7 +38,7 @@ $('#ubah_data_form').on('submit', function(event){
 	var updateId = $('#hidden_id').val();
 
 	$.ajax({
-		url: "/admin/profile/edit",
+		url: url_seg+"/profile/edit",
 		method: "PUT",
 		data: $(this).serialize(),
 		datatype: "json",
@@ -52,7 +65,7 @@ $('#ubah_pass_form').on('submit', function(event){
 	var updateId = $('#hidden_id').val();
 
 	$.ajax({
-		url: "/admin/password/change",
+		url: url_seg+"/password/change",
 		method: "POST",
 		data: $(this).serialize(),
 		datatype: "json",

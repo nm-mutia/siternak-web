@@ -164,7 +164,6 @@
                             <li><a href="{{ route('admin.riwayat.index') }}">Riwayat Penyakit</a></li>
                             <li><a href="{{ route('admin.ternak.index') }}">Ternak</a></li>
                             @elsecan('isPeternak')
-                            <li><a href="{{ route('peternak.peternakan.index') }}">Peternakan</a></li>
                             <li><a href="{{ route('peternak.kematian.index') }}">Kematian</a></li>
                             <li><a href="{{ route('peternak.pemilik.index') }}">Pemilik</a></li>
                             <li><a href="{{ route('peternak.penyakit.index') }}">Penyakit</a></li>

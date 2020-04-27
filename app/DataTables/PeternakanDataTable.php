@@ -51,7 +51,6 @@ class PeternakanDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
                     ->buttons(
                         // Button::make('export'),
                         Button::make('excel'),

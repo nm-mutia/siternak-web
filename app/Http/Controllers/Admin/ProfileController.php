@@ -26,7 +26,8 @@ class ProfileController extends Controller
     {
     	$rules = array(
             'name' => 'required',
-            'email' => 'required'
+            'username' => 'required|unique:users',
+            'email' => 'required|email'
         );
 
         $error = Validator::make($request->all(), $rules);

@@ -106,7 +106,7 @@ class PemilikController extends Controller
     {
         $rules = array(
             'nama_pemilik' => 'required',
-            'ktp' => 'required|digits:16|unique:pemiliks'
+            'ktp' => 'required|digits:16'
         );
 
         $error = Validator::make($request->all(), $rules);

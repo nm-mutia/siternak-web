@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header bg-teal">Dashboard Utama</div>
 
-                <div class="card-body">
+                <div class="card-body">                  
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
