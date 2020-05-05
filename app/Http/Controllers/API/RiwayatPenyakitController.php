@@ -41,7 +41,10 @@ class RiwayatPenyakitController extends Controller
         $error = Validator::make($request->all(), $rules);
 
         if($error->fails()){
-            return response()->json(['error' => $error->errors()]);
+            return response()->json([
+                'status' => 'error',
+                'error' => $error->errors()
+            ]);
         }
 
         $form_data = array(
@@ -96,7 +99,10 @@ class RiwayatPenyakitController extends Controller
         $error = Validator::make($request->all(), $rules);
 
         if($error->fails()){
-            return response()->json(['error' => $error->errors()]);
+            return response()->json([
+                'status' => 'error',
+                'error' => $error->errors()
+            ]);
         }
 
         $form_data = array(

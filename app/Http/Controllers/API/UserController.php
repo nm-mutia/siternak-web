@@ -48,7 +48,10 @@ class UserController extends Controller
     	]);
 
 	    if($validator->fails()){ 
-	      	return response()->json(['error'=> $validator->errors()]);
+	      	return response()->json([
+	      		'status' => 'error',
+	      		'error'=> $validator->errors()
+	      	]);
 	    }
 
 	    $data = $request->all(); 

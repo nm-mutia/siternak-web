@@ -18,7 +18,7 @@ Route::prefix('v1')->namespace('API')->group(function(){
 	Route::post('register', 'UserController@register');
 
 	Route::middleware('auth:api')->group(function(){
-		Route::post('details', 'UserController@get_user_details_info');
+		Route::get('profile', 'UserController@get_user_details_info');
 		Route::get('logout', 'UserController@logout');
 
 

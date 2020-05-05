@@ -43,7 +43,10 @@ class TernakController extends Controller
         $error = Validator::make($request->all(), $rules);
 
         if($error->fails()){
-            return response()->json(['error' => $error->errors()]);
+            return response()->json([
+                'status' => 'error',
+                'error' => $error->errors()
+            ]);
         }
 
         $necktag = Str::random(6);
@@ -117,7 +120,10 @@ class TernakController extends Controller
         $error = Validator::make($request->all(), $rules);
 
         if($error->fails()){
-            return response()->json(['error' => $error->errors()]);
+            return response()->json([
+                'status' => 'error',
+                'error' => $error->errors()
+            ]);
         }
 
         if($request->necktag_ayah == $id || $request->necktag_ibu == $id){

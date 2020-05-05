@@ -42,7 +42,10 @@ class PerkawinanController extends Controller
         $error = Validator::make($request->all(), $rules);
 
         if($error->fails()){
-            return response()->json(['error' => $error->errors()]);
+            return response()->json([
+                'status' => 'error',
+                'error' => $error->errors()
+            ]);
         }
 
         $cek1 = Ternak::find($request->necktag);
@@ -100,7 +103,10 @@ class PerkawinanController extends Controller
         $error = Validator::make($request->all(), $rules);
 
         if($error->fails()){
-            return response()->json(['error' => $error->errors()]);
+            return response()->json([
+                'status' => 'error',
+                'error' => $error->errors()
+            ]);
         }
 
         $cek1 = Ternak::find($request->necktag);
