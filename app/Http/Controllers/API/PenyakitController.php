@@ -16,7 +16,7 @@ class PenyakitController extends Controller
      */
     public function index()
     {
-        $penyakit = Penyakit::all();
+        $penyakit = Penyakit::orderBy("id")->get();
 
         return response()->json([
             'status' => 'success',

@@ -16,7 +16,7 @@ class KematianController extends Controller
      */
     public function index()
     {
-        $kematian = Kematian::all();
+        $kematian = Kematian::orderBy("id")->get();
 
         return response()->json([
             'status' => 'success',

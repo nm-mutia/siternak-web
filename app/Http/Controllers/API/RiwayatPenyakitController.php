@@ -17,7 +17,7 @@ class RiwayatPenyakitController extends Controller
      */
     public function index()
     {
-        $riwayat = DB::table('riwayat_penyakits')->get();
+        $riwayat = DB::table('riwayat_penyakits')->orderBy("id")->get();
 
         return response()->json([
             'status' => 'success',

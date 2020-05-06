@@ -16,7 +16,7 @@ class PemilikController extends Controller
      */
     public function index()
     {
-        $pemilik = Pemilik::all();
+        $pemilik = Pemilik::orderBy("id")->get();
 
         return response()->json([
             'status' => 'success',

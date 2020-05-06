@@ -17,7 +17,7 @@ class PerkawinanController extends Controller
      */
     public function index()
     {
-        $perkawinan = Perkawinan::all();
+        $perkawinan = Perkawinan::orderBy("id")->get();
 
         return response()->json([
             'status' => 'success',

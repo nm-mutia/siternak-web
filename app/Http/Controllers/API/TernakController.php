@@ -17,7 +17,7 @@ class TernakController extends Controller
      */
     public function index()
     {
-        $ternak = Ternak::all();
+        $ternak = Ternak::orderBy("created_at")->get();
 
         return response()->json([
             'status' => 'success',

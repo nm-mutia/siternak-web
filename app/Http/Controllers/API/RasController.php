@@ -16,7 +16,7 @@ class RasController extends Controller
      */
     public function index()
     {
-        $ras = Ras::all();
+        $ras = Ras::orderBy("id")->get();
 
         return response()->json([
             'status' => 'success',
