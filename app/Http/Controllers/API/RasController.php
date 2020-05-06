@@ -42,7 +42,7 @@ class RasController extends Controller
         if($error->fails()){
             return response()->json([
                 'status' => 'error',
-                'error' => $error->errors()
+                'error' => $error->errors()->all()
             ]);
         }
 
@@ -92,7 +92,10 @@ class RasController extends Controller
         $error = Validator::make($request->all(), $rules);
 
         if($error->fails()){
-            return response()->json(['error' => $error->errors()]);
+            return response()->json([
+                'status' => 'error',
+                'error' => $error->errors()->all()
+            ]);
         }
 
         $form_data = array(

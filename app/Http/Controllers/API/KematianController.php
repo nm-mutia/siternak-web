@@ -44,7 +44,7 @@ class KematianController extends Controller
         if($error->fails()){
             return response()->json([
                 'status' => 'error',
-                'error' => $error->errors()
+                'error' => $error->errors()->all()
             ]);
         }
 
@@ -100,7 +100,7 @@ class KematianController extends Controller
         if($error->fails()){
             return response()->json([
                 'status' => 'error',
-                'error' => $error->errors()
+                'error' => $error->errors()->all()
             ]);
         }
 
