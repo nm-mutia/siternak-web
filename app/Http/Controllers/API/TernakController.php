@@ -34,6 +34,7 @@ class TernakController extends Controller
     public function store(Request $request)
     {
         $rules = array(
+            'peternakan_id' => 'required',            
             'ras_id' => 'required',
             'jenis_kelamin' => 'required',
             'blood' => 'required',
@@ -57,6 +58,7 @@ class TernakController extends Controller
         $form_data = array(
             'necktag' => $necktag,
             'pemilik_id' => $request->pemilik_id,
+            'peternakan_id' => $request->peternakan_id,
             'ras_id' => $request->ras_id,
             'kematian_id' => $request->kematian_id,
             'jenis_kelamin' => $request->jenis_kelamin,
@@ -111,6 +113,7 @@ class TernakController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
+            'peternakan_id' => 'required',
             'ras_id' => 'required',
             'jenis_kelamin' => 'required',
             'blood' => 'required',
@@ -134,6 +137,7 @@ class TernakController extends Controller
         $form_data = array(
             'necktag' => $id,
             'pemilik_id' => $request->pemilik_id,
+            'peternakan_id' => $request->peternakan_id,
             'ras_id' => $request->ras_id,
             'kematian_id' => $request->kematian_id,
             'jenis_kelamin' => $request->jenis_kelamin,
