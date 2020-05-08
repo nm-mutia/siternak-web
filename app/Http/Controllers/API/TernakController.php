@@ -38,6 +38,7 @@ class TernakController extends Controller
             'ras_id' => 'required',
             'jenis_kelamin' => 'required',
             'blood' => 'required',
+            'tgl_lahir' => 'required',
             'status_ada' => 'required'
         );
 
@@ -117,6 +118,7 @@ class TernakController extends Controller
             'ras_id' => 'required',
             'jenis_kelamin' => 'required',
             'blood' => 'required',
+            'tgl_lahir' => 'required',
             'status_ada' => 'required'
         );
 
@@ -181,6 +183,66 @@ class TernakController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => "Data ternak id ". $id ." telah berhasil dihapus.",
+        ], 200);
+    }
+
+
+    //-----------------------------trash-----------------------------------
+
+    //trash
+    public function trash()
+    {
+        $ternak = Ternak::onlyTrashed()->orderBy("deleted_at")->get();
+
+        return response()->json([
+            'status' => 'success',
+            'ternak' => $ternak,
+        ], 200);
+    }
+
+    //restore 
+    public function restore($id)
+    {
+        $ternak = Ternak::onlyTrashed()->where('necktag',$id);
+        $ternak->restore();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Data ternak id ". $id ." telah berhasil dikembalikan.",
+        ], 200);
+    }
+
+    public function restoreAll()
+    {
+        $ternak = Ternak::onlyTrashed();
+        $ternak->restore();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Data ternak pada tong sampah telah berhasil dikembalikan.",
+        ], 200);
+    }
+
+    //force delete
+    public function fdelete($id)
+    {
+        $ternak = Ternak::onlyTrashed()->where('necktag',$id);
+        $ternak->forceDelete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Data ternak id ". $id ." telah berhasil dihapus permanen.",
+        ], 200);
+    }
+
+    public function fdeleteAll()
+    {
+        $ternak = Ternak::onlyTrashed();
+        $ternak->forceDelete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Data ternak pada tong sampah telah berhasil dihapus permanen.",
         ], 200);
     }
 }
