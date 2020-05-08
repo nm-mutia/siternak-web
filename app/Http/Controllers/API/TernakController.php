@@ -200,6 +200,16 @@ class TernakController extends Controller
         ], 200);
     }
 
+    public function trashid($id)
+    {
+        $ternak = Ternak::onlyTrashed()->find($id);
+
+        return response()->json([
+            'status' => 'success',
+            'ternak' => $ternak,
+        ], 200);
+    }
+
     //restore 
     public function restore($id)
     {

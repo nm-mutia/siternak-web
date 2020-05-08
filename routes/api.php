@@ -32,6 +32,7 @@ Route::prefix('v1')->namespace('API')->group(function(){
 		Route::apiResource('riwayat', 'RiwayatPenyakitController');
 
 		Route::get('ternaktrash', 'TernakController@trash');
+		Route::get('ternaktrash/{id}', 'TernakController@trashid');
 		Route::get('ternaktrash/restore/{id}', 'TernakController@restore');
 		Route::get('ternaktrash/restore', 'TernakController@restoreAll');
 		Route::delete('ternaktrash/fdelete/{id}', 'TernakController@fdelete');
