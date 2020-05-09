@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Ternak;
+use App\Perkawinan;
 use Validator;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
@@ -178,7 +179,16 @@ class TernakController extends Controller
     public function destroy($id)
     {
         $data = Ternak::find($id);
-        $data->delete();
+
+        if(Perkawinan::where('necktag', $id)->exists()){
+            return response()->json([
+                'status' => 'error',
+                'message' => "Data ternak id ". $id ." tidak dapat dihapus.",
+            ], 200);
+        }
+        else{
+            $data->delete();
+        }
 
         return response()->json([
             'status' => 'success',

@@ -260,8 +260,18 @@ $(document).on('click', '.delete', function(){
             url: url_seg+"/ternak/"+ternak_id,
             method: "DELETE",
             success: function(data){
-                $('#ternak-table').DataTable().ajax.reload();
-                swal("Terhapus!", "Data ternak id " + ternak_id + " berada di tong sampah.", "success");
+                if (data.error) {
+                    swal({
+                        title: 'Opps...',
+                        text : data.error,
+                        type : 'error',
+                        timer : '1500'
+                    })
+                }
+                else{
+                    $('#ternak-table').DataTable().ajax.reload();
+                    swal("Terhapus!", "Data ternak id " + ternak_id + " berada di tong sampah.", "success");
+                }
             },
             error: function(data){
                 swal({
