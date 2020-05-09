@@ -58,7 +58,9 @@ class RiwayatPenyakitController extends Controller
             'updated_at' => Carbon::now()
         );
 
-        $riwayat = DB::table('riwayat_penyakits')->insert($form_data);
+        $create = DB::table('riwayat_penyakits')->insert($form_data);
+        $id = DB::getPdo()->lastInsertId();
+        $riwayat = DB::table('riwayat_penyakits')->find($id);
 
         return response()->json([
             'status' => 'success',
