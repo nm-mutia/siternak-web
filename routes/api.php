@@ -39,6 +39,7 @@ Route::prefix('v1')->namespace('API')->group(function(){
 		Route::delete('ternaktrash/fdelete', 'TernakController@fdeleteAll');
 
 		Route::get('scan/{id}', 'ScanController@search');
+		Route::get('match', 'MatchController@match');
 
 	});
 

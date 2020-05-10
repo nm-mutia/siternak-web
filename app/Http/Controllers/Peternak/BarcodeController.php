@@ -13,7 +13,7 @@ class BarcodeController extends Controller
 {
     public function index()
     {
-    	$ternak = Ternak::latest()->paginate(15); 
+    	$ternak = Ternak::withTrashed()->latest()->paginate(15); 
 	    $no = 1; 
 
         return view('home.barcode')->with('ternak', $ternak)->with('no', $no);
@@ -21,7 +21,7 @@ class BarcodeController extends Controller
 
     public function generatePdf()
     {
-        $ternak = Ternak::get();
+        $ternak = Ternak::withTrashed()->get();
         $no = 1;
         $html = '<h2 align="center">SITERNAK - Barcode Necktag</h2>';
         $html .= '<table>';
