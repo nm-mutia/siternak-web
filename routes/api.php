@@ -38,6 +38,8 @@ Route::prefix('v1')->namespace('API')->group(function(){
 		Route::delete('ternaktrash/fdelete/{id}', 'TernakController@fdelete');
 		Route::delete('ternaktrash/fdelete', 'TernakController@fdeleteAll');
 
+		Route::get('scan/{id}', 'ScanController@search');
+
 	});
 
 });
