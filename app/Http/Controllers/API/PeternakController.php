@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use App\Peternak;
+use App\User;
 use Validator;
 
 class PeternakController extends Controller
