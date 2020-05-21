@@ -120,8 +120,14 @@ class PeternakController extends Controller
             'nama_peternak' => $request->nama_peternak
         );
 
-        Peternak::find($id)->update($form_data);
+        $form_data_user = array(
+            'name' => $request->nama_peternak
+        );
+
         $peternak = Peternak::find($id);
+        $peternak->update($form_data);
+
+        User::where('username', $peternak->username)->update($form_data_user);
         
         return response()->json([
             'status' => 'success',
