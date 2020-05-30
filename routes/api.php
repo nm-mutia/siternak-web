@@ -42,6 +42,8 @@ Route::prefix('v1')->namespace('API')->group(function(){
 		Route::get('match', 'MatchController@match');
 
 		Route::get('grafik', 'GrafikController@index');
+		Route::get('grafik/lahir', 'GrafikController@grafikLahir');
+		Route::get('grafik/mati', 'GrafikController@grafikMati');
 
 	});
 

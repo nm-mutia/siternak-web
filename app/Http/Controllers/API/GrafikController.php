@@ -15,12 +15,6 @@ class GrafikController extends Controller
 	    $umur = $this->grafikUmur();
 	    $lahir = $this->grafikLahir($request);
 	    $mati = $this->grafikMati($request);
-        $yearNow = date('Y');
-        $year = array();
-
-        for($i = $yearNow; $i > $yearNow-5; $i--){
-            $year[] = $i;
-        }
 
         return response()->json([
             'status' => 'success',
@@ -28,7 +22,6 @@ class GrafikController extends Controller
             'umur' => $umur,
             'lahir'=> $lahir,
             'mati' => $mati,
-            'years' => $year,
         ], 200);
 
     }
@@ -220,7 +213,7 @@ class GrafikController extends Controller
     {
         $yearNow = date('Y');
 
-        if ($request->ajax()) {
+        if ($request->tahun) {
            $yearNow = $request->tahun;
         }
 
@@ -264,19 +257,28 @@ class GrafikController extends Controller
 
         $label = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-        return [
-        	'label' => $label,
-       		'data' => $data, 
-       		'jantan' => $jantan, 
-       		'betina' => $betina
-       	];
+        $data = [
+            'label' => $label,
+            'data' => $data, 
+            'jantan' => $jantan, 
+            'betina' => $betina,
+        ];
+
+        if ($request->tahun) {
+           return response()->json([
+                'status' => 'success',
+                'data' => $data,
+            ], 200);
+        }
+
+        return $data;
     }
 
     public function grafikMati(Request $request)
     {
         $yearNow = date('Y');
 
-        if ($request->ajax()) {
+        if ($request->tahun) {
            $yearNow = $request->tahun;
         }
 
@@ -326,11 +328,20 @@ class GrafikController extends Controller
 
         $label = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-        return [
-        	'label' => $label,
-       		'data' => $data, 
-       		'jantan' => $jantan, 
-       		'betina' => $betina
-       	];
+        $data = [
+            'label' => $label,
+            'data' => $data, 
+            'jantan' => $jantan, 
+            'betina' => $betina,
+        ];
+
+        if ($request->tahun) {
+           return response()->json([
+                'status' => 'success',
+                'data' => $data,
+            ], 200);
+        }
+
+        return $data;
     }
 }
