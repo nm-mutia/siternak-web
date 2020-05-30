@@ -41,6 +41,8 @@ Route::prefix('v1')->namespace('API')->group(function(){
 		Route::get('scan/{id}', 'ScanController@search');
 		Route::get('match', 'MatchController@match');
 
+		Route::get('grafik', 'GrafikController@index');
+
 	});
 
 });
