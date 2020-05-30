@@ -63,29 +63,66 @@ class GrafikController extends Controller
                         ->selectRaw('ras.jenis_ras as ras, coalesce(count(ternaks.necktag), 0) as jumlah')
                         ->get();
 
+        $i = 0;
         foreach($count as $ras){
-        	$label[] = $ras->ras;
-        	$data[] = $ras->jumlah;
+            $label[] = $ras->ras;
+            $data[] = $ras->jumlah;
+            $rasb[$i] = null;
+            $rasj[$i] = null;
+            $i++;
         }
 
         $i = 0;
         foreach($count_jantan as $ras){
-            while($ras->ras != $label[$i]){
-                $i++;
-                $jantan[] = 0;
-            }
+            $rasj[$i] = $ras->ras;
+            $jt[] = $ras->jumlah;
             $i++;
-            $jantan[] = $ras->jumlah;
         }
 
         $i = 0;
         foreach($count_betina as $ras){
-            while($ras->ras != $label[$i]){
-                $i++;
-                $betina[] = 0;
-            }
+            $rasb[$i] = $ras->ras;
+            $bt[] = $ras->jumlah;
             $i++;
-            $betina[] = $ras->jumlah;
+        }
+
+        $j = 0;
+        $b = 0;
+
+        for($i = 0; $i < count($label); $i++){
+            if($rasj != null){
+                if($rasj[$b] == null){
+                    $jantan[$i] = 0;
+                }
+                else{
+                    if($label[$i] == $rasj[$j]){
+                        $jantan[$i] = $jt[$j];
+                        $j++;
+                    }
+                    else{
+                        $jantan[$i] = 0;
+                    }
+                }
+            }else{
+                $jantan[$i] = 0;
+            }
+
+            if($rasb != null){
+                if($rasb[$b] == null){
+                    $betina[$i] = 0;
+                }
+                else {
+                    if($label[$i] == $rasb[$b]){
+                        $betina[$i] = $bt[$b];
+                        $b++;
+                    }
+                    else{
+                        $betina[$i] = 0;
+                    }
+                }
+            }else{
+                $betina[$i] = 0;
+            }
         }
 
         $chart = new RasChart;
@@ -187,6 +224,8 @@ class GrafikController extends Controller
                 else{
                     $jantan[$i] = 0;
                 }
+            }else{
+                $jantan[$i] = 0;
             }
 
             if($umurb != null){
@@ -197,6 +236,8 @@ class GrafikController extends Controller
                 else{
                     $betina[$i] = 0;
                 }
+            }else{
+                $betina[$i] = 0;
             }
         }
 
