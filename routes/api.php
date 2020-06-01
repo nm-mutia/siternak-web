@@ -45,6 +45,10 @@ Route::prefix('v1')->namespace('API')->group(function(){
 		Route::get('grafik/lahir', 'GrafikController@grafikLahir');
 		Route::get('grafik/mati', 'GrafikController@grafikMati');
 
+		Route::get('barcode', 'BarcodeController@index');
+
+		Route::get('laporan', 'laporanController@index');
+
 	});
 
 });
