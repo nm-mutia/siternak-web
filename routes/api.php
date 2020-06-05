@@ -47,7 +47,10 @@ Route::prefix('v1')->namespace('API')->group(function(){
 
 		Route::get('barcode', 'BarcodeController@index');
 
-		Route::get('laporan', 'laporanController@index');
+		Route::get('laporan', 'LaporanController@index');
+
+		//for select option
+		Route::get('options', 'OptionsController@index');
 
 	});
 
