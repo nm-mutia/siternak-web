@@ -23,7 +23,6 @@ class OptionsController extends Controller
     	$ternak = Ternak::orderBy("created_at")->select("necktag", "jenis_kelamin")->get(); 
 
         return response()->json([
-            'status' => 'success',
             'kematian' => $kematian,
             'pemilik' => $pemilik,
             'penyakit' => $penyakit,

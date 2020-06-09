@@ -40,6 +40,8 @@ class GrafikController extends Controller
     {
         $jantan = array();
         $betina = array();
+        $label = array();
+        $data = array();
 
         $count = Ternak::where('status_ada', '=', true)
                         ->rightJoin('ras', 'ras.id', '=', 'ternaks.ras_id')
@@ -64,17 +66,68 @@ class GrafikController extends Controller
                         ->selectRaw('ras.jenis_ras as ras, coalesce(count(ternaks.necktag), 0) as jumlah')
                         ->get();
 
+        $i = 0;
         foreach($count as $ras){
             $label[] = $ras->ras;
             $data[] = $ras->jumlah;
+            $rasb[$i] = null;
+            $rasj[$i] = null;
+            $i++;
         }
 
+        $i = 0;
         foreach($count_jantan as $ras){
-            $jantan[] = $ras->jumlah;
+            $rasj[$i] = $ras->ras;
+            $jt[] = $ras->jumlah;
+            $i++;
         }
 
+        $i = 0;
         foreach($count_betina as $ras){
-            $betina[] = $ras->jumlah;
+            $rasb[$i] = $ras->ras;
+            $bt[] = $ras->jumlah;
+            $i++;
+        }
+
+        $j = 0;
+        $b = 0;
+
+        if($label != null){
+            for($i = 0; $i < count($label); $i++){
+                if($rasj != null){
+                    if($rasj[$b] == null){
+                        $jantan[$i] = 0;
+                    }
+                    else{
+                        if($label[$i] == $rasj[$j]){
+                            $jantan[$i] = $jt[$j];
+                            $j++;
+                        }
+                        else{
+                            $jantan[$i] = 0;
+                        }
+                    }
+                }else{
+                    $jantan[$i] = 0;
+                }
+
+                if($rasb != null){
+                    if($rasb[$b] == null){
+                        $betina[$i] = 0;
+                    }
+                    else {
+                        if($label[$i] == $rasb[$b]){
+                            $betina[$i] = $bt[$b];
+                            $b++;
+                        }
+                        else{
+                            $betina[$i] = 0;
+                        }
+                    }
+                }else{
+                    $betina[$i] = 0;
+                }
+            }
         }
 
         $chart = new RasChart;
@@ -106,15 +159,17 @@ class GrafikController extends Controller
             ]);
         }
 
-        $chart->dataset('Jumlah Ternak', 'bar', $data)->options([
-            'responsive' => true,
-            'fill' => true,
-            'backgroundColor' => '#B2DFDB',
-            'borderColor' => '#009688',
-            'tooltip' => [
-                'show' => true
-            ],
-        ]);
+        if($count != null){
+            $chart->dataset('Jumlah Ternak', 'bar', $data)->options([
+                'responsive' => true,
+                'fill' => true,
+                'backgroundColor' => '#B2DFDB',
+                'borderColor' => '#009688',
+                'tooltip' => [
+                    'show' => true
+                ],
+            ]);
+        }
 
         return $chart;
     }
@@ -125,6 +180,8 @@ class GrafikController extends Controller
         $umurb = array();
         $jantan = array();
         $betina = array();
+        $label = array();
+        $data = array();
 
         $count = Ternak::where('status_ada', '=', true)
                         ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) - 
@@ -167,30 +224,36 @@ class GrafikController extends Controller
         $j = 0;
         $b = 0;
 
-        for($i = 0; $i < count($label); $i++){
-            if($umurj != null){
-                if($label[$i] == $umurj[$j]){
-                    $jantan[$i] = $jt[$j];
-                    $j++;
-                }
-                else{
+        if($label != null){
+            for($i = 0; $i < count($label); $i++){
+                if($umurj != null){
+                    if($label[$i] == $umurj[$j]){
+                        $jantan[$i] = $jt[$j];
+                        $j++;
+                    }
+                    else{
+                        $jantan[$i] = 0;
+                    }
+                }else{
                     $jantan[$i] = 0;
                 }
-            }
 
-            if($umurb != null){
-                if($label[$i] == $umurb[$b]){
-                    $betina[$i] = $bt[$b];
-                    $b++;
-                }
-                else{
+                if($umurb != null){
+                    if($label[$i] == $umurb[$b]){
+                        $betina[$i] = $bt[$b];
+                        $b++;
+                    }
+                    else{
+                        $betina[$i] = 0;
+                    }
+                }else{
                     $betina[$i] = 0;
                 }
             }
         }
 
         $chart = new UmurChart;
-        $chart->title('Grafik Ternak - Umur');
+        $chart->title('Grafik Ternak - Umur (tahun)');
         $chart->labels($label);
 
         if($count_jantan != null){
@@ -217,18 +280,20 @@ class GrafikController extends Controller
             ]);
         }
 
-        $chart->dataset('Jumlah Ternak', 'bar', $data)->options([
-            'responsive' => true,
-            'fill' => true,
-            'backgroundColor' => '#CDDC39',
-            'borderColor' => '#8BC34A',
-            'legend' => [
-                'show' => true,
-             ],
-             'tooltip' => [
-                'show' => true
-            ],
-        ]);
+        if($count != null){
+            $chart->dataset('Jumlah Ternak', 'bar', $data)->options([
+                'responsive' => true,
+                'fill' => true,
+                'backgroundColor' => '#CDDC39',
+                'borderColor' => '#8BC34A',
+                'legend' => [
+                    'show' => true,
+                 ],
+                 'tooltip' => [
+                    'show' => true
+                ],
+            ]);
+        }
 
         return $chart;
     }
@@ -283,35 +348,41 @@ class GrafikController extends Controller
         $chart->title('Grafik Ternak - Kelahiran ('. $yearNow .')');
         $chart->labels(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
         
-        $chart->dataset('Jantan','bar', $jantan)->options([
-            'responsive' => true,
-            'fill' => 'true',
-            'backgroundColor' => '#36A7C9',
-            'borderColor' => '#1A89B4',
-             'tooltip' => [
-                'show' => 'true'
-            ],
-        ]);
+        if($count_jantan != null){
+            $chart->dataset('Jantan','bar', $jantan)->options([
+                'responsive' => true,
+                'fill' => 'true',
+                'backgroundColor' => '#36A7C9',
+                'borderColor' => '#1A89B4',
+                 'tooltip' => [
+                    'show' => 'true'
+                ],
+            ]);
+        }
 
-        $chart->dataset('Betina','bar', $betina)->options([
-            'responsive' => true,
-            'fill' => 'true',
-            'backgroundColor' => '#F8B195',
-            'borderColor' => '#f67280',
-             'tooltip' => [
-                'show' => 'true'
-            ],
-        ]);
+        if($count_betina != null){
+            $chart->dataset('Betina','bar', $betina)->options([
+                'responsive' => true,
+                'fill' => 'true',
+                'backgroundColor' => '#F8B195',
+                'borderColor' => '#f67280',
+                 'tooltip' => [
+                    'show' => 'true'
+                ],
+            ]);
+        }
 
-        $chart->dataset('Jumlah Ternak','line', $data)->options([
-            'responsive' => true,
-            // 'fill' => 'true',
-            // 'backgroundColor' => '#1A535C',
-            'borderColor' => '#607D8B',
-             'tooltip' => [
-                'show' => true
-            ],
-        ]);
+        if($count != null){
+            $chart->dataset('Jumlah Ternak','line', $data)->options([
+                'responsive' => true,
+                // 'fill' => 'true',
+                // 'backgroundColor' => '#1A535C',
+                'borderColor' => '#607D8B',
+                 'tooltip' => [
+                    'show' => true
+                ],
+            ]);
+        }
 
         if ($request->ajax()) {
            return response()->json(['data' => $data, 'jantan' => $jantan, 'betina' => $betina]);
@@ -376,35 +447,41 @@ class GrafikController extends Controller
         $chart->title('Grafik Ternak - Kematian ('. $yearNow .')');
         $chart->labels(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
 
-        $chart->dataset('Jantan','bar', $jantan)->options([
-            'responsive' => true,
-            'fill' => true,
-            'backgroundColor' => '#36A7C9',
-            'borderColor' => '#1A89B4',
-             'tooltip' => [
-                'show' => true
-            ],
-        ]);
+        if($count_jantan != null){
+            $chart->dataset('Jantan','bar', $jantan)->options([
+                'responsive' => true,
+                'fill' => true,
+                'backgroundColor' => '#36A7C9',
+                'borderColor' => '#1A89B4',
+                 'tooltip' => [
+                    'show' => true
+                ],
+            ]);
+        }
 
-        $chart->dataset('Betina','bar', $betina)->options([
-            'responsive' => true,
-            'fill' => true,
-            'backgroundColor' => '#F8B195',
-            'borderColor' => '#f67280',
-             'tooltip' => [
-                'show' => true
-            ],
-        ]);
+        if($count_betina != null){
+            $chart->dataset('Betina','bar', $betina)->options([
+                'responsive' => true,
+                'fill' => true,
+                'backgroundColor' => '#F8B195',
+                'borderColor' => '#f67280',
+                 'tooltip' => [
+                    'show' => true
+                ],
+            ]);
+        }
 
-        $chart->dataset('Jumlah Ternak', 'line', $data)->options([
-            'responsive' => true,
-            // 'fill' => 'true',
-            // 'backgroundColor' => '#FFE0B2',
-            'borderColor' => '#FF9800',
-             'tooltip' => [
-                'show' => true
-            ],
-        ]);
+        if($count != null){
+            $chart->dataset('Jumlah Ternak', 'line', $data)->options([
+                'responsive' => true,
+                // 'fill' => 'true',
+                // 'backgroundColor' => '#FFE0B2',
+                'borderColor' => '#FF9800',
+                 'tooltip' => [
+                    'show' => true
+                ],
+            ]);
+        }
 
         if ($request->ajax()) {
            return response()->json(['data' => $data, 'jantan' => $jantan, 'betina' => $betina]);

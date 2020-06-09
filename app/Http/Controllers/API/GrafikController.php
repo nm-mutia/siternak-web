@@ -32,6 +32,8 @@ class GrafikController extends Controller
         $betina = array();
         $rasb = array();
         $rasj = array();
+        $label = array();
+        $data = array();
 
         $count = Ternak::where('status_ada', '=', true)
                         ->rightJoin('ras', 'ras.id', '=', 'ternaks.ras_id')
@@ -82,39 +84,41 @@ class GrafikController extends Controller
         $j = 0;
         $b = 0;
 
-        for($i = 0; $i < count($label); $i++){
-            if($rasj != null){
-                if($rasj[$b] == null){
-                    $jantan[$i] = 0;
-                }
-                else{
-                    if($label[$i] == $rasj[$j]){
-                        $jantan[$i] = $jt[$j];
-                        $j++;
-                    }
-                    else{
+        if($label != null){
+            for($i = 0; $i < count($label); $i++){
+                if($rasj != null){
+                    if($rasj[$b] == null){
                         $jantan[$i] = 0;
                     }
-                }
-            }else{
-                $jantan[$i] = 0;
-            }
-
-            if($rasb != null){
-                if($rasb[$b] == null){
-                    $betina[$i] = 0;
-                }
-                else {
-                    if($label[$i] == $rasb[$b]){
-                        $betina[$i] = $bt[$b];
-                        $b++;
-                    }
                     else{
+                        if($label[$i] == $rasj[$j]){
+                            $jantan[$i] = $jt[$j];
+                            $j++;
+                        }
+                        else{
+                            $jantan[$i] = 0;
+                        }
+                    }
+                }else{
+                    $jantan[$i] = 0;
+                }
+
+                if($rasb != null){
+                    if($rasb[$b] == null){
                         $betina[$i] = 0;
                     }
+                    else {
+                        if($label[$i] == $rasb[$b]){
+                            $betina[$i] = $bt[$b];
+                            $b++;
+                        }
+                        else{
+                            $betina[$i] = 0;
+                        }
+                    }
+                }else{
+                    $betina[$i] = 0;
                 }
-            }else{
-                $betina[$i] = 0;
             }
         }
 
@@ -133,6 +137,8 @@ class GrafikController extends Controller
         $umurb = array();
         $jantan = array();
         $betina = array();
+        $label = array();
+        $data = array();
 
         $count = Ternak::where('status_ada', '=', true)
                         ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) - 
@@ -175,32 +181,34 @@ class GrafikController extends Controller
         $j = 0;
         $b = 0;
 
-        for($i = 0; $i < count($label); $i++){
-            if($umurj != null){
-                if($label[$i] == $umurj[$j]){
-                    $jantan[$i] = $jt[$j];
-                    $j++;
-                }
-                else{
+        if($label != null){
+            for($i = 0; $i < count($label); $i++){
+                if($umurj != null){
+                    if($label[$i] == $umurj[$j]){
+                        $jantan[$i] = $jt[$j];
+                        $j++;
+                    }
+                    else{
+                        $jantan[$i] = 0;
+                    }
+                }else{
                     $jantan[$i] = 0;
                 }
-            }else{
-                $jantan[$i] = 0;
-            }
 
-            if($umurb != null){
-                if($label[$i] == $umurb[$b]){
-                    $betina[$i] = $bt[$b];
-                    $b++;
-                }
-                else{
+                if($umurb != null){
+                    if($label[$i] == $umurb[$b]){
+                        $betina[$i] = $bt[$b];
+                        $b++;
+                    }
+                    else{
+                        $betina[$i] = 0;
+                    }
+                }else{
                     $betina[$i] = 0;
                 }
-            }else{
-                $betina[$i] = 0;
             }
         }
-
+        
         return [
         	'label' => $label,
        		'data' => $data, 
@@ -211,6 +219,11 @@ class GrafikController extends Controller
 
     public function grafikLahir(Request $request)
     {
+        $jantan = array();
+        $betina = array();
+        $label = array();
+        $data = array();
+
         $yearNow = date('Y');
 
         if ($request->tahun) {
@@ -276,6 +289,11 @@ class GrafikController extends Controller
 
     public function grafikMati(Request $request)
     {
+        $jantan = array();
+        $betina = array();
+        $label = array();
+        $data = array();
+        
         $yearNow = date('Y');
 
         if ($request->tahun) {

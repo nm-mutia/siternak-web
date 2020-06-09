@@ -263,9 +263,8 @@ $(document).on('click', '.delete', function(){
                 if (data.error) {
                     swal({
                         title: 'Opps...',
-                        text : data.error,
-                        type : 'error',
-                        timer : '1500'
+                        text : 'Data ternak id ' + ternak_id + ' tidak dapat dihapus.',
+                        type : 'error'
                     })
                 }
                 else{
@@ -276,9 +275,8 @@ $(document).on('click', '.delete', function(){
             error: function(data){
                 swal({
                     title: 'Opps...',
-                    text : data.message,
-                    type : 'error',
-                    timer : '1500'
+                    text : 'Error',
+                    type : 'error'
                 })
             }
         });

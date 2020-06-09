@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Ternak;
+use App\Perkawinan;
 use App\DataTables\TernakDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -232,6 +233,7 @@ class TernakController extends Controller
     public function destroy($id)
     {
         $data = Ternak::findOrFail($id);
+
         if(Perkawinan::where('necktag', $id)->exists()){
             $err = 'Data ternak id '. $id .' tidak dapat dihapus.';
             return response()->json(['error' => $err]);
