@@ -78,7 +78,7 @@ class ScanController extends Controller
 			if($child != null){
 				foreach($child as $n){
 					$c = preg_split("/[(),]/", $n->search_child);
-					$dataSibling[] = [
+					$dataChild[] = [
 						'necktag' => $c[1],
 						'jenis_kelamin' => $c[2],
 						'ras' => $c[3],

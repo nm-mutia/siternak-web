@@ -85,7 +85,7 @@
 			                    <label for="password" class="col-sm-2 control-label">Password Baru</label>
 			                     <div class="col-sm-9">
 		                            <div class="form-line">
-		                                <input id="password" type="password" class="form-control" name="password" required placeholder="Masukkan minimal 6 karakter">
+		                                <input id="password" type="password" class="form-control" name="password" required placeholder="Masukkan minimal 8 karakter">
 		                                @if ($errors->has('password'))
 					                        <span class="help-block">
 					                            <strong>{{ $errors->first('password') }}</strong>

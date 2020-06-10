@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Peternak;
+use Redirect;
+
 // use App\Providers\RouteServiceProvider;
 
 class LoginController extends Controller
@@ -32,13 +35,27 @@ class LoginController extends Controller
     // protected $redirectTo;
     
     public function redirectTo(){
+
         if(Auth::user()->role == 'admin'){
             $this->redirectTo = route('admin');
             return $this->redirectTo;
         }
 
-        $this->redirectTo = route('peternak');
-        return $this->redirectTo;
+        // $this->redirectTo = route('peternak');
+        // return $this->redirectTo;
+
+        else if(Auth::user()->role == 'peternak'){
+            if(Peternak::where('username', Auth::user()->username)->exists()){
+                $this->redirectTo = route('peternak');
+                return $this->redirectTo;
+            }
+
+            Auth::logout();
+            session()->flash('failure', 'Tidak terauthorisasi - Register dari Admin!');
+            $this->redirectTo = route('login');
+            return $this->redirectTo;            
+        }
+        
     }
     /**
      * Create a new controller instance.

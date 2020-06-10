@@ -38,8 +38,23 @@ class RegisterController extends Controller
             return $this->redirectTo;
         }
 
-        $this->redirectTo = route('peternak');
-        return $this->redirectTo;
+        // $this->redirectTo = route('peternak');
+        // return $this->redirectTo;
+
+        // else if(Auth::user()->role == 'peternak'){
+        //     if(Peternak::where('username', Auth::user()->username)->exists()){
+        //         $this->redirectTo = route('peternak');
+        //         return $this->redirectTo;
+        //     }
+
+        //     Auth::logout();
+        //     $this->redirectTo = route('login');
+        //     return $this->redirectTo;          
+        // }
+
+        Auth::logout();
+        $this->redirectTo = route('login');
+        return $this->redirectTo; 
     }
 
     /**

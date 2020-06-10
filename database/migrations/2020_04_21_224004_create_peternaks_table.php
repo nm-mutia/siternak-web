@@ -15,12 +15,13 @@ class CreatePeternaksTable extends Migration
     {
         Schema::create('peternaks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('peternakan_id')->unsigned()->nullable();
-            $table->foreign('peternakan_id')->references('id')->on('peternakans')->onDelete('cascade');
+            $table->bigInteger('peternakan_id')->unsigned()->nullable();
             $table->string('nama_peternak', 50);
             $table->string('username')->unique();
             $table->string('password');
             $table->timestamps();
+
+            $table->foreign('peternakan_id')->references('id')->on('peternakans')->onDelete('cascade');
         });
     }
 

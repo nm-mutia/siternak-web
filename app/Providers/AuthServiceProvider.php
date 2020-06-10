@@ -36,13 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('isPeternak', function($user) {
-            if(Peternak::where('username', $user->username)->exists()){
-                return $user->role == 'peternak';
-            }
-            else{
-                Auth::logout();
-                return Redirect::route('login')->with('failure', 'Tidak terauthorisasi - Register dari Admin!');
-            }
+            return $user->role == 'peternak';
         });
 
     }

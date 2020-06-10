@@ -51,7 +51,7 @@ class ProfileController extends Controller
     public function postChangePassword(Request $request)
     {
     	$rules = array(
-            'password' => 'required|min:6|same:password',
+            'password' => 'required|min:8|same:password',
             'password_confirmation' => 'required|same:password',
             'current_password' => 'required'
         );

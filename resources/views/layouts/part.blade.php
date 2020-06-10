@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
 	<title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ asset('/images/siternak.png') }}"/>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css"/>
