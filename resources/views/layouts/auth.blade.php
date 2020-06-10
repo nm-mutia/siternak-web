@@ -14,10 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/auth/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/auth/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/auth/animate/animate.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/auth/css-hamburgers/hamburgers.min.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/auth/animsition/css/animsition.min.css') }}">
-	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/auth/select2/select2.min.css') }}"> -->
-	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/auth/daterangepicker/daterangepicker.css') }}"> -->
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/auth/util.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/auth/main.css') }}">
@@ -40,17 +36,8 @@
 
 	<script src="{{ asset('vendor/auth/jquery/jquery-3.2.1.min.js') }}"></script>
 
-	<script src="{{ asset('vendor/auth/animsition/js/animsition.min.js') }}"></script>
-
 	<script src="{{ asset('vendor/auth/bootstrap/js/popper.js') }}"></script>
 	<script src="{{ asset('vendor/auth/bootstrap/js/bootstrap.min.js') }}"></script>
-
-	<!-- <script src="{{ asset('/vendor/auth/select2/select2.min.js') }}"></script> -->
-
-	<!-- <script src="{{ asset('/vendor/auth/daterangepicker/moment.min.js') }}"></script> -->
-	<!-- <script src="{{ asset('/vendor/auth/daterangepicker/daterangepicker.js') }}"></script> -->
-
-	<!-- <script src="{{ asset('/vendor/auth/countdowntime/countdowntime.js') }}"></script> -->
 
 	<script src="{{ asset('vendor/auth/main.js') }}"></script>
 
