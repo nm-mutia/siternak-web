@@ -118,7 +118,7 @@
 							<select class="form-control js-select-search" name="kematian_id" id="kematian_id">
 								<option></option>
 							  	@foreach ($kematian as $kid)
-							    <option value="{{ $kid->id }}">{{ $kid->tgl_kematian }} - {{ $kid->waktu_kematian }} - {{ $kid->penyebab }} - {{ $kid->kondisi }}</option>
+							    <option value="{{ $kid->id }}">{{ $kid->id }}. {{ $kid->tgl_kematian }} - {{ $kid->waktu_kematian }} - {{ $kid->penyebab }} - {{ $kid->kondisi }}</option>
 								@endforeach    
 							</select>
 						</div>
