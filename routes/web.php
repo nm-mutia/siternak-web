@@ -28,7 +28,7 @@
 		Route::get('/', 'Admin\HomeController@index')->name('admin');
 
 		
-		Route::namespace('admin')->name('admin.')->group(function(){
+		Route::namespace('Admin')->name('admin.')->group(function(){
 			// search
 			Route::get('search', 'HomeController@search')->name('search');
 
@@ -87,7 +87,7 @@
 	Route::prefix('peternak')->middleware('can:isPeternak', 'auth')->group(function(){
 		Route::get('/', 'Peternak\HomeController@index')->name('peternak');
 
-		Route::namespace('peternak')->name('peternak.')->group(function(){
+		Route::namespace('Peternak')->name('peternak.')->group(function(){
 			Route::get('dashboard', 'HomeController@index')->name('dashboard');
 			// search
 			Route::get('search', 'HomeController@search')->name('search');
