@@ -135,14 +135,16 @@ class PenyakitController extends Controller
     {
         $data = Penyakit::findOrFail($id);
 
-        $resultObj = DB::selectOne('select exists(select 1 from public.riwayat_penyakits where penyakit_id=$id) as `exists`');
+        $exists= DB::table('public.riwayat_penyakits')
+                            ->where('penyakit_id', '=', $id)
+                            ->first();
 
-        if($resultObj->exists){
-            $err = 'Data penyakit id '. $id .' tidak dapat dihapus.';
-            return response()->json(['error' => $err]);
+        if(is_null($exists)){
+            $data->delete();
         }
         else{
-            $data->delete();
+            $err = 'Data penyakit id '. $id .' tidak dapat dihapus.';
+            return response()->json(['error' => $err]);
         }
     }
 }

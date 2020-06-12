@@ -123,18 +123,20 @@ class PenyakitController extends Controller
     {
         $data = Penyakit::find($id);
 
-        $resultObj = DB::selectOne('select exists(select 1 from public.riwayat_penyakits where penyakit_id=$id) as `exists`');
+        $exists= DB::table('public.riwayat_penyakits')
+                            ->where('penyakit_id', '=', $id)
+                            ->first();
 
-        if($resultObj->exists){
+        if(is_null($exists)){
+            $data->delete();
+        }
+        else{
             return response()->json([
                 'status' => 'error',
                 'message' => "Data penyakit id ". $id ." tidak dapat dihapus.",
             ], 200);
         }
-        else{
-            $data->delete();
-        }
-
+        
         return response()->json([
             'status' => 'success',
             'message' => "Data penyakit id ". $id ." telah berhasil dihapus.",
