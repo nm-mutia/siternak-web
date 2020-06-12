@@ -121,7 +121,16 @@ class RasController extends Controller
     public function destroy($id)
     {
         $data = Ras::find($id);
-        $data->delete();
+        
+        if(Ternak::where('ras_id', $id)->exists()){
+            return response()->json([
+                'status' => 'error',
+                'message' => "Data ras id ". $id ." tidak dapat dihapus.",
+            ], 200);
+        }
+        else{
+            $data->delete();
+        }
 
         return response()->json([
             'status' => 'success',

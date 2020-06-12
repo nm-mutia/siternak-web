@@ -113,8 +113,17 @@ $(document).on('click', '.delete', function(){
             url: url_seg+"/kematian/"+kematian_id,
             method: "DELETE",
             success: function(data){
-                $('#kematian-table').DataTable().ajax.reload();
-                swal("Terhapus!", "Data kematian id "+kematian_id+" telah terhapus.", "success");
+                if (data.error) {
+                    swal({
+                        title: 'Opps...',
+                        text : 'Data kematian id ' + kematian_id + ' tidak dapat dihapus.',
+                        type : 'error'
+                    })
+                }
+                else{
+                    $('#kematian-table').DataTable().ajax.reload();
+                    swal("Terhapus!", "Data kematian id "+kematian_id+" telah terhapus.", "success");
+                }
             },
             error : function(){
                 swal({

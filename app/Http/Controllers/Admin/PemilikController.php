@@ -134,6 +134,13 @@ class PemilikController extends Controller
     public function destroy($id)
     {
         $data = Pemilik::findOrFail($id);
-        $data->delete();
+
+        if(Ternak::where('pemilik_id', $id)->exists()){
+            $err = 'Data pemilik id '. $id .' tidak dapat dihapus.';
+            return response()->json(['error' => $err]);
+        }
+        else{
+            $data->delete();
+        }
     }
 }

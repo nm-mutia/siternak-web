@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Peternak;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Kematian;
+use App\Ternak;
 use App\DataTables\KematianDataTable;
 use Yajra\Datatables\Datatables;
 use Validator;
@@ -135,6 +136,13 @@ class KematianController extends Controller
     public function destroy($id)
     {
         $data = Kematian::findOrFail($id);
-        $data->delete();
+        
+        if(Ternak::where('kematian_id', $id)->exists()){
+            $err = 'Data kematian id '. $id .' tidak dapat dihapus.';
+            return response()->json(['error' => $err]);
+        }
+        else{
+            $data->delete();
+        }
     }
 }

@@ -95,8 +95,17 @@ $(document).on('click', '.delete', function(){
             url:"/admin/peternakan/"+peternakan_id,
             method: "DELETE",
             success: function(data){
-                $('#peternakan-table').DataTable().ajax.reload();
-                swal("Terhapus!", "Data peternakan id "+peternakan_id+" telah terhapus.", "success");
+                if (data.error) {
+                    swal({
+                        title: 'Opps...',
+                        text : 'Data peternakan id ' + peternakan_id + ' tidak dapat dihapus.',
+                        type : 'error'
+                    })
+                }
+                else{
+                    $('#peternakan-table').DataTable().ajax.reload();
+                    swal("Terhapus!", "Data peternakan id "+peternakan_id+" telah terhapus.", "success");
+                }
             },
             error : function(){
                 swal({

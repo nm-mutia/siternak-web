@@ -134,6 +134,15 @@ class PenyakitController extends Controller
     public function destroy($id)
     {
         $data = Penyakit::findOrFail($id);
-        $data->delete();
+
+        $resultObj = DB::selectOne('select exists(select 1 from public.riwayat_penyakits where penyakit_id=$id) as `exists`');
+
+        if($resultObj->exists){
+            $err = 'Data penyakit id '. $id .' tidak dapat dihapus.';
+            return response()->json(['error' => $err]);
+        }
+        else{
+            $data->delete();
+        }
     }
 }

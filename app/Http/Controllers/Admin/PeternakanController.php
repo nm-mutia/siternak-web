@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Peternakan;
+use App\Peternak;
+use App\Ternak;
 use App\DataTables\PeternakanDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -130,6 +132,13 @@ class PeternakanController extends Controller
     public function destroy($id)
     {
         $data = Peternakan::findOrFail($id);
-        $data->delete();
+
+        if(Ternak::where('peternakan_id', $id)->exists() || Peternak::where('peternakan_id', $id)->exists()){
+            $err = 'Data peternakan id '. $id .' tidak dapat dihapus.';
+            return response()->json(['error' => $err]);
+        }
+        else{
+            $data->delete();
+        }
     }
 }

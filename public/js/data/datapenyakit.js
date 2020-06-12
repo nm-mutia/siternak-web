@@ -166,8 +166,17 @@ $(document).on('click', '.delete', function(){
             url: url_seg+"/penyakit/"+penyakit_id,
             method: "DELETE",
             success: function(data){
-                $('#penyakit-table').DataTable().ajax.reload();
-                swal("Terhapus!", "Data penyakit id "+penyakit_id+" telah terhapus.", "success");
+                if (data.error) {
+                    swal({
+                        title: 'Opps...',
+                        text : 'Data penyakit id ' + penyakit_id + ' tidak dapat dihapus.',
+                        type : 'error'
+                    })
+                }
+                else{
+                    $('#penyakit-table').DataTable().ajax.reload();
+                    swal("Terhapus!", "Data penyakit id "+penyakit_id+" telah terhapus.", "success");
+                }
             },
             error : function(){
                 swal({

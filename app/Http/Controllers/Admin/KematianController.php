@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Kematian;
+use App\Ternak;
 use App\DataTables\KematianDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -135,6 +136,13 @@ class KematianController extends Controller
     public function destroy($id)
     {
         $data = Kematian::findOrFail($id);
-        $data->delete();
+
+        if(Ternak::where('kematian_id', $id)->exists()){
+            $err = 'Data kematian id '. $id .' tidak dapat dihapus.';
+            return response()->json(['error' => $err]);
+        }
+        else{
+            $data->delete();
+        }
     }
 }

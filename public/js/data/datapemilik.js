@@ -164,8 +164,17 @@ $(document).on('click', '.delete', function(){
             url: url_seg+"/pemilik/"+pemilik_id,
             method: "DELETE",
             success: function(data){
-                $('#pemilik-table').DataTable().ajax.reload();
-                swal("Terhapus!", "Data pemilik id "+pemilik_id+" telah terhapus.", "success");
+                if (data.error) {
+                    swal({
+                        title: 'Opps...',
+                        text : 'Data pemilik id ' + pemilik_id + ' tidak dapat dihapus.',
+                        type : 'error'
+                    })
+                }
+                else{
+                    $('#pemilik-table').DataTable().ajax.reload();
+                    swal("Terhapus!", "Data pemilik id "+pemilik_id+" telah terhapus.", "success");
+                }
             },
             error : function(){
                 swal({

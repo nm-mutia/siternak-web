@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Kematian;
+use App\Ternak;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -129,7 +130,16 @@ class KematianController extends Controller
     public function destroy($id)
     {
         $data = Kematian::find($id);
-        $data->delete();
+
+        if(Ternak::where('kematian_id', $id)->exists()){
+            return response()->json([
+                'status' => 'error',
+                'message' => "Data kematian id ". $id ." tidak dapat dihapus.",
+            ], 200);
+        }
+        else{
+            $data->delete();
+        }
 
         return response()->json([
             'status' => 'success',

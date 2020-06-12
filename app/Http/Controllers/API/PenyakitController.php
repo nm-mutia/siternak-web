@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Penyakit;
 use Validator;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -121,7 +122,18 @@ class PenyakitController extends Controller
     public function destroy($id)
     {
         $data = Penyakit::find($id);
-        $data->delete();
+
+        $resultObj = DB::selectOne('select exists(select 1 from public.riwayat_penyakits where penyakit_id=$id) as `exists`');
+
+        if($resultObj->exists){
+            return response()->json([
+                'status' => 'error',
+                'message' => "Data penyakit id ". $id ." tidak dapat dihapus.",
+            ], 200);
+        }
+        else{
+            $data->delete();
+        }
 
         return response()->json([
             'status' => 'success',

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Ras;
+use App\Ternak;
 use App\DataTables\RasDataTable;
 use Validator;
 
@@ -127,6 +128,13 @@ class RasController extends Controller
     public function destroy($id)
     {
         $data = Ras::findOrFail($id);
-        $data->delete();
+
+        if(Ternak::where('ras_id', $id)->exists()){
+            $err = 'Data ras id '. $id .' tidak dapat dihapus.';
+            return response()->json(['error' => $err]);
+        }
+        else{
+            $data->delete();
+        }
     }
 }

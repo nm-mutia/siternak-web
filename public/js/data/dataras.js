@@ -110,8 +110,17 @@ $(document).on('click', '.delete', function(){
             url: url_seg+"/ras/"+ras_id,
             method: "DELETE",
             success: function(data){
-                $('#ras-table').DataTable().ajax.reload();
-                swal("Terhapus!", "Data ras id "+ras_id+" telah terhapus.", "success");
+            	if (data.error) {
+                    swal({
+                        title: 'Opps...',
+                        text : 'Data ras id ' + ras_id + ' tidak dapat dihapus.',
+                        type : 'error'
+                    })
+                }
+                else{
+	                $('#ras-table').DataTable().ajax.reload();
+	                swal("Terhapus!", "Data ras id "+ras_id+" telah terhapus.", "success");
+	            }
             },
             error : function(){
                 swal({

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Pemilik;
+use App\Ternak;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -121,7 +122,16 @@ class PemilikController extends Controller
     public function destroy($id)
     {
         $data = Pemilik::find($id);
-        $data->delete();
+
+        if(Ternak::where('pemilik_id', $id)->exists()){
+            return response()->json([
+                'status' => 'error',
+                'message' => "Data pemilik id ". $id ." tidak dapat dihapus.",
+            ], 200);
+        }
+        else{
+            $data->delete();
+        }
 
         return response()->json([
             'status' => 'success',

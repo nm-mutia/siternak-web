@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Peternakan;
+use App\Peternak;
+use App\Ternak;
 use Validator;
 
 class PeternakanController extends Controller
@@ -121,7 +123,16 @@ class PeternakanController extends Controller
     public function destroy($id)
     {
         $data = Peternakan::find($id);
-        $data->delete();
+
+        if(Ternak::where('peternakan_id', $id)->exists() || Peternak::where('peternakan_id', $id)->exists()){
+            return response()->json([
+                'status' => 'error',
+                'message' => "Data peternakan id ". $id ." tidak dapat dihapus.",
+            ], 200);
+        }
+        else{
+            $data->delete();
+        }
 
         return response()->json([
             'status' => 'success',
