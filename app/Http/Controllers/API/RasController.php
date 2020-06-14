@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Ras;
+use App\Ternak;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
