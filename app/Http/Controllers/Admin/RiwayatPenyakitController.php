@@ -49,7 +49,8 @@ class RiwayatPenyakitController extends Controller
     {
         $rules = array(
             'penyakit_id' => 'required',
-            'necktag' => 'required'
+            'necktag' => 'required',
+            'tgl_sakit' => 'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -117,7 +118,8 @@ class RiwayatPenyakitController extends Controller
     {
         $rules = array(
             'penyakit_id' => 'required',
-            'necktag' => 'required'
+            'necktag' => 'required',
+            'tgl_sakit' => 'required'
         );
 
         $error = Validator::make($request->all(), $rules);
