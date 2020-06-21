@@ -31,7 +31,7 @@ class LaporanController extends Controller
         if($request->ajax()){
             $lahir = Ternak::whereBetween('tgl_lahir', [$request->datefrom, $request->dateto])->get();
 
-            return Datatables::of($lahir)
+            return DataTables::of($lahir)
                   ->addIndexColumn()
                   ->make(true);
         }
@@ -45,7 +45,7 @@ class LaporanController extends Controller
                         ->whereBetween('kematians.tgl_kematian', [$request->datefrom, $request->dateto])
                         ->get();
 
-            return Datatables::of($mati)
+            return DataTables::of($mati)
                   ->addIndexColumn()
                   ->make(true);
         }
@@ -56,7 +56,7 @@ class LaporanController extends Controller
         if($request->ajax()){
             $kawin = Perkawinan::whereBetween('tgl', [$request->datefrom, $request->dateto])->get();
 
-            return Datatables::of($kawin)
+            return DataTables::of($kawin)
                   ->make(true);
         }
     }
@@ -68,7 +68,7 @@ class LaporanController extends Controller
                     ->select('riwayat_penyakits.id', 'penyakits.nama_penyakit as penyakit_id', 'riwayat_penyakits.necktag', 'riwayat_penyakits.tgl_sakit', 'riwayat_penyakits.obat', 'riwayat_penyakits.lama_sakit', 'riwayat_penyakits.keterangan', 'riwayat_penyakits.created_at', 'riwayat_penyakits.updated_at')
                     ->whereBetween('riwayat_penyakits.tgl_sakit', [$request->datefrom, $request->dateto])->get();
 
-            return Datatables::of($sakit)
+            return DDataTables::of($sakit)
                   ->make(true);
         }
     }
@@ -86,7 +86,7 @@ class LaporanController extends Controller
                         ->union($exists_union)
                         ->get();
 
-            return Datatables::of($exists)
+            return DataTables::of($exists)
                   ->addIndexColumn()
                   ->make(true);
         } 

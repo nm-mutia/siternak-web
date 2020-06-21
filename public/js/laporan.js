@@ -77,7 +77,7 @@ $('#lahir-table').DataTable({
     serverSide: true,
     ajax: {
         url: url_seg+'/laporan/lahir',
-        method: 'GET',
+        method: 'POST',
         data: function(d){
             d.datefrom = from;
             d.dateto = to;
@@ -119,7 +119,7 @@ $('#mati-table').DataTable({
     serverSide: true,
     ajax: {
         url: url_seg+'/laporan/mati',
-        method: 'GET',
+        method: 'POST',
         data: function(d){
             d.datefrom = from;
             d.dateto = to;
@@ -165,7 +165,7 @@ $('#kawin-table').DataTable({
     serverSide: true,
     ajax: {
         url: url_seg+'/laporan/kawin',
-        method: 'GET',
+        method: 'POST',
         data: function(d){
             d.datefrom = from;
             d.dateto = to;
@@ -189,7 +189,7 @@ $('#sakit-table').DataTable({
     serverSide: true,
     ajax: {
         url: url_seg+'/laporan/sakit',
-        method: 'GET',
+        method: 'POST',
         data: function(d){
             d.datefrom = from;
             d.dateto = to;
@@ -216,7 +216,7 @@ $('#ada-table').DataTable({
     serverSide: true,
     ajax: {
         url: url_seg+'/laporan/ada',
-        method: 'GET',
+        method: 'POST',
         data: function(d){
             d.datefrom = from;
             d.dateto = to;
