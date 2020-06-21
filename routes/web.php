@@ -128,11 +128,11 @@
 
 			//laporan
 			Route::get('laporan', 'LaporanController@index')->name('laporan');
-			Route::get('laporan/lahir', 'LaporanController@lahir')->middleware('cors')->name('laporan.lahir');
-			Route::get('laporan/mati', 'LaporanController@mati')->middleware('cors')->name('laporan.mati');
-			Route::get('laporan/kawin', 'LaporanController@kawin')->middleware('cors')->name('laporan.kawin');
-			Route::get('laporan/sakit', 'LaporanController@sakit')->middleware('cors')->name('laporan.sakit');
-			Route::get('laporan/ada', 'LaporanController@ada')->middleware('cors')->name('laporan.ada');
+			Route::post('laporan/lahir', 'LaporanController@lahir')->middleware('cors')->name('laporan.lahir');
+			Route::post('laporan/mati', 'LaporanController@mati')->middleware('cors')->name('laporan.mati');
+			Route::post('laporan/kawin', 'LaporanController@kawin')->middleware('cors')->name('laporan.kawin');
+			Route::post('laporan/sakit', 'LaporanController@sakit')->middleware('cors')->name('laporan.sakit');
+			Route::post('laporan/ada', 'LaporanController@ada')->middleware('cors')->name('laporan.ada');
 			Route::get('laporan/export/{date}', 'LaporanController@export')->name('laporan.export');
 		});
 	});
