@@ -82,6 +82,9 @@ $('#lahir-table').DataTable({
             d.datefrom = from;
             d.dateto = to;
         },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            console.log(jqXHR); 
+        }
     },
     columns: [
         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
@@ -121,6 +124,9 @@ $('#mati-table').DataTable({
             d.datefrom = from;
             d.dateto = to;
         },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            console.log(jqXHR); 
+        }
     },
     columns: [
         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
@@ -164,6 +170,9 @@ $('#kawin-table').DataTable({
             d.datefrom = from;
             d.dateto = to;
         },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            console.log(jqXHR); 
+        }
     },
     columns: [
         {data: 'id', name: 'id'},
@@ -185,6 +194,9 @@ $('#sakit-table').DataTable({
             d.datefrom = from;
             d.dateto = to;
         },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            console.log(jqXHR); 
+        }
     },
     columns: [
         {data: 'id', name: 'id'},
@@ -209,6 +221,9 @@ $('#ada-table').DataTable({
             d.datefrom = from;
             d.dateto = to;
         },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            console.log(jqXHR); 
+        }
     },
     columns: [
         {data: 'DT_RowIndex', name: 'DT_RowIndex'},
