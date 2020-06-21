@@ -44,7 +44,7 @@ class BarcodeController extends Controller
 
         $pdf = domPDF::loadHTML($html);
         $pdf->setPaper('A4', 'landscape');
-        // $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $pdf->setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
 
         return $pdf->download('SITERNAK-Barcode.pdf');
 	}
