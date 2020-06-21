@@ -244,7 +244,7 @@ return [
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 
-        'domPDF' => Barryvdh\DomPDF\facade::class,
+        'domPDF' => Barryvdh\DomPDF\Facade::class,
 
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
