@@ -161,7 +161,6 @@
                             <span id="span-parent" align="center"></span>
                             <table class="table" id="t-parent">
                                 <tr>
-                                    <th></th>
                                     <th>Necktag</th> 
                                     <th>Jenis Kelamin</th>
                                     <th>Ras</th>
@@ -172,7 +171,6 @@
                                     <th>Ibu</th>
                                 </tr>
                                 <tr>
-                                    <td><b>Ayah</b></td>
                                     <td id="pr01"></td>
                                     <td id="pr02"></td>
                                     <td id="pr03"></td>
@@ -183,7 +181,6 @@
                                     <td id="pr08"></td>
                                 </tr>
                                 <tr>
-                                    <td><b>Ibu</b></td>
                                     <td id="pr11"></td>
                                     <td id="pr12"></td>
                                     <td id="pr13"></td>
