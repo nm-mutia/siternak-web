@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-use App\Peternak;
 use App\User;
 use Validator;
 
@@ -37,7 +36,7 @@ class PeternakController extends Controller
     {
         $rules = array(
             'peternakan_id' => 'required',
-            'nama_peternak' => 'required',
+            'name' => 'required',
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users'
         );
@@ -54,21 +53,16 @@ class PeternakController extends Controller
         $password = Str::random(8);
 
         $form_data = array(
-            'peternakan_id' => $request->peternakan_id,
-            'nama_peternak' => $request->nama_peternak,
+            'name' => $request->name,
             'username' => $request->username,
-            'password' => $password
+            'peternakan_id' => $request->peternakan_id,
+            'email' => $request->email,
+            'password_first' => $password,
+            'password' => Hash::make($password),
+            'register_from_admin' => true,
         );
 
-        // register peternak
-        User::create([
-            'name' => $request->nama_peternak,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($password),
-        ]);
-
-        $peternak = Peternak::create($form_data);
+        $peternak = User::create($form_data);
 
         return response()->json([
             'status' => 'success',
@@ -84,7 +78,7 @@ class PeternakController extends Controller
      */
     public function show($id)
     {
-        $peternak = Peternak::find($id);
+        $peternak = User::find($id);
         
         return response()->json([
             'status' => 'success',
@@ -103,7 +97,7 @@ class PeternakController extends Controller
     {
         $rules = array(
             'peternakan_id' => 'required',
-            'nama_peternak' => 'required'
+            'name' => 'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -117,18 +111,12 @@ class PeternakController extends Controller
 
         $form_data = array(
             'peternakan_id' => $request->peternakan_id,
-            'nama_peternak' => $request->nama_peternak
+            'name' => $request->name
         );
 
-        $form_data_user = array(
-            'name' => $request->nama_peternak
-        );
-
-        $peternak = Peternak::find($id);
+        $peternak = User::find($id);
         $peternak->update($form_data);
 
-        User::where('username', $peternak->username)->update($form_data_user);
-        
         return response()->json([
             'status' => 'success',
             'peternak' => $peternak,
@@ -143,7 +131,7 @@ class PeternakController extends Controller
      */
     public function destroy($id)
     {
-        $data = Peternak::find($id);
+        $data = User::find($id);
         $data->delete();
 
         return response()->json([

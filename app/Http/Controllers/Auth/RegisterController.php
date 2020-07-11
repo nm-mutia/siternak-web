@@ -33,25 +33,6 @@ class RegisterController extends Controller
     // protected $redirectTo = RouteServiceProvider::HOME;
 
     public function redirectTo(){
-        if(Auth::user()->role == 'admin'){
-            $this->redirectTo = route('admin');
-            return $this->redirectTo;
-        }
-
-        // $this->redirectTo = route('peternak');
-        // return $this->redirectTo;
-
-        // else if(Auth::user()->role == 'peternak'){
-        //     if(Peternak::where('username', Auth::user()->username)->exists()){
-        //         $this->redirectTo = route('peternak');
-        //         return $this->redirectTo;
-        //     }
-
-        //     Auth::logout();
-        //     $this->redirectTo = route('login');
-        //     return $this->redirectTo;          
-        // }
-
         Auth::logout();
         $this->redirectTo = route('login');
         return $this->redirectTo; 

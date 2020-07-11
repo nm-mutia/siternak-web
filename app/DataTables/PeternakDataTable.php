@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Peternak;
+use App\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -34,9 +34,10 @@ class PeternakDataTable extends DataTable
      * @param \App\PeternakDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Peternak $model)
+    public function query(User $model)
     {
-        return $model->newQuery()->select('*');
+        return $model->newQuery()->select('id', 'name', 'peternakan_id', 'username', 'email', 'password_first', 'register_from_admin', 'created_at', 'updated_at')
+                        ->where('role', '=', 'peternak');
     }
 
     /**
@@ -70,13 +71,17 @@ class PeternakDataTable extends DataTable
         return [
             Column::make('id')
                 ->title('ID'),
+            Column::make('name')
+                ->title('Nama'),
             Column::make('peternakan_id')
                 ->title('ID Peternakan'),
-            Column::make('nama_peternak')
-                ->title('Nama Peternak'),
+            Column::make('register_from_admin')
+                ->title('Admin Register'),
             Column::make('username')
                 ->title('Username'),
-            Column::make('password')
+            Column::make('email')
+                ->title('Email'),
+            Column::make('password_first')
                 ->title('Password'),
             Column::make('created_at')
                 ->title('Created At'),
@@ -86,7 +91,7 @@ class PeternakDataTable extends DataTable
                 ->title('Action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(150)
+                ->width(120)
                 ->addClass('text-center'),
         ];
     }

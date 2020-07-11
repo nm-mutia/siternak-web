@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Peternakan;
-use App\Peternak;
+use App\User;
 use App\Ternak;
 use App\DataTables\PeternakanDataTable;
 use App\Http\Controllers\Controller;
@@ -133,7 +133,7 @@ class PeternakanController extends Controller
     {
         $data = Peternakan::findOrFail($id);
 
-        if(Ternak::where('peternakan_id', $id)->exists() || Peternak::where('peternakan_id', $id)->exists()){
+        if(Ternak::where('peternakan_id', $id)->exists() || User::where('peternakan_id', $id)->exists()){
             $err = 'Data peternakan id '. $id .' tidak dapat dihapus.';
             return response()->json(['error' => $err]);
         }

@@ -45,7 +45,7 @@ class LoginController extends Controller
         // return $this->redirectTo;
 
         else if(Auth::user()->role == 'peternak'){
-            if(Peternak::where('username', Auth::user()->username)->exists()){
+            if(Auth::user()->register_from_admin){
                 $this->redirectTo = route('peternak');
                 return $this->redirectTo;
             }

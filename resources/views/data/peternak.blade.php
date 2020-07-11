@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <label class="control-label">Nama Peternak</label>
                         <div class="form-line col-md-8">
-                            <input type="text" name="nama_peternak" id="nama_peternak" class="form-control">
+                            <input type="text" name="name" id="name" class="form-control">
                         </div>
                     </div>
 

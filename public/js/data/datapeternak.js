@@ -69,9 +69,9 @@ $(document).on('click', '.edit', function(){
         datatype: "json",
         success: function(data){
             $('#peternakan_id').val(data.result.peternakan_id).change();
-            $('#nama_peternak').val(data.result.nama_peternak);
-            $('#username').val(data.result.username);
-            $('#password').val(data.result.password);
+            $('#name').val(data.result.name);
+            // $('#username').val(data.result.username);
+            // $('#password_first').val(data.result.password_first);
             $('#hidden_id').val(id);
             $('#action').val('Edit');
             $('#action_button').val('Ubah');

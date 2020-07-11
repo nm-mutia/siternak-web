@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Peternak;
 use App\Peternakan;
 use App\User;
 use App\DataTables\PeternakDataTable;
@@ -53,7 +52,7 @@ class PeternakController extends Controller
     {
         $rules = array(
             'peternakan_id' => 'required',
-            'nama_peternak' => 'required',
+            'name' => 'required',
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users'
         );
@@ -67,21 +66,16 @@ class PeternakController extends Controller
         $password = Str::random(8);
 
         $form_data = array(
-            'peternakan_id' => $request->peternakan_id,
-            'nama_peternak' => $request->nama_peternak,
+            'name' => $request->name,
             'username' => $request->username,
-            'password' => $password
+            'peternakan_id' => $request->peternakan_id,
+            'email' => $request->email,
+            'password_first' => $password,
+            'password' => Hash::make($password),
+            'register_from_admin' => true,
         );
 
-        // register peternak
-        User::create([
-            'name' => $request->nama_peternak,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($password),
-        ]);
-
-        Peternak::create($form_data);
+        User::create($form_data);
 
         return response()->json(['success' => 'Data telah berhasil ditambahkan.']);
     }
@@ -95,7 +89,7 @@ class PeternakController extends Controller
     public function show($id)
     {
         if(request()->ajax()){
-            $data = Peternak::findOrFail($id);
+            $data = User::findOrFail($id);
             return response()->json(['result' => $data]);
         }
     }
@@ -109,7 +103,7 @@ class PeternakController extends Controller
     public function edit($id)
     {
         if(request()->ajax()){
-            $data = Peternak::findOrFail($id);
+            $data = User::findOrFail($id);
             return response()->json(['result' => $data]);
         }
     }
@@ -125,7 +119,7 @@ class PeternakController extends Controller
     {
         $rules = array(
             'peternakan_id' => 'required',
-            'nama_peternak' => 'required'
+            'name' => 'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -136,10 +130,10 @@ class PeternakController extends Controller
 
         $form_data = array(
             'peternakan_id' => $request->peternakan_id,
-            'nama_peternak' => $request->nama_peternak
+            'name' => $request->name
         );
 
-        Peternak::whereId($id)->update($form_data);
+        User::whereId($id)->update($form_data);
 
         return response()->json(['success' => 'Data telah berhasil diubah.']);
     }
@@ -152,7 +146,7 @@ class PeternakController extends Controller
      */
     public function destroy($id)
     {
-        $data = Peternak::findOrFail($id);
+        $data = User::findOrFail($id);
         $data->delete();
     }
 }
