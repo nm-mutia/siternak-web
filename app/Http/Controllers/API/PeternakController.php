@@ -18,7 +18,7 @@ class PeternakController extends Controller
      */
     public function index()
     {
-        $peternak = Peternak::orderBy("id")->get();
+        $peternak = User::where('role', '=', 'peternak')->orderBy("id")->get();
 
         return response()->json([
             'status' => 'success',

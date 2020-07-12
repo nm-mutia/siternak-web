@@ -36,7 +36,8 @@ class PeternakDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->select('id', 'name', 'peternakan_id', 'username', 'email', 'password_first', 'register_from_admin', 'created_at', 'updated_at')
+        // return $model->newQuery()->select('id', 'name', 'peternakan_id', 'username', 'email', 'password_first', 'register_from_admin', 'created_at', 'updated_at')
+        return $model->newQuery()->select('*')
                         ->where('role', '=', 'peternak');
     }
 
