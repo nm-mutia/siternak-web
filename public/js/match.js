@@ -29,11 +29,19 @@ $('#match_form').on('submit', function(event){
                     type: "error",
                     text: data.message,
                 });
-            }else{
+            }
+            else if(data.result == 'berhasil'){
                 swal({
                     title: "Boleh!",
                     type: "success",
                     text: "Ternak boleh dikawinkan!",
+                });
+            }
+            else{
+                swal({
+                    title: "Gagal!",
+                    type: "error",
+                    text: "Pilih ternak yang ingin dipasangkan!",
                 });
             }            
         },
