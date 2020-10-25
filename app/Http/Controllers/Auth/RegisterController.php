@@ -35,7 +35,7 @@ class RegisterController extends Controller
     public function redirectTo(){
         Auth::logout();
         $this->redirectTo = route('login');
-        return $this->redirectTo; 
+        return $this->redirectTo;
     }
 
     /**
