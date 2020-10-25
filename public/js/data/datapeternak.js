@@ -13,6 +13,7 @@ $('#tambah_data').click(function(){
     $('#form_result').html('');
     $('#tambah_data_form')[0].reset();
     $('#register').show();
+    // $('.reg-admin').hide();
 
     $('#peternakan_id').val('').change();
     $('#formModal').modal('show');
@@ -70,6 +71,9 @@ $(document).on('click', '.edit', function(){
         success: function(data){
             $('#peternakan_id').val(data.result.peternakan_id).change();
             $('#name').val(data.result.name);
+            // $('.reg-admin').show();
+            // $('#register_from_admin').val(data.result.register_from_admin).change();
+
             // $('#username').val(data.result.username);
             // $('#password_first').val(data.result.password_first);
             $('#hidden_id').val(id);

@@ -28,13 +28,13 @@
                     <div class="form-group">
                         <label class="control-label">Peternakan</label>
                         <div>
-							<select class="form-control js-select-search" name="peternakan_id" id="peternakan_id">
-								<option></option>
-							  	@foreach ($peternakan as $pid)
-								    <option value="{{ $pid->id }}">{{ $pid->id }} - {{ $pid->nama_peternakan }}</option>
-								@endforeach    
-							</select>
-						</div>
+            							<select class="form-control js-select-search" name="peternakan_id" id="peternakan_id">
+            								<option></option>
+            							  	@foreach ($peternakan as $pid)
+            								    <option value="{{ $pid->id }}">{{ $pid->id }} - {{ $pid->nama_peternakan }}</option>
+            								  @endforeach
+            							</select>
+            						</div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Nama Peternak</label>
@@ -42,6 +42,17 @@
                             <input type="text" name="name" id="name" class="form-control">
                         </div>
                     </div>
+
+                    <!-- add edit authorization -->
+                    <!-- <div class="form-group reg-admin">
+                        <label class="control-label">Admin Register</label>
+                        <div>
+            							<select class="form-control js-select-search" name="register_from_admin" id="register_from_admin">
+                            <option value="true">Ya</option>
+            								<option value="false">Tidak</option>
+            							</select>
+            						</div>
+                    </div> -->
 
                     <div id="register">
 	                    <div>
