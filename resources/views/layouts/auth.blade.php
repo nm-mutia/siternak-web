@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Aplikasi Web SITERNAK. Abdi masyarakat LAZ AL-Azhar.">
 
 	<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,7 +25,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
 </head>
 <body>
-	
+
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -32,7 +33,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 
 	<script src="{{ asset('vendor/auth/jquery/jquery-3.2.1.min.js') }}"></script>
 
