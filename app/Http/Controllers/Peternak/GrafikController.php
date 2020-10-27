@@ -184,7 +184,7 @@ class GrafikController extends Controller
         $data = array();
 
         $count = Ternak::where('status_ada', '=', true)
-                        ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) - 
+                        ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) -
     extract(year from ternaks.tgl_lahir)), 0) as tahun')
                         ->groupBy('tahun')
                         ->orderBy('tahun')
@@ -192,7 +192,7 @@ class GrafikController extends Controller
 
         $count_jantan = Ternak::where('status_ada', '=', true)
                         ->where('jenis_kelamin', '=', 'Jantan')
-                        ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) - 
+                        ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) -
     extract(year from ternaks.tgl_lahir)), 0) as tahun')
                         ->groupBy('tahun')
                         ->orderBy('tahun')
@@ -200,25 +200,33 @@ class GrafikController extends Controller
 
         $count_betina = Ternak::where('status_ada', '=', true)
                         ->where('jenis_kelamin', '=', 'Betina')
-                        ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) - 
+                        ->selectRaw('count(*) as jumlah, coalesce((extract(year from current_date) -
     extract(year from ternaks.tgl_lahir)), 0) as tahun')
                         ->groupBy('tahun')
                         ->orderBy('tahun')
                         ->get();
 
+        $i = 0;
         foreach($count as $umur){
-            $label[] = $umur->tahun;
-            $data[] = $umur->jumlah;
-        }
-        
-        foreach($count_jantan as $umur){
-            $umurj[] = $umur->tahun;
-            $jt[] = $umur->jumlah;
+        	$label[] = $umur->tahun;
+        	$data[] = $umur->jumlah;
+          $umurj[$i] = null;
+          $umurb[$i] = null;
+          $i++;
         }
 
+        $i = 0;
+        foreach($count_jantan as $umur){
+            $umurj[$i] = $umur->tahun;
+            $jt[] = $umur->jumlah;
+            $i++;
+        }
+
+        $i = 0;
         foreach($count_betina as $umur){
-            $umurb[] = $umur->tahun;
+            $umurb[$i] = $umur->tahun;
             $bt[] = $umur->jumlah;
+            $i++;
         }
 
         $j = 0;
@@ -331,7 +339,7 @@ class GrafikController extends Controller
             $jantan[$i] = 0;
             $betina[$i] = 0;
         }
-    
+
         foreach($count as $lahir){
             $data[$lahir->lahir - 1] = $lahir->jumlah;
         }
@@ -347,7 +355,7 @@ class GrafikController extends Controller
         $chart = new KelahiranChart;
         $chart->title('Grafik Ternak - Kelahiran ('. $yearNow .')');
         $chart->labels(['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
-        
+
         if($count_jantan != null){
             $chart->dataset('Jantan','bar', $jantan)->options([
                 'responsive' => true,
@@ -486,7 +494,7 @@ class GrafikController extends Controller
         if ($request->ajax()) {
            return response()->json(['data' => $data, 'jantan' => $jantan, 'betina' => $betina]);
         }
-        
+
         return $chart;
     }
 }
